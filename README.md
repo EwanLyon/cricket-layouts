@@ -1,6 +1,6 @@
 # cricket-layouts
 
-Layouts used for cricket matches. These are not used in any production and were made for fun. Some of the [gdx18-layouts](https://github.com/gamesdonequick/gdqx18-layouts)(e.g. tsconfig files) may be seen as it currently is the only large TypeScript bundle so I'm using to assist my learning.
+Layouts used for cricket matches. These are not used in any production and were made for fun. Some of the [gdx18-layouts](https://github.com/gamesdonequick/gdqx18-layouts) (e.g. tsconfig files) may be seen as it currently is the only large TypeScript bundle so I'm using to assist my learning.
 
 ## Requirements
 - [Node.js 8 or greater (8 recommended, newer versions not tested)](https://nodejs.org/)
