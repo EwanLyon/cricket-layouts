@@ -1,0 +1,89 @@
+{
+  "name": "cricket-layouts",
+  "version": "0.0.0",
+  "description": "Cricket bundle",
+  "homepage": "",
+  "author": {
+    "name": "Clubwho",
+    "email": "pls@lint.com",
+    "url": "https://pls-lint.com"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "runs",
+        "title": "Runs",
+        "width": 3,
+        "file": "runs.html",
+        "headerColor": "#525F78",
+        "workspace": "Game"
+      },
+      {
+        "name": "over",
+        "title": "Current Over",
+        "width": 2,
+        "file": "over.html",
+        "headerColor": "#525F78",
+        "workspace": "Game"
+      },
+      {
+        "name": "teams",
+        "title": "Teams",
+        "width": 3,
+        "file": "teams.html",
+        "headerColor": "#525F78",
+        "workspace": "Setup"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "mainBar.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "teams",
+        "title": "Teams",
+        "allowedTypes": [
+          "json"
+        ]
+      }
+    ]
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "json-schema-to-typescript": "^6.1.0",
+    "tslib": "^1.9.3"
+  },
+  "scripts": {
+    "static": "npm run static:node && npm run static:browser && npm run static:shared",
+    "static:node": "tslint -p tsconfig.node.json -t stylish",
+    "static:browser": "tslint -p tsconfig.browser.json -t stylish",
+    "static:shared": "tslint -p shared/tsconfig.node.json -t stylish",
+    "pretest": "npm run static",
+    "test": "ava test",
+    "build": "npm run schema-types && npm run build:extension && npm run build:browser",
+    "build:extension": "trash dist && tsc -b tsconfig.node.json",
+    "build:browser": "tsc -p tsconfig.browser.json",
+    "generate-fixture-screenshots": "generate-fixture-screenshots",
+    "debug-fixture-screenshots": "generate-fixture-screenshots --debug",
+    "mock-donations": "node ./scripts/test_donation_server",
+    "schema-types": "node scripts/schema-types.js"
+  }
+}

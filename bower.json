@@ -1,0 +1,14 @@
+{
+  "name": "cricket-layouts",
+  "dependencies": {
+    "paper-button": "2.0.0",
+    "sc-fitted-text": "SupportClass/sc-fitted-text#^1.1.2",
+    "paper-input": "2.0.0",
+    "polymer-decorators": "Polymer/polymer-decorators#^2.1.0"
+  },
+  "resolutions": {
+    "polymer": "^2.4",
+    "webcomponentsjs": "^v1.1.0",
+    "polymer-decorators": "^2.1.0"
+  }
+}
