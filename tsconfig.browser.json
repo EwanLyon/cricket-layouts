@@ -12,8 +12,7 @@
 		"declaration": false,
 		"declarationMap": false,
 		"sourceMap": false,
-		"inlineSourceMap": true,
-		"importHelpers": false
+		"inlineSourceMap": true
 	},
 	"include": [
 		"../../types/browser.d.ts",

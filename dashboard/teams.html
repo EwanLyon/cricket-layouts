@@ -6,11 +6,23 @@
 	<script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 	<link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
 	<link rel="import" href="../bower_components/polymer/polymer-element.html">
-	<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-	<link rel="import" href="../bower_components/paper-button/paper-button.html">
-	<link rel="import" href="../bower_components/paper-input/paper-input.html">
-	<link rel="import" href="../bower_components/sc-fitted-text/sc-fitted-text.html">
-	<link rel="import" href="elements/teamNames.html">
+	<link rel="import" href="../bower_components/polymer/lib/mixins/mutable-data.html">
+	<link rel="import" href="../bower_components/polymer/lib/utils/debounce.html">
+
+	<script>
+		{
+			const links = [
+				'elements/cricket-teams.html'
+			];
+			for (const link of links) {
+				const linkElem = document.createElement('link');
+				linkElem.rel = 'import';
+				linkElem.href = link;
+				document.head.appendChild(linkElem);
+			}
+		}
+	</script>
+
 	<style>
 
 		#seperator {

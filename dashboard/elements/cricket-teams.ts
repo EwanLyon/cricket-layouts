@@ -14,11 +14,10 @@ interface Asset {
 @customElement('cricket-teams')
 export default class CricketTeams extends Polymer.Element {
     @property({type: Array})
-    teamsJson: string[]
+	teamsLoaded: string[];
 
     ready() {
-        super.ready();
-        console.log(teams.value);
-        this.teamsJson = ['cool', 'rad'];
+		super.ready();
+		console.log(teams.value);
     }
 }
