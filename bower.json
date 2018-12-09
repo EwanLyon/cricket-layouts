@@ -4,7 +4,9 @@
     "paper-button": "2.0.0",
     "sc-fitted-text": "SupportClass/sc-fitted-text#^1.1.2",
     "paper-input": "2.0.0",
-    "polymer-decorators": "Polymer/polymer-decorators#^2.1.0"
+    "polymer-decorators": "Polymer/polymer-decorators#^2.1.0",
+    "iron-list": "PolymerElements/iron-list#^2.0.2",
+    "nodecg-typeahead-input": "NodeCGElements/nodecg-typeahead-input#^2.0.1"
   },
   "resolutions": {
     "polymer": "^2.4",

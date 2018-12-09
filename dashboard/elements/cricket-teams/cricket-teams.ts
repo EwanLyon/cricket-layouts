@@ -18,6 +18,15 @@ export default class CricketTeams extends Polymer.Element {
 
     ready() {
 		super.ready();
-		console.log(teams.value);
-    }
+
+		teams.on('change', newVal =>{
+			this.teamsLoaded = [];
+			newVal.forEach(teamFile => {
+				this.teamsLoaded.push(teamFile.name);
+			});
+
+			(this.$.typeaheadBatter as any).items = this.teamsLoaded;
+			(this.$.typeaheadFielder as any).items = this.teamsLoaded;
+		});
+	}
 }

@@ -1,0 +1,31 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="cricket-teams">
+	<template>
+		<style>
+		#seperator{
+			height: 1px;
+			background-color: #526076;
+			width: 100%;
+			margin: 10px 0;
+		}
+
+		#confirm{
+			background-color: #57bb8a;
+			width: 100%;
+			margin: 0;
+		}
+		</style>
+
+		<span>Batters</span>
+		<vaadin-combo-box id="typeaheadBatter" placeholder="Search" theme="material"></vaadin-combo-box>
+		<div class="seperator"></div>
+		<span>Bowlers</span>
+		<vaadin-combo-box id="typeaheadFielder" placeholder="Search" theme="material"></vaadin-combo-box>
+		<paper-button raised id="confirm">Confirm</paper-button>
+	</template>
+
+	<script src="cricket-teams.js" type="module"></script>
+</dom-module>

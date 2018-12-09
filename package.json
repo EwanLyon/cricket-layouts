@@ -44,7 +44,22 @@
         "width": 3,
         "file": "teams.html",
         "headerColor": "#525F78",
-        "workspace": "Setup"
+        "workspace": "Setup"       
+      },
+      {
+        "name": "wicket",
+        "title": "Wicket",
+        "width": 2,
+        "file": "wicket.html",
+        "headerColor": "#525F78",
+        "workspace": "Game"
+      },
+      {
+        "name": "players",
+        "title": "Players",
+        "file": "players.html",
+        "fullbleed": true,
+        "headerColor": "#525F78"
       }
     ],
     "graphics": [
