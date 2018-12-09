@@ -7,8 +7,9 @@ Layouts used for cricket matches. These are not used in any production and were 
 Currently the graphics have not been worked on
 
 **Dashboard**
-![Game](https://raw.githubusercontent.com/Clubwho/cricket-layouts/img/dashboard/game.jpg)
-![Setup](https://raw.githubusercontent.com/Clubwho/cricket-layouts/img/dashboard/setup.jpg)
+
+![Game](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/game.jpg)
+![Setup](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/setup.jpg)
 
 ## Requirements
 - [Node.js 8 or greater (8 recommended, newer versions not tested)](https://nodejs.org/)
