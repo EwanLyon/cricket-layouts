@@ -1,25 +1,86 @@
 {
-    "name": "India",
-    "players": [
-        "Virat Kohli",
-        "Ajinkya Rahane",
-        "Rohit Sharma",
-        "Shikhar Dhawan",
-        "K. L. Rahul",
-        "Murali Vijay",
-        "Prithvi Shaw",
-        "Chesteshwar Pujara",
-        "Hanuma Vihari",
-        "Ravichandran Ashwin",
-        "Ravindra Jadeja",
-        "Hardik Pandya",
-        "Dinesh Karthik",
-        "Jasprit Bumrah",
-        "Bhuvneshwar Kumar",
-        "Mohammed Shami",
-        "Ishant Sharma",
-        "Umesh Yadav",
-        "Parthiv Patel",
-        "Kuldeep Yadav"
-    ]
+	"name": "India",
+	"tla": "IND",
+	"players": [
+        {
+			"name": "Virat Kohli",
+			"role": "allrounder"
+		},
+		{
+			"name": "Ajinkya Rahane",
+			"role": "allrounder"
+		},
+		{
+			"name": "Rohit Sharma",
+			"role": "allrounder"
+		},
+		{
+			"name": "Shikhar Dhawan",
+			"role": "allrounder"
+		},
+		{
+			"name": "K. L. Rahul",
+			"role": "allrounder"
+		},
+		{
+			"name": "Murali Vijay",
+			"role": "allrounder"
+		},
+		{
+			"name": "Prithvi Shaw",
+			"role": "allrounder"
+		},
+		{
+			"name": "Chesteshwar Pujara",
+			"role": "allrounder"
+		},
+		{
+			"name": "Hanuma Vihari",
+			"role": "allrounder"
+		},
+		{
+			"name": "Ravichandran Ashwin",
+			"role": "allrounder"
+		},
+		{
+			"name": "Ravindra Jadeja",
+			"role": "allrounder"
+		},
+		{
+			"name": "Hardik Pandya",
+			"role": "allrounder"
+		},
+		{
+			"name": "Dinesh Karthik",
+			"role": "allrounder"
+		},
+		{
+			"name": "Jasprit Bumrah",
+			"role": "allrounder"
+		},
+		{
+			"name": "Bhuvneshwar Kumar",
+			"role": "allrounder"
+		},
+		{
+			"name": "Mohammed Shami",
+			"role": "allrounder"
+		},
+		{
+			"name": "Ishant Sharma",
+			"role": "allrounder"
+		},
+		{
+			"name": "Umesh Yadav",
+			"role": "allrounder"
+		},
+		{
+			"name": "Parthiv Patel",
+			"role": "allrounder"
+		},
+		{
+			"name": "Kuldeep Yadav",
+			"role": "allrounder"
+		}
+	]
 }

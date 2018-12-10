@@ -44,7 +44,7 @@
         "width": 3,
         "file": "teams.html",
         "headerColor": "#525F78",
-        "workspace": "Setup"       
+        "workspace": "Setup"
       },
       {
         "name": "wicket",
@@ -84,6 +84,7 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
+    "ajv": "^6.6.1",
     "json-schema-to-typescript": "^6.1.0",
     "trash-cli": "^1.4.0",
     "tslib": "^1.9.3"

@@ -1,15 +1,7 @@
-const {customElement, property} = Polymer.decorators;
-const teams = nodecg.Replicant<Asset[]>('assets:teams');
+import {Teams} from '../../../src/types/schemas/teams';
 
-interface Asset {
-	base: string;
-	bundleName: string;
-	category: string;
-	ext: string;
-	name: string;
-	sum: string;
-	url: string;
-}
+const {customElement, property} = Polymer.decorators;
+const teams = nodecg.Replicant<Teams>('teams');
 
 @customElement('cricket-teams')
 export default class CricketTeams extends Polymer.Element {
@@ -21,12 +13,21 @@ export default class CricketTeams extends Polymer.Element {
 
 		teams.on('change', newVal =>{
 			this.teamsLoaded = [];
-			newVal.forEach(teamFile => {
-				this.teamsLoaded.push(teamFile.name);
+			newVal.forEach((team: any) => {
+				this.teamsLoaded.push(team.name);
 			});
 
 			(this.$.typeaheadBatter as any).items = this.teamsLoaded;
 			(this.$.typeaheadFielder as any).items = this.teamsLoaded;
 		});
+	}
+
+	_updateFiles(){
+		nodecg.sendMessage('updateTeamFiles');
+	}
+
+	SwapTeams(){
+		// https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript
+		(this.$.typeaheadFielder as any).selectedItem = [(this.$.typeaheadBatter as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem = (this.$.typeaheadFielder as any).selectedItem][0]
 	}
 }

@@ -5,4 +5,16 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Teams = any[];
+export type Teams = {
+	/**
+	 * The name of the team
+	 */
+	name?: string;
+	/**
+	 * Three-letter abbreviation of team name. e.g. India => IND
+	 */
+	tla?: string;
+	players?: {
+		[k: string]: any;
+	}[];
+}[];

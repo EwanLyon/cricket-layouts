@@ -2,10 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
+	<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+	<script>
+		{
+			const links = [
+                'elements/cricket-batters/cricket-batters.html',
+                'elements/cricket-fielders/cricket-fielders.html'
+			];
+			for (const link of links) {
+				const linkElem = document.createElement('link');
+				linkElem.rel = 'import';
+				linkElem.href = link;
+				document.head.appendChild(linkElem);
+			}
+		}
+	</script>
 </head>
 <body>
-    
+    <cricket-batters></cricket-batters>
+    <cricket-fielders></cricket-fielders>
 </body>
 </html>
