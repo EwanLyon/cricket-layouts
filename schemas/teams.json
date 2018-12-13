@@ -9,13 +9,29 @@
 		"properties": {
 			"name": {
 				"type": "string",
-				"description": "The name of the team",
-				"default": ""
+				"description": "The name of the team"
 			},
 			"tla": {
 				"type": "string",
-				"description": "Three-letter abbreviation of team name. e.g. India => IND",
-				"default": ""
+				"description": "Three-letter abbreviation of team name. e.g. India => IND"
+			},
+			"totalRuns": {
+				"type": "integer",
+				"description": "Total runs the team has currently made",
+				"minimum": 0,
+				"default": 0
+			},
+			"wickets": {
+				"type": "integer",
+				"description": "Total amount of runners out",
+				"minimum": 0,
+				"maximum": 10,
+				"default": 0
+			},
+			"currentPosition": {
+				"type": "string",
+				"description": "Is the team batting or fielding",
+				"enum": ["batting", "fielding"]
 			},
 			"players": {
 				"type": "array",
@@ -24,8 +40,7 @@
 						"type": "object",
 						"name": {
 							"type": "string",
-							"description": "Player's name",
-							"default": ""
+							"description": "Player's name"
 						},
 						"role": {
 							"type": "string",
@@ -35,8 +50,35 @@
 						},
 						"bowlingStyle": {
 							"type": "string",
-							"description": "The player's bowling style",
-							"default": "Right arm fast"
+							"description": "The player's bowling style"
+						},
+						"runs": {
+							"type": "array",
+							"description": "Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's",
+							"minItems": 3,
+							"maxItems": 3,
+							"default": [0, 0, 0]
+						},
+						"dismissal": {
+							"type": "string",
+							"description": "If populated the player will be shown as out",
+							"default": ""
+						},
+						"battingBowls": {
+							"type": "integer",
+							"description": "The amount of bowls the BATTER has faced",
+							"minimum": 0,
+							"default": 0
+						},
+						"bowlingBalls": {
+							"type": "integer",
+							"description": "The amount of ball the BOWLER had bowled",
+							"default": 0
+						},
+						"wickets": {
+							"type": "integer",
+							"description": "The amount of wickets a bowler has made",
+							"default": 0
 						},
 						"required": ["name", "role"]
 					}

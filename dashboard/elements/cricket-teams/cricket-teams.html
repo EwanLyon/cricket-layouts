@@ -4,7 +4,7 @@
 
 <dom-module id="cricket-teams">
 	<template>
-		<style>
+		<style is="custom-style">
 			#seperator{
 			height: 1px;
 			background-color: #526076;
@@ -25,6 +25,12 @@
 		#swap{
 			background-color: #648adb;
 		}
+
+		vaadin-combo-box{
+			--primary-text-color: white;
+			--paper-input-container-focus-color: #339cff;
+			--iron-icon-fill-color: white;
+		}
 		</style>
 
 		<paper-button raised id="update" on-tap="_updateFiles">Update files</paper-button>
@@ -33,11 +39,19 @@
 		<br><br>
 
 		<span>Batters</span>
-		<vaadin-combo-box id="typeaheadBatter" placeholder="Search" theme="lumo"></vaadin-combo-box>
+		<vaadin-combo-box id="typeaheadBatter" placeholder="Search" theme="lumo" item-label-path="name">
+			<template>
+				[[item.name]]
+			</template>
+		</vaadin-combo-box>
 		<div class="seperator"></div>
-		<span>Bowlers</span>
-		<vaadin-combo-box id="typeaheadFielder" placeholder="Search" theme="material"></vaadin-combo-box>
-		<paper-button raised id="confirm">Confirm</paper-button>
+		<span>Fielders</span>
+		<vaadin-combo-box id="typeaheadFielder" placeholder="Search" theme="material" item-label-path="name">
+			<template>
+				[[item.name]]
+			</template>
+		</vaadin-combo-box>
+		<paper-button raised id="confirm" on-tap="ConfirmTeams">Confirm</paper-button>
 	</template>
 
 	<script src="cricket-teams.js" type="module"></script>
