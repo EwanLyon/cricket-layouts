@@ -14,5 +14,6 @@ module.exports = (nodecg: any) => {
 };
 
 async function init() {
-    require('./teamdata');
+	require('./teamdata');
+	require('./match')
 }

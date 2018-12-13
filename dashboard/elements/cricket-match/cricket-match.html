@@ -1,0 +1,37 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="cricket-match">
+	<template>
+		<style is="custom-style">
+			paper-button {
+				background-color: #3367d6;
+				width: 100%;
+				margin: 3px 0;
+			}
+
+			paper-input {
+				--primary-text-color: #ffffff;
+				--paper-input-container-color: #dbdbdb;
+				--paper-input-container-focus-color: #339cff;
+			}
+		</style>
+
+
+		<paper-input id="VenueInput" always-float-label label="Venue" placeholder="Ground, City"></paper-input>
+		<paper-input id="DateInput" always-float-label label="Start Date" placeholder="Day Month Year"></paper-input>
+		<paper-input id="Ump1Input" always-float-label label="Umpire 1"></paper-input>
+		<paper-input id="Ump2Input" always-float-label label="Umpire 2"></paper-input>
+		<paper-input id="TrdUmpInput" always-float-label label="3rd Umpire"></paper-input>
+		<paper-input id="RefInput" always-float-label label="Referee"></paper-input>
+		<paper-input id="PitchInput" always-float-label label="Pitch Condition"></paper-input>
+		<paper-input id="SurfaceInput" always-float-label label="Surface Condition"></paper-input>
+		<paper-input id="WeatherInput" always-float-label label="Weather"></paper-input>
+		<paper-input id="TossInput" always-float-label label="Toss" placeholder="Team 1 won the toss, elected to bat."></paper-input>
+
+		<paper-button raised on-tap="updateMatch">Update</paper-button>
+    </template>
+    
+    <script src="cricket-match.js" type="module"></script>
+</dom-module>
