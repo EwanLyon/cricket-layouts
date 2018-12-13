@@ -1,22 +1,16 @@
 {
   "name": "cricket-layouts",
-  "version": "0.0.0",
+  "version": "0.1.5",
   "description": "Cricket bundle",
-  "homepage": "",
+  "homepage": "https://github.com/EwanLyon/cricket-layouts",
   "author": {
-    "name": "Clubwho",
-    "email": "pls@lint.com",
-    "url": "https://pls-lint.com"
+    "name": "Ewan Lyon"
   },
   "files": [
     "dashboard",
     "graphics",
     "extension.js",
     "extension"
-  ],
-  "keywords": [
-    "",
-    "nodecg-bundle"
   ],
   "nodecg": {
     "compatibleRange": "^1.1.1",
@@ -60,6 +54,14 @@
         "file": "players.html",
         "fullbleed": true,
         "headerColor": "#525F78"
+      },
+      {
+        "name": "match",
+        "title": "Match Info",
+        "width": 3,
+        "file": "match.html",
+        "headerColor": "#525F78",
+        "workspace": "Setup"
       }
     ],
     "graphics": [
@@ -79,7 +81,7 @@
       }
     ]
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^3.2.1"
   },
