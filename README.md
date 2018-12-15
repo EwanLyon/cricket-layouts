@@ -10,6 +10,7 @@ Currently the graphics have not been worked on
 
 ![Game](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/game.jpg)
 ![Setup](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/setup.jpg)
+![Players](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/players.jpg)
 
 ## Requirements
 - [Node.js 8 or greater (8 recommended, newer versions not tested)](https://nodejs.org/)
