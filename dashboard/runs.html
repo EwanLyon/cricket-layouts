@@ -3,102 +3,28 @@
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-	<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-	<link rel="import" href="../bower_components/paper-button/paper-button.html">
-	<link rel="import" href="../bower_components/paper-input/paper-input.html">
-	<link rel="import" href="../bower_components/sc-fitted-text/sc-fitted-text.html">
-	<style>
-		#total-runs {
-			font-size: 42px;
-			text-align: center;
-		}
+    <link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
+	<link rel="import" href="../bower_components/polymer/polymer-element.html">
 
-		#seperator{
-			height: 1px;
-			background-color: #526076;
-			width: 100%;
-			margin: 10px 0;
+	<script>
+		{
+			const links = [
+				'elements/cricket-runs/cricket-runs.html'
+			];
+			for (const link of links) {
+				const linkElem = document.createElement('link');
+				linkElem.rel = 'import';
+				linkElem.href = link;
+				document.head.appendChild(linkElem);
+			}
 		}
-
-		.runners {
-			font-size: 24px;
-			margin: 10px;
-		}
-
-		table {
-			width: 100%;
-		}
-
-		th {
-			height: 20px;
-		}
-
-		td {
-			background: #50658a;
-			border-radius: 3px;
-			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-			text-align: center;
-		}
-
-		.name {
-			text-align: left;
-			padding: 0 6px;
-			width:20%;
-		}
-
-		.batsmanTotal{
-			font-weight: bold;
-		}
-
-		.balls{
-			font-weight: lighter;
-			font-size: 18px;
-		}
-
-		#edit{
-			float:right;
-			background-color: #ff4747;
-			margin: 5px 0 0 0;
-		}
-	</style>
+	</script>
 </head>
 
 <body>
-	<div id="total-runs">0</div>
 
-	<div id="seperator"></div>
+	<cricket-runs></cricket-runs>
 
-	<div id="batsmen">
-		<table>
-			<tr>
-				<th>Runners</th>
-				<th>1's</th>
-				<th>4's</th>
-				<th>6's</th>
-				<th>Total</th>
-				<th>Balls</th>
-			</tr>
-			<tr class="runners" id="runner0">
-				<td class="name"><sc-fitted-text text="" max-width="180"></sc-fitted-text></td>
-				<td class="singles">0</td>
-				<td class="fours">0</td>
-				<td class="sixes">0</td>
-				<td class="batsmanTotal">0</td>
-				<td class="balls">(0)</td>
-			</tr>
-
-			<tr class="runners" id="runner1">
-				<td class="name"><sc-fitted-text text="" max-width="180"></sc-fitted-text></td>
-				<td class="singles">0</td>
-				<td class="fours">0</td>
-				<td class="sixes">0</td>
-				<td class="batsmanTotal">0</td>
-				<td class="balls">(0)</td>
-			</tr>
-		</table>
-		<paper-button raised id="edit">Edit</paper-button>
-	</div>
 </body>
 
 </html>

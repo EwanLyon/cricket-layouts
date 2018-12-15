@@ -7,15 +7,6 @@
             "role": "wicketkeeper"
         },
         {
-            "name": "Ashton Agar",
-            "role": "bowler",
-            "bowlingStyle": "Left Arm Orthodox"
-        },
-        {
-            "name": "Alex Carey",
-            "role": "batter"
-        },
-        {
             "name": "Pat Cummins",
             "role": "bowler",
             "bowlingStyle": "Right Arm Fast"
@@ -47,35 +38,8 @@
             "bowlingStyle": "Right Arm Off-Spin"
         },
         {
-            "name": "Mitch Marsh",
-            "role": "allrounder"
-        },
-        {
             "name": "Shaun Marsh",
             "role": "batter"
-        },
-        {
-            "name": "Glenn Maxwell",
-            "role": "allrounder"
-        },
-        {
-            "name": "Matthew Renshaw",
-            "role": "batter"
-        },
-        {
-            "name": "Jhye Richardson",
-            "role": "bowler",
-            "bowlingStyle": "Right Arm Fast"
-        },
-        {
-            "name": "Kane Richardson",
-            "role": "bowler",
-            "bowlingStyle": "Right Arm Fast-Med"
-        },
-        {
-            "name": "Billy Stanlake",
-            "role": "bowler",
-            "bowlingStyle": "Right Arm Fast"
         },
         {
             "name": "Mitchell Starc",
@@ -83,13 +47,8 @@
             "bowlingStyle": "Left Arm Fast"
         },
         {
-            "name": "Marcus Stoinis",
+            "name": "Marcus Harris",
             "role": "allrounder"
-        },
-        {
-            "name": "Andrew Tye",
-            "role": "bowler",
-            "bowlingStyle": "Right Arm Med-Fast"
         }
     ]
 }

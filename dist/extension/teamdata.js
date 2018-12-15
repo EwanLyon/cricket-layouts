@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const path = require("path");
-const util = require("util");
 const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const teams = nodecg.Replicant('teams');
@@ -18,11 +17,5 @@ nodecg.listenFor('updateTeamFiles', () => {
     catch (error) {
         nodecg.log.error(error);
     }
-});
-nodecg.listenFor('updateBatting', (data) => {
-    nodecg.log.info("Batting team is: " + util.inspect(data));
-});
-nodecg.listenFor('updateFielding', (data) => {
-    nodecg.log.info("Fielding team is: " + data.name);
 });
 //# sourceMappingURL=teamdata.js.map

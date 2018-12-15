@@ -2,7 +2,6 @@
 
 import fs = require('fs');
 import path = require('path');
-import util = require('util');
 
 import * as nodecgApiContext from './util/nodecg-api-context';
 import {Teams} from '../types/schemas/teams';
@@ -19,10 +18,11 @@ interface Asset {
 
 const nodecg = nodecgApiContext.get();
 
-const teams = nodecg.Replicant<Teams>('teams');
+const teams = nodecg.Replicant<Teams[]>('teams');
 const teamAssets = nodecg.Replicant<Asset[]>('assets:teams');
 
 nodecg.listenFor('updateTeamFiles', () => {
+
 
     teams.value = [];
 
@@ -35,12 +35,4 @@ nodecg.listenFor('updateTeamFiles', () => {
         nodecg.log.error(error);
 	}
 
-});
-
-nodecg.listenFor('updateBatting', (data: any) => {
-	data.currentPosition = "batting";
-});
-
-nodecg.listenFor('updateFielding', (data: any) => {
-	data.currentPosition = "fielding";
 });

@@ -14,18 +14,6 @@ export type Teams = {
 	 * Three-letter abbreviation of team name. e.g. India => IND
 	 */
 	tla?: string;
-	/**
-	 * Total runs the team has currently made
-	 */
-	totalRuns?: number;
-	/**
-	 * Total amount of runners out
-	 */
-	wickets?: number;
-	/**
-	 * Is the team batting or fielding
-	 */
-	currentPosition?: 'batting' | 'fielding';
 	players?: {
 		[k: string]: any;
 	}[];

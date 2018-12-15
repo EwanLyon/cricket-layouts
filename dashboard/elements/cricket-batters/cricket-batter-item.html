@@ -1,15 +1,18 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/sc-fitted-text/sc-fitted-text.html">
 
 <dom-module id="cricket-batter-item">
 	<template>
 		<style>
-		#seperator{
-			height: 1px;
-			background-color: #526076;
-			width: 100%;
-			margin: 10px 0;
-		}
 		</style>
+
+		<sc-fitted-text text="[[name]]" max-width="300"></sc-fitted-text>
+<span>[[dismissal]]</span><span>[[runs]]</span>
+		<span>[[overs]]</span>
+		<span>[[maidenOvers]]</span>
+		
+		
+		<span>[[balls]]</span>
 
 	</template>
 

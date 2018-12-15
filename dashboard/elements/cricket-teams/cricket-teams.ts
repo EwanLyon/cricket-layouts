@@ -1,7 +1,7 @@
 import {Teams} from '../../../src/types/schemas/teams';
 
 const {customElement} = Polymer.decorators;
-const teams = nodecg.Replicant<Teams>('teams');
+const teams = nodecg.Replicant<Teams[]>('teams');
 
 @customElement('cricket-teams')
 export default class CricketTeams extends Polymer.Element {
@@ -10,7 +10,7 @@ export default class CricketTeams extends Polymer.Element {
 
 		teams.on('change', newVal =>{
 			(this.$.typeaheadBatter as any).items = newVal;
-			(this.$.typeaheadFielder as any).items = newVal;
+			(this.$.typeaheadBowlers as any).items = newVal;
 		});
 	}
 
@@ -20,11 +20,10 @@ export default class CricketTeams extends Polymer.Element {
 
 	SwapTeams(){
 		// https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript
-		(this.$.typeaheadFielder as any).selectedItem = [(this.$.typeaheadBatter as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem = (this.$.typeaheadFielder as any).selectedItem][0]
+		(this.$.typeaheadBowlers as any).selectedItem = [(this.$.typeaheadBatter as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem = (this.$.typeaheadBowlers as any).selectedItem][0]
 	}
 
 	ConfirmTeams(){
-		nodecg.sendMessage('updateBatting', (this.$.typeaheadBatter as any).selectedItem);
-		nodecg.sendMessage('updateFielding', (this.$.typeaheadFielder as any).selectedItem);
+		nodecg.sendMessage('newInnings', [(this.$.typeaheadBowlers as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem]);
 	}
 }

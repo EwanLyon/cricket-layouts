@@ -62,6 +62,14 @@
         "file": "match.html",
         "headerColor": "#525F78",
         "workspace": "Setup"
+      },
+      {
+        "name": "bowler",
+        "title": "Bowler",
+        "width": 3,
+        "file": "bowler.html",
+        "headerColor": "#525F78",
+        "workspace": "Game"
       }
     ],
     "graphics": [
