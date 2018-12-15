@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+	<link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
+	<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+	<script>
+		{
+			const links = [
+				'elements/cricket-bowler/cricket-bowler.html'
+			];
+			for (const link of links) {
+				const linkElem = document.createElement('link');
+				linkElem.rel = 'import';
+				linkElem.href = link;
+				document.head.appendChild(linkElem);
+			}
+		}
+	</script>
+	<style>
+	body{
+		height: 500px;
+	}
+	</style>
+</head>
+
+<body>
+	<cricket-bowler></cricket-bowler>
+</body>
+
+</html>

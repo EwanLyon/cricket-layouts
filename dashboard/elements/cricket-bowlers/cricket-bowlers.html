@@ -1,0 +1,31 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="cricket-bowler-item.html">
+
+<dom-module id="cricket-bowlers">
+	<template>
+		<style>
+		#seperator{
+			height: 1px;
+			background-color: #526076;
+			width: 100%;
+			margin: 10px 0;
+		}
+		</style>
+	
+
+		<div>
+			<template is="dom-repeat" items="[[currentInnings.bowlers]]" as="bowler">
+				<cricket-fielder-item
+					name="[[bowler.name]]"
+					overs="[[bowler.overs]]"
+					maidenOvers="[[bowler.maidenOvers]]"
+					runs="[[bowler.bowlingRuns]]"
+					wickets="[[bowler.wickets]]"
+					badBalls="[[bowler.badBalls]]">
+				</cricket-fielder-item>
+				<div id="seperator"></div>
+			</template>
+		</div>
+	</template>
+	<script src="cricket-bowlers.js" type="module"></script>
+</dom-module>
