@@ -23,11 +23,13 @@
 		},
 		"bowlingTeam": {
 			"type": "string",
-			"description": "The team that is bowling this innings"
+			"description": "The team that is bowling this innings",
+			"default": "NO BOWLING TEAM"
 		},
 		"battingTeam": {
 			"type": "string",
-			"description": "The team that is batting this innings"
+			"description": "The team that is batting this innings",
+			"default": "NO BATTING TEAM"
 		},
 		"TLAs": {
 			"type": "array",
@@ -57,5 +59,6 @@
 				"$ref": "types/batter.json"
 			}
 		}
-	}
+	},
+	"required": ["runs", "wickets", "over", "battingTeam", "bowlingTeam", "TLAs", "currentBowler", "currentBatterFacing", "currentBatterRunning", "bowlers", "batters"]
 }

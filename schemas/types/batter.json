@@ -5,7 +5,8 @@
 	"properties": {
 		"name": {
 			"type": "string",
-			"description": "Batter's name"
+			"description": "Batter's name",
+			"default": "MISSING BATTER NAME"
 		},
 		"runs": {
 			"type": "array",
@@ -21,8 +22,9 @@
 		},
 		"dismissal": {
 			"type": "string",
-			"description": "If populated the player will be shown as out"
+			"description": "If populated the player will be shown as out",
+			"default": ""
 		}
-	}
-
+	},
+	"required": ["name", "runs", "balls", "dismissal"]
 }

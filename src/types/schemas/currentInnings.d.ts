@@ -9,131 +9,131 @@ export interface CurrentInnings {
 	/**
 	 * Current runs scored
 	 */
-	runs?: number;
+	runs: number;
 	/**
 	 * Current wickets
 	 */
-	wickets?: number;
+	wickets: number;
 	/**
 	 * Current over with decimal, e.g. 15.2
 	 */
-	over?: number;
+	over: number;
 	/**
 	 * The team that is bowling this innings
 	 */
-	bowlingTeam?: string;
+	bowlingTeam: string;
 	/**
 	 * The team that is batting this innings
 	 */
-	battingTeam?: string;
+	battingTeam: string;
 	/**
 	 * Three letter abreviations for playing teams. [Bowlers, Batters]
 	 */
-	TLAs?: string[];
-	currentBowler?: {
+	TLAs: string[];
+	currentBowler: {
 		/**
 		 * Bowler's name
 		 */
-		name?: string;
+		name: string;
 		/**
 		 * Number of overs bowled with decimal, e.g. 15.2
 		 */
-		overs?: number;
+		overs: number;
 		/**
 		 * Number of overs where the batsman has not made a run
 		 */
-		maidenOvers?: number;
+		maidenOvers: number;
 		/**
 		 * Number of runs made off the bowler
 		 */
-		runs?: number;
+		runs: number;
 		/**
 		 * The amount of wickets a bowler has made
 		 */
-		wickets?: number;
+		wickets: number;
 		/**
 		 * Wides and No Balls, [wide, noball]
 		 */
-		badBalls?: any[];
+		badBalls: any[];
 	};
-	currentBatterFacing?: {
+	currentBatterFacing: {
 		/**
 		 * Batter's name
 		 */
-		name?: string;
+		name: string;
 		/**
 		 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's. Default is -1 to display it as a '-'
 		 */
-		runs?: any[];
+		runs: any[];
 		/**
 		 * Number of balls the batter has faced, -1 to display as '-'
 		 */
-		balls?: number;
+		balls: number;
 		/**
 		 * If populated the player will be shown as out
 		 */
-		dismissal?: string;
+		dismissal: string;
 	};
-	currentBatterRunning?: {
+	currentBatterRunning: {
 		/**
 		 * Batter's name
 		 */
-		name?: string;
+		name: string;
 		/**
 		 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's. Default is -1 to display it as a '-'
 		 */
-		runs?: any[];
+		runs: any[];
 		/**
 		 * Number of balls the batter has faced, -1 to display as '-'
 		 */
-		balls?: number;
+		balls: number;
 		/**
 		 * If populated the player will be shown as out
 		 */
-		dismissal?: string;
+		dismissal: string;
 	};
-	bowlers?: {
+	bowlers: {
 		/**
 		 * Bowler's name
 		 */
-		name?: string;
+		name: string;
 		/**
 		 * Number of overs bowled with decimal, e.g. 15.2
 		 */
-		overs?: number;
+		overs: number;
 		/**
 		 * Number of overs where the batsman has not made a run
 		 */
-		maidenOvers?: number;
+		maidenOvers: number;
 		/**
 		 * Number of runs made off the bowler
 		 */
-		runs?: number;
+		runs: number;
 		/**
 		 * The amount of wickets a bowler has made
 		 */
-		wickets?: number;
+		wickets: number;
 		/**
 		 * Wides and No Balls, [wide, noball]
 		 */
-		badBalls?: any[];
+		badBalls: any[];
 	}[];
-	batters?: {
+	batters: {
 		/**
 		 * Batter's name
 		 */
-		name?: string;
+		name: string;
 		/**
 		 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's. Default is -1 to display it as a '-'
 		 */
-		runs?: any[];
+		runs: any[];
 		/**
 		 * Number of balls the batter has faced, -1 to display as '-'
 		 */
-		balls?: number;
+		balls: number;
 		/**
 		 * If populated the player will be shown as out
 		 */
-		dismissal?: string;
+		dismissal: string;
 	}[];
 }

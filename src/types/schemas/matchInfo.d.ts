@@ -9,30 +9,29 @@ export interface MatchInfo {
 	/**
 	 * Location of game as {Stadium/Ground Name, City}
 	 */
-	venue?: string;
+	venue: string;
 	/**
 	 * Who won the toss and what they started as '{Team} won and chose, elected to {bat/bowl}'
 	 */
-	toss?: string;
+	toss: string;
 	/**
 	 * Date when the match began
 	 */
-	startDate?: string;
+	startDate: string;
 	/**
 	 * First two are fielding umpires, 3rd is the 3rd umpire, 4th is referee
 	 */
-	umpires?: string[];
+	umpires: string[];
 	/**
 	 * CUrrent state of pitch, e.g. Rough or Flat
 	 */
-	pitchState?: string;
+	pitchState: string;
 	/**
 	 * Current fielding ground state, e.g. Slow
 	 */
-	surfaceState?: string;
+	surfaceState: string;
 	/**
 	 * Current weather conditions, e.g. Fine
 	 */
-	weather?: string;
-	[k: string]: any;
+	weather: string;
 }

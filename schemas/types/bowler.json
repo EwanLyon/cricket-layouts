@@ -5,7 +5,8 @@
 	"properties": {
 		"name": {
 			"type": "string",
-			"description": "Bowler's name"
+			"description": "Bowler's name",
+			"default": "MISSING BOWLERS NAME"
 		},
 		"overs": {
 			"type": "number",
@@ -34,5 +35,6 @@
 			"maxItems": 2,
 			"default": [0, 0]
 		}
-	}
+	},
+	"required": ["name", "overs", "maidenOvers", "runs", "wickets", "badBalls"]
 }

@@ -14,15 +14,83 @@
 			paper-button {
 				background: #3367d6;
 			}
+
+			#search {
+				display: flex;
+				flex-direction: row;
+			}
+
+			#search vaadin-combo-box{
+				flex-grow: 2;
+			}
+
+			#name{
+				font-size: 1.5em;
+				display: block;
+				text-align: center;
+			}
+
+			.dataTable{
+				display: flex;
+  				flex-wrap: wrap;
+  				justify-content: center;
+				/* width: 100%; */
+			}
+
+			.dataCell {
+				width:40%;
+  				overflow: hidden;
+				padding: 5px;
+				margin: 5px 3px;
+				background-color: #50658a;
+				border-radius: 3px;
+				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+			}
+
+			.seperator {
+				height: 1px;
+				background-color: #526076;
+				width: 100%;
+				margin: 10px 0;
+			}
 		</style>
 
-		<vaadin-combo-box id="typeaheadBowler" placeholder="Search" item-label-path="name">
-			<template>
-				[[item.name]]
-			</template>
-		</vaadin-combo-box>
+		<div id="search">
+			<vaadin-combo-box id="typeaheadBowler" placeholder="Search" item-label-path="name">
+				<template>
+					[[item.name]]
+				</template>
+			</vaadin-combo-box>
 
-		<paper-button raised on-tap="UpdateBowler">Confirm</paper-button>
+			<paper-button raised on-tap="UpdateBowler">Confirm</paper-button>
+		</div>
+
+		<div class="seperator"></div>
+
+		<span id="name">[[cbName]]</span>
+		<div class="dataTable">
+			<div class="dataCell">Overs</div>
+			<div class="dataCell">[[curBowler.overs]]</div>
+
+			<div class="dataCell">Maidens</div>
+			<div class="dataCell">[[curBowler.maidenOvers]]</div>
+
+			<div class="dataCell">Runs</div>
+			<div class="dataCell">[[curBowler.runs]]</div>
+
+			<div class="dataCell">Wickets</div>
+			<div class="dataCell">[[curBowler.wickets]]</div>
+
+			<div class="dataCell">Wides</div>
+			<div class="dataCell">[[cbWides]]</div>
+
+			<div class="dataCell">No Balls</div>
+			<div class="dataCell">[[cbNoBalls]]</div>
+		</div>
+
+		<table>
+
+		</table>
 
 	</template>
 

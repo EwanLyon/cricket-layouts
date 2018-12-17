@@ -4,9 +4,10 @@ import * as nodecgApiContext from './util/nodecg-api-context';
 const nodecg = nodecgApiContext.get();
 import {CurrentInnings} from '../types/schemas/currentInnings';
 import {Teams} from '../types/schemas/teams';
+import {Batter} from '../types/schemas/other/batter';
+import {Bowler} from '../types/schemas/other/bowler';
 
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
-// const teamsRep = nodecg.Replicant<Teams[]>('teams');
 
 nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
 	currentInningsRep.value.wickets = 0;
@@ -18,14 +19,53 @@ nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
 
 	currentInningsRep.value.bowlingTeam = bowlingTeam.name;
 	currentInningsRep.value.battingTeam = battingTeam.name;
-	
-	currentInningsRep.value.batters = battingTeam.players;
+
+	const bowlingPlayers: Bowler[] = createBowlersObjects(bowlingTeam);
+	const battingPlayers: Batter[] = createBatterObjects(battingTeam);
+
+	currentInningsRep.value.bowlers = bowlingPlayers;
+	currentInningsRep.value.batters = battingPlayers;
 });
 
-nodecg.listenFor('changeBowler', (newVal:object) => {
-	console.log(newVal);
+function createBowlersObjects(bowlingTeam: Teams[0]) {
+	var buildingBowlers: Bowler[] = [];
 
-	if (currentInningsRep.value.currentBowler == ""){
+	bowlingTeam.players.forEach(player => {
+		var bowlingObj: Bowler = {
+			name: player.name,
+			overs: 0,
+			maidenOvers: 0,
+			runs: 0,
+			wickets: 0,
+			badBalls: [0,0]
+		};
+
+		buildingBowlers.push(bowlingObj);
+	});
+
+	return buildingBowlers;
+}
+
+function createBatterObjects(battingTeam: Teams[0]) {
+	var buildingBatters: Batter[] = [];
+
+	battingTeam.players.forEach(player => {
+		var batterObj: Batter = {
+			name: player.name,
+			runs: [0, 0, 0],
+			balls: 0,
+			dismissal: ""
+		};
+
+		buildingBatters.push(batterObj);
+	});
+
+	return buildingBatters;
+}
+
+nodecg.listenFor('changeBowler', (newVal: Bowler) => {
+
+	if (currentInningsRep.value.currentBowler == undefined){
 		currentInningsRep.value.currentBowler = newVal;
 	} else if (newVal){
 

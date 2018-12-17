@@ -9,12 +9,12 @@ export type Teams = {
 	/**
 	 * The name of the team
 	 */
-	name?: string;
+	name: string;
 	/**
 	 * Three-letter abbreviation of team name. e.g. India => IND
 	 */
-	tla?: string;
-	players?: {
+	tla: string;
+	players: {
 		[k: string]: any;
 	}[];
 }[];

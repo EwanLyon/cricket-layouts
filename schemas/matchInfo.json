@@ -2,18 +2,22 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
 
     "type": "object",
+    "additionalProperties": false,
     "properties": {
         "venue": {
             "type": "string",
-            "description": "Location of game as {Stadium/Ground Name, City}"
+            "description": "Location of game as {Stadium/Ground Name, City}",
+            "default": "UNKNOWN"
         },
         "toss": {
             "type": "string",
-            "description": "Who won the toss and what they started as '{Team} won and chose, elected to {bat/bowl}'"
+            "description": "Who won the toss and what they started as '{Team} won and chose, elected to {bat/bowl}'",
+            "default": "Toss has not been made yet"
         },
         "startDate": {
             "type": "string",
-            "description": "Date when the match began"
+            "description": "Date when the match began",
+            "default": "Today"
         },
         "umpires": {
             "type": "array",
@@ -25,15 +29,19 @@
         },
         "pitchState": {
             "type": "string",
-            "description": "CUrrent state of pitch, e.g. Rough or Flat"
+            "description": "CUrrent state of pitch, e.g. Rough or Flat",
+            "default": "UNKNOWN"
         },
         "surfaceState": {
             "type": "string",
-            "description": "Current fielding ground state, e.g. Slow"
+            "description": "Current fielding ground state, e.g. Slow",
+            "default": "UNKNOWN"
         },
         "weather": {
             "type": "string",
-            "description": "Current weather conditions, e.g. Fine"
+            "description": "Current weather conditions, e.g. Fine",
+            "default": "UNKNOWN"
         }
-    }
+    },
+    "required": ["venue", "toss", "startDate", "umpires", "pitchState", "surfaceState", "weather"]
 }
