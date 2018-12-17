@@ -1,66 +1,7 @@
 {
-	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$schema": "http://json-schema.org/draft-04/schema#",
 	"type": "object",
-
-	"definitions": {
-		"bowler": {
-			"type": "object",
-			"name": {
-				"type": "string",
-				"description": "Bowler's name"
-			},
-			"overs": {
-				"type": "number",
-				"description": "Number of overs bowled with decimal, e.g. 15.2",
-				"default": 0
-			},
-			"maidenOvers": {
-				"type": "integer",
-				"description": "Number of overs where the batsman has not made a run",
-				"default": 0
-			},
-			"runs": {
-				"type": "integer",
-				"description": "Number of runs made off the bowler",
-				"default": 0
-			},
-			"wickets": {
-				"type": "integer",
-				"description": "The amount of wickets a bowler has made",
-				"default": 0
-			},
-			"badBalls": {
-				"type": "array",
-				"description": "Wides and No Balls, [wide, noball]",
-				"minItems": 2,
-				"maxItems": 2,
-				"default": [0, 0]
-			}
-		},
-		"batter": {
-			"type": "object",
-			"name": {
-				"type": "string",
-				"description": "Bowler's name"
-			},
-			"runs": {
-				"type": "array",
-				"description": "Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's. Default is -1 to display it as a '-'",
-				"minItems": 3,
-				"maxItems": 3,
-				"default": [-1, -1, -1]
-			},
-			"balls": {
-				"type": "integer",
-				"description": "Number of balls the batter has faced, -1 to display as '-'",
-				"default": -1
-			},
-			"dismissal": {
-				"type": "string",
-				"description": "If populated the player will be shown as out"
-			}
-		}
-	},
+	"additionalProperties": false,
 	"properties": {
 		"runs": {
 			"type": "integer",
@@ -94,27 +35,27 @@
 				"type": "string"
 			},
 			"description": "Three letter abreviations for playing teams. [Bowlers, Batters]"
-		}
-	},
-	"currentBowler": {
-		"$ref": "#/definitions/bowler"
-	},
-	"currentBatter1": {
-		"$ref": "#/definitions/batter"
-	},
-	"currentBatter2": {
-		"$ref": "#/definitions/batter"
-	},
-	"bowlers": {
-		"type": "array",
-		"items": {
-			"$ref": "#/definitions/bowler"
-		}
-	},
-	"batters": {
-		"type": "array",
-		"items": {
-			"$ref": "#/definitions/batter"
+		},
+		"currentBowler": {
+			"$ref": "types/bowler.json"
+		},
+		"currentBatterFacing": {
+			"$ref": "types/batter.json"
+		},
+		"currentBatterRunning": {
+			"$ref": "types/batter.json"
+		},
+		"bowlers": {
+			"type": "array",
+			"items": {
+				"$ref": "types/bowler.json"
+			}
+		},
+		"batters": {
+			"type": "array",
+			"items": {
+				"$ref": "types/batter.json"
+			}
 		}
 	}
 }

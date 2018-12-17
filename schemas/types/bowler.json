@@ -1,0 +1,38 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "Bowler's name"
+		},
+		"overs": {
+			"type": "number",
+			"description": "Number of overs bowled with decimal, e.g. 15.2",
+			"default": 0
+		},
+		"maidenOvers": {
+			"type": "integer",
+			"description": "Number of overs where the batsman has not made a run",
+			"default": 0
+		},
+		"runs": {
+			"type": "integer",
+			"description": "Number of runs made off the bowler",
+			"default": 0
+		},
+		"wickets": {
+			"type": "integer",
+			"description": "The amount of wickets a bowler has made",
+			"default": 0
+		},
+		"badBalls": {
+			"type": "array",
+			"description": "Wides and No Balls, [wide, noball]",
+			"minItems": 2,
+			"maxItems": 2,
+			"default": [0, 0]
+		}
+	}
+}

@@ -24,5 +24,11 @@ nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
 
 nodecg.listenFor('changeBowler', (newVal:object) => {
 	console.log(newVal);
+
+	if (currentInningsRep.value.currentBowler == ""){
+		currentInningsRep.value.currentBowler = newVal;
+	} else if (newVal){
+
+	}
 	// currentInningsRep.value.currentBowler;
 });
