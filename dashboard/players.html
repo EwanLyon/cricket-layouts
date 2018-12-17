@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
+	<meta charset="UTF-8">
+	<link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
 	<link rel="import" href="../bower_components/polymer/polymer-element.html">
 
 	<script>
 		{
 			const links = [
-                'elements/cricket-batters/cricket-batters.html',
-                'elements/cricket-bowlers/cricket-bowlers.html'
+				'elements/cricket-batters/cricket-batters.html',
+				'elements/cricket-bowlers/cricket-bowlers.html'
 			];
 			for (const link of links) {
 				const linkElem = document.createElement('link');
@@ -19,9 +20,20 @@
 			}
 		}
 	</script>
+	<style>
+		.seperator {
+			height: 3px;
+			background-color: #526076;
+			width: 100%;
+			margin: 20px 0;
+		}
+	</style>
 </head>
+
 <body>
-    <cricket-batters></cricket-batters>
-    <cricket-bowlers></cricket-bowlers>
+	<cricket-batters></cricket-batters>
+	<div class="seperator"></div>
+	<cricket-bowlers></cricket-bowlers>
 </body>
+
 </html>

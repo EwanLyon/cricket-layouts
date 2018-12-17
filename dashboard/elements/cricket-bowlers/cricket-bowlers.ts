@@ -13,6 +13,6 @@ export default class CricketBowlers extends Polymer.Element {
 
 		currentInningsRep.on('change', newVal => {
 			this.currentInnings = newVal;
-		})
+		});
 	}
 }

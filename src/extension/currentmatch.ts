@@ -65,7 +65,7 @@ function createBatterObjects(battingTeam: Teams[0]) {
 
 nodecg.listenFor('changeBowler', (newVal: Bowler) => {
 
-	if (currentInningsRep.value.currentBowler == undefined){
+	if (currentInningsRep.value.currentBowler.name == "NO BOWLER NAME"){
 		currentInningsRep.value.currentBowler = newVal;
 	} else if (newVal){
 

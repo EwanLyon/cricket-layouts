@@ -24,7 +24,6 @@ export default class CricketBowler extends Polymer.Element {
 		super.ready();
 
 		currentInningsRep.on('change', newVal =>{
-			console.log(newVal);
 			(this.$.typeaheadBowler as any).items = newVal.bowlers;
 		});
 	}

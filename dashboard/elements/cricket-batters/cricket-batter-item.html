@@ -4,15 +4,40 @@
 <dom-module id="cricket-batter-item">
 	<template>
 		<style>
+			.horizontal{
+				display:flex;
+				flex-direction: row;
+				justify-content: center;
+			}
+
+			sc-fitted-text {
+				margin: 0 50px;
+				width: 300px;
+				font-weight: bold;
+			}
+
+			#runs{
+				font-weight: bold
+			}
+
+			#runs, #balls, #fours, #sixes{
+				/* margin: 0 16px; */
+				width: 70px;
+				display: inline-block;
+				text-align: center;
+			}
 		</style>
 
-		<sc-fitted-text text="[[name]]" max-width="300"></sc-fitted-text>
-<span>[[dismissal]]</span><span>[[runs]]</span>
-		<span>[[overs]]</span>
-		<span>[[maidenOvers]]</span>
-		
-		
-		<span>[[balls]]</span>
+		<div class="horizontal">
+			<sc-fitted-text text="[[name]]" max-width="300"></sc-fitted-text>
+			<div id="info">
+				<span>[[dismissal]]</span>
+				<span id="runs">[[totalRuns]]</span>
+				<span id="balls">[[balls]]</span>
+				<span id="fours">[[fours]]</span>
+				<span id="sixes">[[sixes]]</span>
+			</div>
+		</div>
 
 	</template>
 

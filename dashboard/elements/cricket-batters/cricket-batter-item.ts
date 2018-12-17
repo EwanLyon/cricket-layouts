@@ -5,7 +5,7 @@ export default class CricketBatterItem extends Polymer.Element {
 	@property({type: String})
 	name: string;
 
-	@property({type: Number, observer: CricketBatterItem.prototype.calcTotalRuns})
+	@property({type: Number, observer: CricketBatterItem.prototype.calcRuns})
 	runs: number[];
 
 	@property({type: Number})
@@ -19,9 +19,21 @@ export default class CricketBatterItem extends Polymer.Element {
 
 	@property({type: Number})
 	totalRuns: number;
+
+	@property({type: Number})
+	singles: number;
+
+	@property({type: Number})
+	fours: number;
+
+	@property({type: Number})
+	sixes: number;
 	
-	calcTotalRuns(){
+	calcRuns(){
 		this.totalRuns = this.runs.reduce((a,b) => a+b, 0);
+		this.singles = this.runs[0];
+		this.fours = this.runs[1];
+		this.sixes = this.runs[2];
 	}
 	
 }

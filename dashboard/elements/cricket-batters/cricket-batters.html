@@ -1,30 +1,57 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="cricket-batter-item.html">
 
 <dom-module id="cricket-batters">
 	<template>
 		<style>
-		#seperator{
+			#seperator{
 			height: 1px;
 			background-color: #526076;
 			width: 100%;
 			margin: 10px 0;
 		}
+
+		#battingKey {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			font-size: 1.3em;
+			font-weight: bold;
+			margin: 0 0 10px 0;
+		}
+
+		#name{
+			width: 300px;
+			margin: 0 50px;
+		}
+
+		#runs, #balls, #fours, #sixes {
+			width: 70px;
+			display: inline-block;
+			text-align: center;
+		}
 		</style>
 
-		<div>
-			<template is="dom-repeat" items="[[currentInnings.bowlers]]" as="bowler">
-				<cricket-batter-item
-					name="[[bowler.name]]"
-					overs="[[bowler.overs]]"
-					maidenOvers="[[bowler.maidenOvers]]"
-					runs="[[bowler.bowlingRuns]]"
-					wickets="[[bowler.wickets]]"
-					badBalls="[[bowler.badBalls]]">
-				</cricket-batter-item>
-				<div id="seperator"></div>
-			</template>
+		<div id="battingKey">
+			<span id="name">Batting</span>
+			<div id="numbers">
+				<span id="runs">R</span>
+				<span id="balls">B</span>
+				<span id="fours">4s</span>
+				<span id="sixes">6s</span>
+			</div>
 		</div>
+
+		<template is="dom-repeat" items="[[currentInnings.batters]]" as="batters">
+			<cricket-batter-item 
+				name="[[batters.name]]"
+				balls="[[batters.balls]]"
+				dismissal="[[batters.dismissal]]"
+				runs="[[batters.runs]]">
+			</cricket-batter-item>
+			<div id="seperator"></div>
+		</template>
 
 	</template>
 

@@ -70,6 +70,14 @@
         "file": "bowler.html",
         "headerColor": "#525F78",
         "workspace": "Game"
+      },
+      {
+        "name": "battingroster",
+        "title": "Batting Roster",
+        "width": 2,
+        "file": "battingroster.html",
+        "headerColor": "#525F78",
+        "workspace": "Setup"
       }
     ],
     "graphics": [
