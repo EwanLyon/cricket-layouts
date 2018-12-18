@@ -25,6 +25,8 @@ nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
 
 	currentInningsRep.value.bowlers = bowlingPlayers;
 	currentInningsRep.value.batters = battingPlayers;
+
+	nodecg.log.info('New innings started! Batters: ' + currentInningsRep.value.battingTeam + ' | Bowlers: ' + currentInningsRep.value.bowlingTeam);
 });
 
 function createBowlersObjects(bowlingTeam: Teams[0]) {
@@ -64,6 +66,8 @@ function createBatterObjects(battingTeam: Teams[0]) {
 }
 
 nodecg.listenFor('changeBowler', (newVal: Bowler) => {
+
+	nodecg.log.info(currentInningsRep.value.currentBowler.name);
 
 	if (currentInningsRep.value.currentBowler.name == "NO BOWLER NAME"){
 		currentInningsRep.value.currentBowler = newVal;

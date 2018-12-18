@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const currentInningsRep = nodecg.Replicant('currentInnings');
-// const teamsRep = nodecg.Replicant<Teams[]>('teams');
 nodecg.listenFor('newInnings', (data) => {
     currentInningsRep.value.wickets = 0;
     currentInningsRep.value.runs = 0;
@@ -17,6 +16,7 @@ nodecg.listenFor('newInnings', (data) => {
     const battingPlayers = createBatterObjects(battingTeam);
     currentInningsRep.value.bowlers = bowlingPlayers;
     currentInningsRep.value.batters = battingPlayers;
+    nodecg.log.info('New innings started! Batters: ' + currentInningsRep.value.battingTeam + ' | Bowlers: ' + currentInningsRep.value.bowlingTeam);
 });
 function createBowlersObjects(bowlingTeam) {
     var buildingBowlers = [];
@@ -29,11 +29,6 @@ function createBowlersObjects(bowlingTeam) {
             wickets: 0,
             badBalls: [0, 0]
         };
-        // bowlingObj.overs = 0;
-        // bowlingObj.maidenOvers = 0;
-        // bowlingObj.runs = 0;
-        // bowlingObj.wickets = 0;
-        // bowlingObj.badBalls = [0 , 0];
         buildingBowlers.push(bowlingObj);
     });
     return buildingBowlers;
@@ -41,17 +36,19 @@ function createBowlersObjects(bowlingTeam) {
 function createBatterObjects(battingTeam) {
     var buildingBatters = [];
     battingTeam.players.forEach(player => {
-        var batterObj = {};
-        batterObj.name = player.name;
-        batterObj.runs = [0, 0, 0];
-        batterObj.balls = 0;
-        batterObj.dismissal = "";
+        var batterObj = {
+            name: player.name,
+            runs: [0, 0, 0],
+            balls: 0,
+            dismissal: ""
+        };
         buildingBatters.push(batterObj);
     });
     return buildingBatters;
 }
 nodecg.listenFor('changeBowler', (newVal) => {
-    if (currentInningsRep.value.currentBowler == undefined) {
+    nodecg.log.info(currentInningsRep.value.currentBowler.name);
+    if (currentInningsRep.value.currentBowler.name == "NO BOWLER NAME") {
         currentInningsRep.value.currentBowler = newVal;
     }
     else if (newVal) {

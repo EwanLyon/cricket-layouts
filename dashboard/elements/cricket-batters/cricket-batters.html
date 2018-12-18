@@ -43,7 +43,7 @@
 			</div>
 		</div>
 
-		<template is="dom-repeat" items="[[currentInnings.batters]]" as="batters">
+		<template id="BattersList" is="dom-repeat" items="[[currentInnings.batters]]" as="batters">
 			<cricket-batter-item 
 				name="[[batters.name]]"
 				balls="[[batters.balls]]"
