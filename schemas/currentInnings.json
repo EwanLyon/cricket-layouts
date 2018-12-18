@@ -53,6 +53,12 @@
 				"$ref": "types/bowler.json"
 			}
 		},
+		"playedBowlers": {
+			"type": "array",
+			"items": {
+				"$ref": "types/bowler.json"
+			}
+		},
 		"batters": {
 			"type": "array",
 			"items": {
@@ -60,5 +66,5 @@
 			}
 		}
 	},
-	"required": ["runs", "wickets", "over", "battingTeam", "bowlingTeam", "TLAs", "currentBowler", "currentBatterFacing", "currentBatterRunning", "bowlers", "batters"]
+	"required": ["runs", "wickets", "over", "battingTeam", "bowlingTeam", "TLAs", "currentBowler", "currentBatterFacing", "currentBatterRunning", "bowlers", "batters", "playedBowlers"]
 }

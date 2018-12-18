@@ -4,7 +4,7 @@ const {customElement, property} = Polymer.decorators;
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 
 @customElement('cricket-bowlers')
-export default class CricketBowlers extends Polymer.Element {
+export default class CricketBowlers extends Polymer.MutableData(Polymer.Element) {
 	@property({type: Object})
 	currentInnings: CurrentInnings;
 
@@ -12,7 +12,9 @@ export default class CricketBowlers extends Polymer.Element {
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
+			console.log(newVal.playedBowlers);
 			this.currentInnings = newVal;
+			this.notifyPath('BowlersList');
 		});
 	}
 }

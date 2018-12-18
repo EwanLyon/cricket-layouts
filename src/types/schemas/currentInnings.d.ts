@@ -118,6 +118,32 @@ export interface CurrentInnings {
 		 */
 		badBalls: any[];
 	}[];
+	playedBowlers: {
+		/**
+		 * Bowler's name
+		 */
+		name: string;
+		/**
+		 * Number of overs bowled with decimal, e.g. 15.2
+		 */
+		overs: number;
+		/**
+		 * Number of overs where the batsman has not made a run
+		 */
+		maidenOvers: number;
+		/**
+		 * Number of runs made off the bowler
+		 */
+		runs: number;
+		/**
+		 * The amount of wickets a bowler has made
+		 */
+		wickets: number;
+		/**
+		 * Wides and No Balls, [wide, noball]
+		 */
+		badBalls: any[];
+	}[];
 	batters: {
 		/**
 		 * Batter's name
