@@ -3,11 +3,11 @@
 	"tla": "IND",
 	"players": [
 		{
-			"name": "Lokesh Rahul",
+			"name": "Hanuma Vihari",
 			"role": "batter"
 		},
 		{
-			"name": "Murali Vijay",
+			"name": "Mayank Agarwal",
 			"role": "bowler"
 		},
 		{
@@ -23,15 +23,15 @@
 			"role": "batter"
 		},
 		{
-			"name": "Hanuma Vihari",
-			"role": "bowler"
+			"name": "Rohit Sharma",
+			"role": "batter"
 		},
 		{
 			"name": "Rishabh Pant",
 			"role": "wicketkeeper"
 		},
 		{
-			"name": "Ishant Sharma",
+			"name": "Ravindra Jadeja",
 			"role": "bowler"
 		},
 		{
@@ -39,7 +39,7 @@
 			"role": "bowler"
 		},
 		{
-			"name": "Umesh Yadav",
+			"name": "Ishant Sharma",
 			"role": "bowler"
 		},
 		{
