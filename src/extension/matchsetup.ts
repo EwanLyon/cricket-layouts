@@ -12,6 +12,8 @@ import {Bowler} from '../types/schemas/bowler';
 const matchRep = nodecg.Replicant<MatchInfo>('match');
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings', {persistent: false});
 
+// const util = require('util');
+
 nodecg.listenFor('updateMatch', (data: MatchInfo) => {
     matchRep.value = data;
 });
@@ -41,10 +43,11 @@ nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
 });
 
 function createBowlersObjects(bowlingTeam: Teams[0]) {
-	var buildingBowlers: Bowler[] = [];
+	let buildingBowlers: Bowler[] = [];
 
+    // Reset each player to default
 	bowlingTeam.players.forEach(player => {
-		var bowlingObj: Bowler = {
+		let bowlingObj: Bowler = {
 			name: player.name,
 			overs: 0,
 			maidenOvers: 0,
@@ -62,13 +65,15 @@ function createBowlersObjects(bowlingTeam: Teams[0]) {
 function createBatterObjects(battingTeam: Teams[0]) {
 	var buildingBatters: Batter[] = [];
 
+    // Reset each player to default
 	battingTeam.players.forEach(player => {
 		var batterObj: Batter = {
 			name: player.name,
 			runs: [0, 0, 0],
 			balls: 0,
 			dismissal: "",
-			batting: false
+            batting: false,
+            facing: false
 		};
 
 		buildingBatters.push(batterObj);
@@ -76,3 +81,23 @@ function createBatterObjects(battingTeam: Teams[0]) {
 
 	return buildingBatters;
 }
+
+nodecg.listenFor('updateBattingRoster', (updatedBatters: Batter[]) => {
+	// Reset batting roster
+	currentInningsRep.value.batters = [];
+    
+	// Push each batter into the batting roster	
+	currentInningsRep.value.batters = updatedBatters;
+
+	// updatedBatters.forEach(batter => {
+	// 	currentInningsRep.value.batters.push(batter);
+	// });
+
+    // Set first two batters as on pitch
+    currentInningsRep.value.battersFacing = [currentInningsRep.value.batters[0], currentInningsRep.value.batters[1]];
+
+    // Set the first batter as facing
+	currentInningsRep.value.battersFacing[0].facing = true;
+
+	// nodecg.log.info(util.inspect(currentInningsRep.value.batters, false, null, true /* enable colors */));
+});
