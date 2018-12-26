@@ -11,15 +11,19 @@ export interface Batter {
 	 */
 	name: string;
 	/**
-	 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's. Default is -1 to display it as a '-'
+	 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's
 	 */
 	runs: any[];
 	/**
-	 * Number of balls the batter has faced, -1 to display as '-'
+	 * Number of balls the batter has faced
 	 */
 	balls: number;
 	/**
 	 * If populated the player will be shown as out
 	 */
 	dismissal: string;
+	/**
+	 * If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out
+	 */
+	batting: boolean;
 }

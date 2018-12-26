@@ -39,30 +39,30 @@
 			"description": "Three letter abreviations for playing teams. [Bowlers, Batters]"
 		},
 		"currentBowler": {
-			"$ref": "types/bowler.json"
+			"$ref": "./bowler.json"
 		},
 		"currentBatterFacing": {
-			"$ref": "types/batter.json"
+			"$ref": "./batter.json"
 		},
 		"currentBatterRunning": {
-			"$ref": "types/batter.json"
+			"$ref": "./batter.json"
 		},
 		"bowlers": {
 			"type": "array",
 			"items": {
-				"$ref": "types/bowler.json"
+				"$ref": "./bowler.json"
 			}
 		},
 		"playedBowlers": {
 			"type": "array",
 			"items": {
-				"$ref": "types/bowler.json"
+				"$ref": "./bowler.json"
 			}
 		},
 		"batters": {
 			"type": "array",
 			"items": {
-				"$ref": "types/batter.json"
+				"$ref": "./batter.json"
 			}
 		}
 	},

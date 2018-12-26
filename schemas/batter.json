@@ -10,21 +10,26 @@
 		},
 		"runs": {
 			"type": "array",
-			"description": "Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's. Default is -1 to display it as a '-'",
+			"description": "Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's",
 			"minItems": 3,
 			"maxItems": 3,
-			"default": [-1, -1, -1]
+			"default": [0, 0, 0]
 		},
 		"balls": {
 			"type": "integer",
-			"description": "Number of balls the batter has faced, -1 to display as '-'",
-			"default": -1
+			"description": "Number of balls the batter has faced",
+			"default": 0
 		},
 		"dismissal": {
 			"type": "string",
 			"description": "If populated the player will be shown as out",
 			"default": ""
+		},
+		"batting": {
+			"type": "boolean",
+			"description": "If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out",
+			"default": false
 		}
 	},
-	"required": ["name", "runs", "balls", "dismissal"]
+	"required": ["name", "runs", "balls", "dismissal", "batting"]
 }
