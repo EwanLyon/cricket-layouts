@@ -13,7 +13,7 @@ module.exports = (nodecg) => {
 };
 async function init() {
     require('./teamdata');
-    require('./matchinfo');
+    require('./matchsetup');
     require('./currentmatch');
 }
 //# sourceMappingURL=index.js.map
