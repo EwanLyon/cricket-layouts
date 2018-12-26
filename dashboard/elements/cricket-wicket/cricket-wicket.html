@@ -1,0 +1,22 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/sc-fitted-text/sc-fitted-text.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="cricket-wicket">
+	<template>
+		<style>
+            paper-button{
+                margin: 10px 0;
+                width: 100%;
+                background-color: #ff4747;
+            }
+		</style>
+
+		
+        <paper-button raised><sc-fitted-text text="[[batter1]]" max-width="180"></sc-fitted-text></paper-button>
+        <paper-button raised><sc-fitted-text text="[[batter2]]" max-width="180"></sc-fitted-text></paper-button>
+
+	</template>
+
+	<script src="cricket-wicket.js" type="module"></script>
+</dom-module>
