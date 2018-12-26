@@ -12,7 +12,6 @@ export default class CricketBowlers extends Polymer.MutableData(Polymer.Element)
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
-			console.log(newVal.playedBowlers);
 			this.currentInnings = newVal;
 			this.notifyPath('BowlersList');
 		});

@@ -7,31 +7,31 @@
 	<template>
 		<style>
 			#seperator{
-			height: 1px;
-			background-color: #526076;
-			width: 100%;
-			margin: 10px 0;
-		}
+				height: 1px;
+				background-color: #526076;
+				width: 100%;
+				margin: 10px 0;
+			}
 
-		#battingKey {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			font-size: 1.3em;
-			font-weight: bold;
-			margin: 0 0 10px 0;
-		}
+			#battingKey {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				font-size: 1.3em;
+				font-weight: bold;
+				margin: 0 0 10px 0;
+			}
 
-		#name{
-			width: 300px;
-			margin: 0 50px;
-		}
+			#name{
+				width: 300px;
+				margin: 0 50px;
+			}
 
-		#runs, #balls, #fours, #sixes {
-			width: 70px;
-			display: inline-block;
-			text-align: center;
-		}
+			#runs, #balls, #fours, #sixes {
+				width: 70px;
+				display: inline-block;
+				text-align: center;
+			}
 		</style>
 
 		<div id="battingKey">
@@ -44,13 +44,8 @@
 			</div>
 		</div>
 
-		<template id="BattersList" is="dom-repeat" items="[[currentInnings.batters]]" as="batters">
-			<cricket-batter-item 
-				name="[[batters.name]]"
-				balls="[[batters.balls]]"
-				dismissal="[[batters.dismissal]]"
-				runs="[[batters.runs]]">
-			</cricket-batter-item>
+		<template id="BattersList" is="dom-repeat" items="[[currentInnings.batters]]" as="batter">
+			<cricket-batter-item batter="[[batter]]"></cricket-batter-item>
 			<div id="seperator"></div>
 		</template>
 

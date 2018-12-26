@@ -34,6 +34,9 @@
 			text-align: center;
 		}
 
+		#currentBowler {
+			--font-weight: bold;
+		}
 		</style>
 	
 		<div id="bowlingKey">
@@ -48,15 +51,12 @@
 			</div>
 		</div>
 
+		<cricket-bowler-item id="currentBowler" bowler="[[currentInnings.currentBowler]]" currentBowler></cricket-bowler-item>
+
+		<div id="seperator"></div>
+
 		<template id="BowlersList" is="dom-repeat" items="[[currentInnings.playedBowlers]]" as="bowler">
-			<cricket-bowler-item
-				name="[[bowler.name]]"
-				overs="[[bowler.overs]]"
-				maidenOvers="[[bowler.maidenOvers]]"
-				runs="[[bowler.bowlingRuns]]"
-				wickets="[[bowler.wickets]]"
-				badBalls="[[bowler.badBalls]]">
-			</cricket-bowler-item>
+			<cricket-bowler-item bowler="[[bowler]]"></cricket-bowler-item>
 			<div id="seperator"></div>
 		</template>
 	</template>

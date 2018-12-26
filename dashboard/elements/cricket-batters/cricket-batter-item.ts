@@ -1,39 +1,53 @@
 const {customElement, property} = Polymer.decorators;
 
+import {Batter} from '../../../src/types/schemas/batter';
+
 @customElement('cricket-batter-item')
 export default class CricketBatterItem extends Polymer.Element {
+	@property({type: Object, observer: CricketBatterItem.prototype._updateBatter})
+	batter: Batter;
+	
 	@property({type: String})
 	name: string;
 
-	@property({type: Number, observer: CricketBatterItem.prototype.calcRuns})
-	runs: number[];
-
-	@property({type: Number})
-	wickets: number;
-
-	@property({type: Number})
-	balls: number;
+	@property({type: String})
+	balls: string;
 
 	@property({type: String})
 	dismissal: string;
 
-	@property({type: Number})
-	totalRuns: number;
+	@property({type: String})
+	totalRuns: string;
 
-	@property({type: Number})
-	singles: number;
+	@property({type: String})
+	singles: string;
 
-	@property({type: Number})
-	fours: number;
+	@property({type: String})
+	fours: string;
 
-	@property({type: Number})
-	sixes: number;
+	@property({type: String})
+	sixes: string;
 	
-	calcRuns(){
-		this.totalRuns = this.runs.reduce((a,b) => a+b, 0);
-		this.singles = this.runs[0];
-		this.fours = this.runs[1];
-		this.sixes = this.runs[2];
+	_updateBatter(newVal: Batter){
+		this.name = newVal.name;
+		this.dismissal = newVal.dismissal;
+
+		// Calc Runs
+		if (newVal.batting) {
+			this.balls = String(newVal.balls);
+
+			this.totalRuns = String(newVal.runs.reduce((a,b) => a+b, 0));
+			this.singles = String(newVal.runs[0]);
+			this.fours = String(newVal.runs[1]);
+			this.sixes = String(newVal.runs[2]);
+		} else {
+			this.totalRuns = '-';
+			this.balls = '-';
+			this.singles = '-';
+			this.fours = '-';
+			this.sixes = '-';
+		}
+		
 	}
 	
 }
