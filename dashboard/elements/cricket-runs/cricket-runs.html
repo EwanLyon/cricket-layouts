@@ -7,57 +7,58 @@
 	<template>
 		<style>
 			#total-runs {
-			font-size: 42px;
-			text-align: center;
-		}
+				font-size: 42px;
+				text-align: center;
+			}
 
-		#seperator{
-			height: 1px;
-			background-color: #526076;
-			width: 100%;
-			margin: 10px 0;
-		}
+			#seperator{
+				height: 1px;
+				background-color: #526076;
+				width: 100%;
+				margin: 10px 0;
+			}
 
-		.runners {
-			font-size: 24px;
-			margin: 10px;
-		}
+			.runners {
+				font-size: 24px;
+				margin: 10px;
+			}
 
-		table {
-			width: 100%;
-		}
+			table {
+				width: 100%;
+			}
 
-		th {
-			height: 20px;
-		}
+			th {
+				height: 20px;
+			}
 
-		td {
-			background: #50658a;
-			border-radius: 3px;
-			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-			text-align: center;
-		}
+			td {
+				background: #50658a;
+				border-radius: 3px;
+				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+				text-align: center;
+			}
 
-		.name {
-			text-align: left;
-			padding: 0 6px;
-			width:20%;
-		}
+			.name {
+				text-align: left;
+				padding: 0 6px;
+				width:20%;
+				font-size: 0.8em;
+			}
 
-		.batsmanTotal{
-			font-weight: bold;
-		}
+			.batsmanTotal{
+				font-weight: bold;
+			}
 
-		.balls{
-			font-weight: lighter;
-			font-size: 18px;
-		}
+			.balls{
+				font-weight: lighter;
+				font-size: 18px;
+			}
 
-		#edit{
-			float:right;
-			background-color: #ff4747;
-			margin: 5px 0 0 0;
-		}
+			#edit{
+				float:right;
+				background-color: #ff4747;
+				margin: 5px 0 0 0;
+			}
 		</style>
 
 		<div id="total-runs">[[currentInnings.runs]]</div>
@@ -76,24 +77,24 @@
 				</tr>
 				<tr class="runners" id="runner0">
 					<td class="name">
-						<sc-fitted-text text="" max-width="180"></sc-fitted-text>
+						<sc-fitted-text text="[[batter1.name]]" max-width="180"></sc-fitted-text>
 					</td>
-					<td class="singles">0</td>
-					<td class="fours">0</td>
-					<td class="sixes">0</td>
-					<td class="batsmanTotal">0</td>
-					<td class="balls">(0)</td>
+					<td class="singles">[[b1Singles]]</td>
+					<td class="fours">[[b1Fours]]</td>
+					<td class="sixes">[[b1Sixes]]</td>
+					<td class="batsmanTotal">[[b1Total]]</td>
+					<td class="balls">([[batter1.balls]])</td>
 				</tr>
 
 				<tr class="runners" id="runner1">
 					<td class="name">
-						<sc-fitted-text text="" max-width="180"></sc-fitted-text>
+						<sc-fitted-text text="[[batter2.name]]" max-width="180"></sc-fitted-text>
 					</td>
-					<td class="singles">0</td>
-					<td class="fours">0</td>
-					<td class="sixes">0</td>
-					<td class="batsmanTotal">0</td>
-					<td class="balls">(0)</td>
+					<td class="singles">[[b2Singles]]</td>
+					<td class="fours">[[b2Fours]]</td>
+					<td class="sixes">[[b2Sixes]]</td>
+					<td class="batsmanTotal">[[b2Total]]</td>
+					<td class="balls">([[batter2.balls]])</td>
 				</tr>
 			</table>
 			<paper-button raised id="edit">Edit</paper-button>
