@@ -33,7 +33,8 @@ export default class CricketBatterItem extends Polymer.Element {
 		this.dismissal = newVal.dismissal;
 
 		// Calc Runs
-		if (newVal.batting) {
+		if (newVal.batting || newVal.dismissal != "") {
+			// Unfortunately since I need to show batters who haven't batted yet as "-" so the variables need to be strings
 			this.balls = String(newVal.balls);
 
 			this.totalRuns = String(newVal.runs.reduce((a,b) => a+b, 0));
