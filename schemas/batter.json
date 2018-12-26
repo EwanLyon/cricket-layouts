@@ -6,7 +6,7 @@
 		"name": {
 			"type": "string",
 			"description": "Batter's name",
-			"default": "MISSING BATTER NAME"
+			"default": "MISSING BATTERS NAME"
 		},
 		"runs": {
 			"type": "array",
@@ -29,7 +29,12 @@
 			"type": "boolean",
 			"description": "If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out",
 			"default": false
+		},
+		"facing": {
+			"type": "boolean",
+			"description": "If true the batter is facing the bowler, false if the batter is running",
+			"default": false
 		}
 	},
-	"required": ["name", "runs", "balls", "dismissal", "batting"]
+	"required": ["name", "runs", "balls", "dismissal", "batting", "facing"]
 }
