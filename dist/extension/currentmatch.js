@@ -43,7 +43,8 @@ function createBatterObjects(battingTeam) {
             name: player.name,
             runs: [0, 0, 0],
             balls: 0,
-            dismissal: ""
+            dismissal: "",
+            batting: false
         };
         buildingBatters.push(batterObj);
     });
