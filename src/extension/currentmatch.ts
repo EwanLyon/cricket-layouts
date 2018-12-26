@@ -7,8 +7,6 @@ import {CurrentInnings} from '../types/schemas/currentInnings';
 // import {Batter} from '../types/schemas/batter';
 import {Bowler} from '../types/schemas/bowler';
 
-// const util = require('util');
-
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings', {persistent: false});
 
 nodecg.listenFor('changeBowler', (newVal: Bowler) => {
