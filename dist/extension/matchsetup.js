@@ -61,18 +61,14 @@ nodecg.listenFor('updateBattingRoster', (updatedBatters) => {
     // Reset batting roster
     currentInningsRep.value.batters = [];
     // Push each batter into the batting roster	
-    // NodeCG BUG(?): Pushing directly into a replicant causes the replicant to trigger change with double the pushes
-    // let battersList: Batter[] = [];
-    // updatedBatters.forEach(batter => {
-    // 	battersList.push(batter);
-    // });
     currentInningsRep.value.batters = updatedBatters;
     // updatedBatters.forEach(batter => {
     // 	currentInningsRep.value.batters.push(batter);
     // });
     // Set first two batters as on pitch
-    currentInningsRep.value.battersFacing[0] = currentInningsRep.value.batters[0];
-    currentInningsRep.value.battersFacing[1] = currentInningsRep.value.batters[1];
+    currentInningsRep.value.battersFacing = [currentInningsRep.value.batters[0], currentInningsRep.value.batters[1]];
+    currentInningsRep.value.batters[0].batting = true;
+    currentInningsRep.value.batters[1].batting = true;
     // Set the first batter as facing
     currentInningsRep.value.battersFacing[0].facing = true;
     // nodecg.log.info(util.inspect(currentInningsRep.value.batters, false, null, true /* enable colors */));

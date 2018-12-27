@@ -96,6 +96,9 @@ nodecg.listenFor('updateBattingRoster', (updatedBatters: Batter[]) => {
     // Set first two batters as on pitch
     currentInningsRep.value.battersFacing = [currentInningsRep.value.batters[0], currentInningsRep.value.batters[1]];
 
+	currentInningsRep.value.batters[0].batting = true;
+	currentInningsRep.value.batters[1].batting = true;
+
     // Set the first batter as facing
 	currentInningsRep.value.battersFacing[0].facing = true;
 
