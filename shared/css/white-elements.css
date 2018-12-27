@@ -1,0 +1,11 @@
+paper-input {
+    --primary-text-color: #ffffff;
+    --paper-input-container-color: #dbdbdb;
+    --paper-input-container-focus-color: #339cff;
+}
+
+vaadin-combo-box{
+    --primary-text-color: white;
+    --paper-input-container-focus-color: #339cff;
+    --iron-icon-fill-color: white;
+}
