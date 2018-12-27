@@ -1,4 +1,4 @@
-import {CurrentInnings} from '../../../src/types/schemas/currentInnings';
+import {CurrentInnings} from 'src/types/schemas/currentInnings';
 
 const {customElement, property} = Polymer.decorators;
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');

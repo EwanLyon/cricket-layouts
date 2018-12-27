@@ -1,6 +1,6 @@
 const {customElement, property} = Polymer.decorators;
 
-import {Batter} from '../../../src/types/schemas/batter';
+import {Batter} from 'src/types/schemas/batter';
 
 @customElement('cricket-batter-item')
 export default class CricketBatterItem extends Polymer.Element {

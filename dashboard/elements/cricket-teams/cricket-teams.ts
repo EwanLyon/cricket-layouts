@@ -1,4 +1,4 @@
-import {Teams} from '../../../src/types/schemas/teams';
+import {Teams} from 'src/types/schemas/teams';
 
 const {customElement} = Polymer.decorators;
 const teams = nodecg.Replicant<Teams[]>('teams');

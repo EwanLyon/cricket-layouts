@@ -1,6 +1,6 @@
-// import {Teams} from '../../../src/types/schemas/teams';
-import {CurrentInnings} from '../../../src/types/schemas/currentInnings';
-import {Bowler} from '../../../src/types/schemas/bowler';
+// import {Teams} from 'src/types/schemas/teams';
+import {CurrentInnings} from 'src/types/schemas/currentInnings';
+import {Bowler} from 'src/types/schemas/bowler';
 
 const {customElement, property} = Polymer.decorators;
 // const teamsRep = nodecg.Replicant<Teams>('teams');
