@@ -11,8 +11,7 @@
 			}
 
 			sc-fitted-text {
-				margin: 0 50px;
-				width: 300px;
+				width: 180px;
 				font-weight: bold;
 			}
 
@@ -26,12 +25,17 @@
 				display: inline-block;
 				text-align: center;
 			}
+
+			#dismissal {
+				color: #5c5c5c;
+				width: 227px;
+			}
 		</style>
 
 		<div class="horizontal">
-			<sc-fitted-text text="[[name]]" max-width="300"></sc-fitted-text>
-			<div id="info">
-				<span>[[dismissal]]</span>
+			<sc-fitted-text text="[[name]]" max-width="180"></sc-fitted-text>
+			<div id="info" class="horizontal">
+				<sc-fitted-text id="dismissal" text="[[dismissal]]" max-width="230"></sc-fitted-text>
 				<span id="runs">[[totalRuns]]</span>
 				<span id="balls">[[balls]]</span>
 				<span id="fours">[[fours]]</span>
