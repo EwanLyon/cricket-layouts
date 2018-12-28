@@ -38,38 +38,36 @@ nodecg.listenFor('changeBowler', (newVal: Bowler) => {
 	}
 });
 
-// Data: [dismissalText, batterOut, fielderItem]
+// Data: [dismissalText, batterOut, batterIndex, fielderItem]
 nodecg.listenFor('newWicket', (data: Array<any>) => {
 	
 	if (currentInningsRep.value.wickets == 10){
 		// All batters are out!
 		return;
-	} else {
-		currentInningsRep.value.wickets++;
 	}
 
-	let indexOfDismissed: number = currentInningsRep.value.battersFacing.findIndex(x => x == data[1]);
-	let dismissedBatter: Batter = currentInningsRep.value.battersFacing[indexOfDismissed];
-	console.log(currentInningsRep.value.battersFacing.findIndex(x => x == data[1]));
+	// Add one to wickets
+	currentInningsRep.value.wickets++;
+	// Add one to bowler
+	currentInningsRep.value.currentBowler.wickets++;
+
+	let dismissedBatter: Batter = currentInningsRep.value.battersFacing[data[2]];
 
 	// Get dismissal message
 	let dismissalText: string = "Error";
 	if (data[0] == "c: ") {
 		// Caught therefore needs both fielder and bowler
-		dismissalText = "c: " + (data[2] as Bowler).name + " b:" + currentInningsRep.value.currentBowler.name;
-		(data[1] as Batter).dismissal = dismissalText;
+		dismissalText = "c: " + (data[3] as Bowler).name + " b: " + currentInningsRep.value.currentBowler.name;
 	} else if (data[0] == "b: "){
 		// Bowled only needs bowler
 		dismissalText = "b: " + currentInningsRep.value.currentBowler.name;
-	} else if (data[2]) {
+	} else if (data[3]) {
 		// Else add fielder to end of dismissal text given
-		dismissalText = data[0] + (data[2] as Bowler).name;
+		dismissalText = data[0] + (data[3] as Bowler).name;
 	} else {
 		// Else extra data must not be needed
 		dismissalText = data[0];
 	}
-
-	dismissedBatter.dismissal = dismissalText;
 
 	// Get next batter
 	let nextBatter: Batter = {} as Batter;
@@ -79,11 +77,24 @@ nodecg.listenFor('newWicket', (data: Array<any>) => {
 			// Batter hasn't been dismissed and isn't batting
 			nextBatter = batter;
 			nextBatter.batting = true;	// Set batter to be facing
-			nextBatter.facing = (data[1] as Batter).facing;	// If batter was facing set this batter to be facing
-			dismissedBatter.facing = false;
+			nextBatter.facing = dismissedBatter.facing;	// If batter was facing set this batter to be facing
 			break;
 		}
 	};
 
-	currentInningsRep.value.battersFacing[indexOfDismissed] = nextBatter;
+	// Update dismissed batter
+	currentInningsRep.value.battersFacing[data[2]] = {
+		name: dismissedBatter.name,
+		runs: dismissedBatter.runs,
+		balls: dismissedBatter.balls,
+		dismissal: dismissalText,
+		batting: false,
+		facing: false
+	}
+
+	let batterOriginalIndex: number = currentInningsRep.value.batters.findIndex(x => x.name == dismissedBatter.name);
+	currentInningsRep.value.batters[batterOriginalIndex] = currentInningsRep.value.battersFacing[data[2]];
+
+	// Set next batter as the batter facing
+	currentInningsRep.value.battersFacing[data[2]] = nextBatter;
 });

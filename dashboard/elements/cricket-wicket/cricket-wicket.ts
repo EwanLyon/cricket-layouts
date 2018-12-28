@@ -20,6 +20,7 @@ const dismissalTypes: object = {
 
 let dismissalTitles: string[] = Object.keys(dismissalTypes);
 let batterOut: Batter;
+let batterIndex: number;
 
 @customElement('cricket-wicket')
 export default class CricketWicket extends Polymer.Element {
@@ -47,12 +48,14 @@ export default class CricketWicket extends Polymer.Element {
 
     batter1Selected() {
         batterOut = this.batter1;
+        batterIndex = 0;
         this.$.batter2Button.toggleAttribute('disabled');
         this.canDismiss[0] = true;
     }
 
     batter2Selected() {
         batterOut = this.batter2;
+        batterIndex = 1;
         this.$.batter1Button.toggleAttribute('disabled');
         this.canDismiss[0] = true;
     }
@@ -67,6 +70,7 @@ export default class CricketWicket extends Polymer.Element {
         } else {
             // Fielder isnt needed
             this.$.fielders.toggleAttribute('disabled', false);
+            (this.$.dismissal as any).selectedItem = undefined;
         }
     }
 
@@ -76,10 +80,10 @@ export default class CricketWicket extends Polymer.Element {
 
         let fielderItem: Bowler =  (this.$.fielders as any).selectedItem;
 
-        nodecg.sendMessage('newWicket', [dismissalText, batterOut, fielderItem]);
+        nodecg.sendMessage('newWicket', [dismissalText, batterOut, batterIndex, fielderItem]);
 
         this.$.batter1Button.toggleAttribute('disabled', false);
-        this.$.batter1Button.toggleAttribute('disabled', false);
+        this.$.batter2Button.toggleAttribute('disabled', false);
     }
 
     allowDismissal(){
