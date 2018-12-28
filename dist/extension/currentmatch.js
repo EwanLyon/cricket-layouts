@@ -46,9 +46,9 @@ nodecg.listenFor('newWicket', (data) => {
         // Caught therefore needs both fielder and bowler
         dismissalText = "c: " + data[3].name + " b: " + currentInningsRep.value.currentBowler.name;
     }
-    else if (data[0] == "b: ") {
+    else if (data[0] == "b: " || data[0] == "lbw: ") {
         // Bowled only needs bowler
-        dismissalText = "b: " + currentInningsRep.value.currentBowler.name;
+        dismissalText = data[0] + currentInningsRep.value.currentBowler.name;
     }
     else if (data[3]) {
         // Else add fielder to end of dismissal text given
