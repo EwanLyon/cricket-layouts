@@ -70,7 +70,7 @@ export default class CricketWicket extends Polymer.Element {
         } else {
             // Fielder isnt needed
             this.$.fielders.toggleAttribute('disabled', false);
-            (this.$.dismissal as any).selectedItem = undefined;
+            (this.$.fielders as any).selectedItem = undefined;
         }
     }
 
