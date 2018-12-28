@@ -35,13 +35,16 @@ nodecg.listenFor('newWicket', (data) => {
         // All batters are out!
         return;
     }
+    // Add one to wickets
     currentInningsRep.value.wickets++;
+    // Add one to bowler
+    currentInningsRep.value.currentBowler.wickets++;
     let dismissedBatter = currentInningsRep.value.battersFacing[data[2]];
     // Get dismissal message
     let dismissalText = "Error";
     if (data[0] == "c: ") {
         // Caught therefore needs both fielder and bowler
-        dismissalText = "c: " + data[3].name + " b:" + currentInningsRep.value.currentBowler.name;
+        dismissalText = "c: " + data[3].name + " b: " + currentInningsRep.value.currentBowler.name;
     }
     else if (data[0] == "b: ") {
         // Bowled only needs bowler
@@ -55,7 +58,6 @@ nodecg.listenFor('newWicket', (data) => {
         // Else extra data must not be needed
         dismissalText = data[0];
     }
-    console.log(dismissalText);
     // Get next batter
     let nextBatter = {};
     for (let batter of currentInningsRep.value.batters) {
