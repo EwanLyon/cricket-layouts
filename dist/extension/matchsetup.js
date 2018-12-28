@@ -23,6 +23,15 @@ nodecg.listenFor('newInnings', (data) => {
     const battingPlayers = createBatterObjects(battingTeam);
     currentInningsRep.value.bowlers = bowlingPlayers;
     currentInningsRep.value.batters = battingPlayers;
+    currentInningsRep.value.currentBowler = {
+        name: "Select bowler",
+        overs: -999,
+        maidenOvers: -999,
+        runs: -999,
+        wickets: -999,
+        badBalls: [-999, -999]
+    };
+    currentInningsRep.value.playedBowlers = [];
     nodecg.log.info('New innings started! Batters: ' + currentInningsRep.value.battingTeam + ' | Bowlers: ' + currentInningsRep.value.bowlingTeam);
 });
 function createBowlersObjects(bowlingTeam) {
