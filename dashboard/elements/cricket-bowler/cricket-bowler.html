@@ -1,6 +1,7 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
 
 <dom-module id="cricket-bowler">
 	<template>
@@ -13,6 +14,7 @@
 
 			paper-button {
 				background: #3367d6;
+				font-size: 0.5em;
 			}
 
 			#search {
@@ -38,13 +40,22 @@
 			}
 
 			.dataCell {
-				width:40%;
+				box-sizing: border-box;
+				width:calc(50% - 9px);
   				overflow: hidden;
-				padding: 5px;
-				margin: 5px 3px;
+				padding: 0.2em 1.2em;
+  				margin: 3px 3px;
 				background-color: #50658a;
 				border-radius: 3px;
 				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+			}
+
+			.title {
+				text-align: right;
+			}
+
+			.value {
+				text-align: left;
 			}
 
 			.seperator {
@@ -62,30 +73,30 @@
 				</template>
 			</vaadin-combo-box>
 
-			<paper-button raised on-tap="UpdateBowler">Confirm</paper-button>
+			<paper-button raised on-tap="UpdateBowler"><iron-icon icon="done"></iron-icon></paper-button>
 		</div>
 
 		<div class="seperator"></div>
 
 		<span id="name">[[cbName]]</span>
 		<div class="dataTable">
-			<div class="dataCell">Overs</div>
-			<div class="dataCell">[[curBowler.overs]]</div>
+			<div style="order: 1" class="dataCell title">Overs</div>
+			<div style="order: 1" class="dataCell value">[[curBowler.overs]]</div>
 
-			<div class="dataCell">Maidens</div>
-			<div class="dataCell">[[curBowler.maidenOvers]]</div>
+			<div style="order: 2" class="dataCell title">Maidens</div>
+			<div style="order: 2" class="dataCell value">[[curBowler.maidenOvers]]</div>
 
-			<div class="dataCell">Runs</div>
-			<div class="dataCell">[[curBowler.runs]]</div>
+			<div style="order: 3" class="dataCell title">Runs</div>
+			<div style="order: 3" class="dataCell value">[[curBowler.runs]]</div>
 
-			<div class="dataCell">Wickets</div>
-			<div class="dataCell">[[curBowler.wickets]]</div>
+			<div style="order: 4" class="dataCell title">Wickets</div>
+			<div style="order: 4" class="dataCell value">[[curBowler.wickets]]</div>
 
-			<div class="dataCell">Wides</div>
-			<div class="dataCell">[[cbWides]]</div>
+			<div style="order: 5" class="dataCell title">Wides</div>
+			<div style="order: 5" class="dataCell value">[[cbWides]]</div>
 
-			<div class="dataCell">No Balls</div>
-			<div class="dataCell">[[cbNoBalls]]</div>
+			<div style="order: 6" class="dataCell title">No Balls</div>
+			<div style="order: 6" class="dataCell value">[[cbNoBalls]]</div>
 		</div>
 
 		<table>
