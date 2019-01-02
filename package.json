@@ -17,6 +17,30 @@
     "transformBareModuleSpecifiers": true,
     "dashboardPanels": [
       {
+        "name": "teams",
+        "title": "Teams",
+        "width": 3,
+        "file": "teams.html",
+        "headerColor": "#525F78",
+        "workspace": "!Setup"
+      },
+      {
+        "name": "match",
+        "title": "Match Info",
+        "width": 3,
+        "file": "match.html",
+        "headerColor": "#525F78",
+        "workspace": "!Setup"
+      },
+      {
+        "name": "battingroster",
+        "title": "Batting Roster",
+        "width": 2,
+        "file": "battingroster.html",
+        "headerColor": "#525F78",
+        "workspace": "!Setup"
+      },
+      {
         "name": "runs",
         "title": "Runs",
         "width": 3,
@@ -32,14 +56,7 @@
         "headerColor": "#525F78",
         "workspace": "Game"
       },
-      {
-        "name": "teams",
-        "title": "Teams",
-        "width": 3,
-        "file": "teams.html",
-        "headerColor": "#525F78",
-        "workspace": "Setup"
-      },
+      
       {
         "name": "wicket",
         "title": "Wicket",
@@ -55,14 +72,7 @@
         "fullbleed": true,
         "headerColor": "#525F78"
       },
-      {
-        "name": "match",
-        "title": "Match Info",
-        "width": 3,
-        "file": "match.html",
-        "headerColor": "#525F78",
-        "workspace": "Setup"
-      },
+      
       {
         "name": "bowler",
         "title": "Bowler",
@@ -70,15 +80,8 @@
         "file": "bowler.html",
         "headerColor": "#525F78",
         "workspace": "Game"
-      },
-      {
-        "name": "battingroster",
-        "title": "Batting Roster",
-        "width": 2,
-        "file": "battingroster.html",
-        "headerColor": "#525F78",
-        "workspace": "Setup"
       }
+      
     ],
     "graphics": [
       {
