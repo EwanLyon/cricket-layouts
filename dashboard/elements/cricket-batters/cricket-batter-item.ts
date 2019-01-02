@@ -20,9 +20,6 @@ export default class CricketBatterItem extends Polymer.Element {
 	totalRuns: string;
 
 	@property({type: String})
-	singles: string;
-
-	@property({type: String})
 	fours: string;
 
 	@property({type: String})
@@ -37,14 +34,12 @@ export default class CricketBatterItem extends Polymer.Element {
 			// Unfortunately since I need to show batters who haven't batted yet as "-" so the variables need to be strings
 			this.balls = String(newVal.balls);
 
-			this.totalRuns = String(newVal.runs.reduce((a,b) => a+b, 0));
-			this.singles = String(newVal.runs[0]);
+			this.totalRuns = String(newVal.runs[0]);
 			this.fours = String(newVal.runs[1]);
 			this.sixes = String(newVal.runs[2]);
 		} else {
 			this.totalRuns = '-';
 			this.balls = '-';
-			this.singles = '-';
 			this.fours = '-';
 			this.sixes = '-';
 		}

@@ -25,9 +25,6 @@ export default class CricketRuns extends Polymer.Element {
 	b1Sixes: number;
 
 	@property({type:Number})
-	b1Total: number;
-
-	@property({type:Number})
 	b2Singles: number;
 
 	@property({type:Number})
@@ -35,9 +32,6 @@ export default class CricketRuns extends Polymer.Element {
 
 	@property({type:Number})
 	b2Sixes: number;
-
-	@property({type:Number})
-	b2Total: number;
 
     ready() {
 		super.ready();
@@ -51,15 +45,19 @@ export default class CricketRuns extends Polymer.Element {
 			this.batter1 = newVal.battersFacing[0];
 			this.batter2 = newVal.battersFacing[1];
 
+			if (this.batter1.facing) {
+				this.batter1.name += '*';
+			} else {
+				this.batter2.name += '*';
+			}
+
 			this.b1Singles = this.batter1.runs[0];
 			this.b1Fours = this.batter1.runs[1];
 			this.b1Sixes = this.batter1.runs[2];
-			this.b1Total = this.batter1.runs.reduce((a,b) => a+b, 0);
 
 			this.b2Singles = this.batter2.runs[0];
 			this.b2Fours = this.batter2.runs[1];
 			this.b2Sixes = this.batter2.runs[2];
-			this.b2Total = this.batter2.runs.reduce((a,b) => a+b, 0);
 		});
 	}
 }
