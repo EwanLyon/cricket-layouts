@@ -15,9 +15,14 @@ export interface CurrentInnings {
 	 */
 	wickets: number;
 	/**
-	 * Current over with decimal, e.g. 15.2
+	 * Array of all overs, length is the overs past, the last index is the current over
 	 */
-	over: number;
+	overs: {
+		/**
+		 * The balls in the past over, any as strings may be included, e.g. [0, 4, Wide, NB, 3, W]
+		 */
+		over: any[];
+	}[];
 	/**
 	 * The team that is bowling this innings
 	 */
@@ -30,58 +35,6 @@ export interface CurrentInnings {
 	 * Three letter abreviations for playing teams. [Bowlers, Batters]
 	 */
 	TLAs: string[];
-	currentBowler: {
-		/**
-		 * Bowler's name
-		 */
-		name: string;
-		/**
-		 * Number of overs bowled with decimal, e.g. 15.2
-		 */
-		overs: number;
-		/**
-		 * Number of overs where the batsman has not made a run
-		 */
-		maidenOvers: number;
-		/**
-		 * Number of runs made off the bowler
-		 */
-		runs: number;
-		/**
-		 * The amount of wickets a bowler has made
-		 */
-		wickets: number;
-		/**
-		 * Wides and No Balls, [wide, noball]
-		 */
-		badBalls: any[];
-	};
-	battersFacing: {
-		/**
-		 * Batter's name
-		 */
-		name: string;
-		/**
-		 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's
-		 */
-		runs: any[];
-		/**
-		 * Number of balls the batter has faced
-		 */
-		balls: number;
-		/**
-		 * If populated the player will be shown as out
-		 */
-		dismissal: string;
-		/**
-		 * If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out
-		 */
-		batting: boolean;
-		/**
-		 * If true the batter is facing the bowler, false if the batter is running
-		 */
-		facing: boolean;
-	}[];
 	bowlers: {
 		/**
 		 * Bowler's name
@@ -107,32 +60,10 @@ export interface CurrentInnings {
 		 * Wides and No Balls, [wide, noball]
 		 */
 		badBalls: any[];
-	}[];
-	playedBowlers: {
 		/**
-		 * Bowler's name
+		 * True if the bowler is currently bowling, false if they are fielding
 		 */
-		name: string;
-		/**
-		 * Number of overs bowled with decimal, e.g. 15.2
-		 */
-		overs: number;
-		/**
-		 * Number of overs where the batsman has not made a run
-		 */
-		maidenOvers: number;
-		/**
-		 * Number of runs made off the bowler
-		 */
-		runs: number;
-		/**
-		 * The amount of wickets a bowler has made
-		 */
-		wickets: number;
-		/**
-		 * Wides and No Balls, [wide, noball]
-		 */
-		badBalls: any[];
+		bowling: boolean;
 	}[];
 	batters: {
 		/**
@@ -140,7 +71,7 @@ export interface CurrentInnings {
 		 */
 		name: string;
 		/**
-		 * Runs in each category made by player, 1st index is normal runs, 2nd is 4's, 3rd is 6's
+		 * Runs in each category made by player, 1st index is total runs, 2nd is 4's, 3rd is 6's
 		 */
 		runs: any[];
 		/**
@@ -154,7 +85,7 @@ export interface CurrentInnings {
 		/**
 		 * If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out
 		 */
-		batting: boolean;
+		batting: 'WAITING' | 'BATTING' | 'OUT';
 		/**
 		 * If true the batter is facing the bowler, false if the batter is running
 		 */

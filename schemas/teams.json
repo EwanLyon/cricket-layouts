@@ -37,7 +37,8 @@
 						},
 						"required": ["name", "role"]
 					}
-				}
+				},
+				"required" : ["player"]
 			}
 		},
 		"required": ["name", "tla", "players"]

@@ -1,102 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8" />
-	<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html" />
-	<link rel="import" href="../bower_components/paper-button/paper-button.html" />
-	<link rel="import" href="../bower_components/paper-input/paper-input.html" />
-	<link rel="import" href="../bower_components/sc-fitted-text/sc-fitted-text.html" />
-	<style>
-		#over {
-			font-size: 42px;
-			text-align: center;
-		}
+    <meta charset="UTF-8">
+    <script src="../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+	<link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html">
+	<link rel="import" href="../bower_components/polymer/polymer-element.html">
 
-		#seperator {
-			height: 1px;
-			background-color: #526076;
-			width: 100%;
-			margin: 10px 0;
+	<script>
+		{
+			const links = [
+				'elements/cricket-over/cricket-over.html'
+			];
+			for (const link of links) {
+				const linkElem = document.createElement('link');
+				linkElem.rel = 'import';
+				linkElem.href = link;
+				document.head.appendChild(linkElem);
+			}
 		}
-
-		table {
-			width: 100%;
-			table-layout: fixed;
-		}
-
-		td {
-			background-color: #50658a;
-			border-radius: 3px;
-			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-				0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-			text-align: center;
-			font-size: 25px;
-			margin: 0 5px;
-			height: 38px;
-		}
-
-		#currentBall {
-			background-color: #7f8ea8;
-		}
-
-		#scoreButtons {
-			display: flex;
-			flex-direction: row;
-		}
-
-		#scoreButtons paper-button {
-			background-color: #0f9d58;
-			min-width: 30px;
-			margin: 0 2px;
-		}
-
-		#ballButtons {
-			margin: 7px 0 0 0;
-			display: flex;
-			flex-direction: row;
-		}
-
-		#ballButtons paper-button {
-			background-color: #3367d6;
-			width: 50%;
-			margin: 0 2px;
-		}
-	</style>
-</head>
-
+	</script>
 <body>
-	<div id="over">0</div>
-
-	<div id="seperator"></div>
-
-	<table>
-		<tr id="overTable">
-			<td id="currentBall"></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-	</table>
-
-	<div id="seperator"></div>
-
-	<div id="scoreButtons">
-		<paper-button raised>0</paper-button>
-		<paper-button raised>1</paper-button>
-		<paper-button raised>2</paper-button>
-		<paper-button raised>3</paper-button>
-		<paper-button raised>4</paper-button>
-		<paper-button raised>5</paper-button>
-		<paper-button raised>6</paper-button>
-	</div>
-
-	<div id="ballButtons">
-		<paper-button raised>Wide</paper-button>
-		<paper-button raised>No ball</paper-button>
-	</div>
+    <cricket-over></cricket-over>
 </body>
-
 </html>

@@ -13,7 +13,7 @@
     "extension"
   ],
   "nodecg": {
-    "compatibleRange": "^1.1.1",
+    "compatibleRange": "^1.4.0",
     "transformBareModuleSpecifiers": true,
     "dashboardPanels": [
       {
@@ -111,17 +111,10 @@
     "tslib": "^1.9.3"
   },
   "scripts": {
-    "static": "npm run static:node && npm run static:browser && npm run static:shared",
-    "static:node": "tslint -p tsconfig.node.json -t stylish",
-    "static:browser": "tslint -p tsconfig.browser.json -t stylish",
-    "static:shared": "tslint -p shared/tsconfig.node.json -t stylish",
-    "pretest": "npm run static",
-    "test": "ava test",
+    "start": "node ../.. --bundlesEnabled=cricket-layouts",
     "build": "npm run build:extension && npm run build:browser",
     "build:extension": "trash dist && tsc -b tsconfig.node.json",
     "build:browser": "tsc -p tsconfig.browser.json",
-    "generate-fixture-screenshots": "generate-fixture-screenshots",
-    "debug-fixture-screenshots": "generate-fixture-screenshots --debug",
-    "schema-types": "node scripts/schema-types.js"
+    "schema-types": "nodecg schema-types"
   }
 }

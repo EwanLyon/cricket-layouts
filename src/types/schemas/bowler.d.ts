@@ -30,4 +30,8 @@ export interface Bowler {
 	 * Wides and No Balls, [wide, noball]
 	 */
 	badBalls: any[];
+	/**
+	 * True if the bowler is currently bowling, false if they are fielding
+	 */
+	bowling: boolean;
 }

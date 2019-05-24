@@ -2,6 +2,7 @@
 <link rel="import" href="../../../bower_components/sc-fitted-text/sc-fitted-text.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../../bower_components/nodecg-typeahead-input/nodecg-typeahead-input.html">
 
 <dom-module id="cricket-wicket">
 	<template>
@@ -22,8 +23,8 @@
 		
         <paper-button id="batter1Button" raised on-tap="batter1Selected"><sc-fitted-text text="[[batter1.name]]" max-width="180"></sc-fitted-text></paper-button>
         <paper-button id="batter2Button" raised on-tap="batter2Selected"><sc-fitted-text text="[[batter2.name]]" max-width="180"></sc-fitted-text></paper-button>
-        <vaadin-combo-box id="dismissal" label="Dismissal" on-value-changed="_checkIfFielderNeeded"></vaadin-combo-box>
-        <vaadin-combo-box disabled id="fielders" label="Fielder" item-label-path="name"></vaadin-combo-box>
+        <nodecg-typeahead-input id="dismissal" label="Dismissal" on-value-changed="_checkIfFielderNeeded"></nodecg-typeahead-input>
+        <nodecg-typeahead-input disabled id="fielders" label="Fielder" item-label-path="name"></nodecg-typeahead-input>
         <paper-button id="dismissButton" raised on-tap="sendWicket">Dismissed</paper-button>
 
 	</template>

@@ -1,0 +1,97 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="cricket-over">
+	<template>
+		<style>
+			#over {
+				font-size: 42px;
+				text-align: center;
+			}
+
+			#seperator {
+				height: 1px;
+				background-color: #526076;
+				width: 100%;
+				margin: 10px 0;
+			}
+
+			.table {
+				width: 100%;
+			}
+
+			.tableCell {
+				background-color: #50658a;
+				border-radius: 3px;
+				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+					0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+				text-align: center;
+				font-size: 25px;
+				margin: 0 1px;
+				height: 38px;
+    			width: 38.33px;
+			}
+
+			#currentBall {
+				background-color: #7f8ea8;
+			}
+
+			#scoreButtons {
+				width: 100%;
+			}
+
+			#scoreButtons paper-button {
+				background-color: #0f9d58;
+				min-width: calc((100% / 7) - 4px);
+				margin: 0 2px;
+			}
+
+			#ballButtons {
+				margin: 7px 0 0 0;
+			}
+
+			#ballButtons paper-button {
+				background-color: #3367d6;
+				width: 50%;
+				margin: 0 2px;
+			}
+
+			.horizontal {
+				display: flex;
+				flex-direction: row;
+			}
+		</style>
+		<div id="over">[[totalOvers]]</div>
+
+		<div id="seperator"></div>
+
+		<div id="overTable" class="table horizontal">
+			<div id="currentBall" class="tableCell"></div>
+			<div class="tableCell"></div>
+			<div class="tableCell"></div>
+			<div class="tableCell"></div>
+			<div class="tableCell"></div>
+			<div class="tableCell"></div>
+		</div>
+
+		<div id="seperator"></div>
+
+		<div id="scoreButtons" class="horizontal">
+			<paper-button raised on-tap="addZero">0</paper-button>
+			<paper-button raised on-tap="addOne">1</paper-button>
+			<paper-button raised on-tap="addTwo">2</paper-button>
+			<paper-button raised on-tap="addThree">3</paper-button>
+			<paper-button raised on-tap="addFour">4</paper-button>
+			<paper-button raised on-tap="addFive">5</paper-button>
+			<paper-button raised on-tap="addSix">6</paper-button>
+		</div>
+
+		<div id="ballButtons" class="horizontal">
+			<paper-button raised on-tap="wide">Wide</paper-button>
+			<paper-button raised on-tap="noBall">No ball</paper-button>
+		</div>
+	</template>
+
+	<script src="cricket-over.js" type="module"></script>
+</dom-module>

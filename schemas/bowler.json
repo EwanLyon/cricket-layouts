@@ -34,7 +34,12 @@
 			"minItems": 2,
 			"maxItems": 2,
 			"default": [0, 0]
+		},
+		"bowling": {
+			"type": "boolean",
+			"description": "True if the bowler is currently bowling, false if they are fielding",
+			"default": false
 		}
 	},
-	"required": ["name", "overs", "maidenOvers", "runs", "wickets", "badBalls"]
+	"required": ["name", "overs", "maidenOvers", "runs", "wickets", "badBalls", "bowling"]
 }

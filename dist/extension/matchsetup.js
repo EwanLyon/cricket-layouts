@@ -13,7 +13,7 @@ nodecg.listenFor('newInnings', (data) => {
     // nodecg.log.info(util.inspect(currentInningsRep, false, null, true /* enable colors */));
     currentInningsRep.value.wickets = 0;
     currentInningsRep.value.runs = 0;
-    currentInningsRep.value.over = 0;
+    currentInningsRep.value.overs = [];
     const bowlingTeam = data[0];
     const battingTeam = data[1];
     currentInningsRep.value.bowlingTeam = bowlingTeam.name;

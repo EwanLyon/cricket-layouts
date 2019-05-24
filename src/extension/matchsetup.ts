@@ -21,35 +21,30 @@ nodecg.listenFor('updateMatch', (data: MatchInfo) => {
 nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
 	// nodecg.log.info(util.inspect(currentInningsRep, false, null, true /* enable colors */));
 
-	currentInningsRep.value.wickets = 0;
-	currentInningsRep.value.runs = 0;
-	currentInningsRep.value.over = 0;
+	let newInnings: CurrentInnings;
+
+	newInnings.wickets = 0;
+	newInnings.runs = 0;
+	newInnings.overs = [];
 	
-	const bowlingTeam: Teams[0] = data[0];
-	const battingTeam: Teams[0] = data[1];
+	const bowlingTeam = data[0];
+	const battingTeam = data[1];
 
-	currentInningsRep.value.bowlingTeam = bowlingTeam.name;
-	currentInningsRep.value.battingTeam = battingTeam.name;
+	newInnings.bowlingTeam = bowlingTeam.name;
+	newInnings.battingTeam = battingTeam.name;
 
-	currentInningsRep.value.TLAs = [bowlingTeam.tla, battingTeam.tla];
+	newInnings.TLAs = [bowlingTeam.tla, battingTeam.tla];
 
-	const bowlingPlayers: Bowler[] = createBowlersObjects(bowlingTeam);
-	const battingPlayers: Batter[] = createBatterObjects(battingTeam);
+	const bowlingPlayers = createBowlersObjects(bowlingTeam);
+	const battingPlayers = createBatterObjects(battingTeam);
 
-	currentInningsRep.value.bowlers = bowlingPlayers;
-	currentInningsRep.value.batters = battingPlayers;
+	bowlingPlayers[0].bowling = true;
 
-	currentInningsRep.value.currentBowler = {
-		name: "Select bowler",
-		overs: -999,
-		maidenOvers: -999,
-		runs: -999,
-		wickets: -999,
-		badBalls: [-999,-999]
-	};
-	currentInningsRep.value.playedBowlers = [];
+	newInnings.bowlers = bowlingPlayers;
+	newInnings.batters = battingPlayers;
 
-	nodecg.log.info('New innings started! Batters: ' + currentInningsRep.value.battingTeam + ' | Bowlers: ' + currentInningsRep.value.bowlingTeam);
+	currentInningsRep.value = newInnings;
+	nodecg.log.info('New innings started! Batters: ' + newInnings.battingTeam + ' | Bowlers: ' + newInnings.bowlingTeam);
 });
 
 function createBowlersObjects(bowlingTeam: Teams[0]) {
@@ -63,7 +58,8 @@ function createBowlersObjects(bowlingTeam: Teams[0]) {
 			maidenOvers: 0,
 			runs: 0,
 			wickets: 0,
-			badBalls: [0,0]
+			badBalls: [0,0],
+			bowling: false
 		};
 
 		buildingBowlers.push(bowlingObj);
@@ -82,7 +78,7 @@ function createBatterObjects(battingTeam: Teams[0]) {
 			runs: [0, 0, 0],
 			balls: 0,
 			dismissal: "",
-            batting: false,
+            batting: "WAITING",
             facing: false
 		};
 
@@ -93,24 +89,13 @@ function createBatterObjects(battingTeam: Teams[0]) {
 }
 
 nodecg.listenFor('updateBattingRoster', (updatedBatters: Batter[]) => {
-	// Reset batting roster
-	currentInningsRep.value.batters = [];
-    
 	// Push each batter into the batting roster	
-	currentInningsRep.value.batters = updatedBatters;
+	let batters = updatedBatters;
 
-	// updatedBatters.forEach(batter => {
-	// 	currentInningsRep.value.batters.push(batter);
-	// });
+	batters[0].batting = "BATTING";
+	batters[0].facing = true;
+	batters[1].batting = "BATTING";
 
     // Set first two batters as on pitch
-    currentInningsRep.value.battersFacing = [currentInningsRep.value.batters[0], currentInningsRep.value.batters[1]];
-
-	currentInningsRep.value.batters[0].batting = true;
-	currentInningsRep.value.batters[1].batting = true;
-
-    // Set the first batter as facing
-	currentInningsRep.value.battersFacing[0].facing = true;
-
-	// nodecg.log.info(util.inspect(currentInningsRep.value.batters, false, null, true /* enable colors */));
+	currentInningsRep.value.batters = batters;
 });

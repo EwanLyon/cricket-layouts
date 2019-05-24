@@ -1,7 +1,7 @@
 import {Teams} from 'src/types/schemas/teams';
 
 const {customElement} = Polymer.decorators;
-const teams = nodecg.Replicant<Teams[]>('teams');
+const teams = nodecg.Replicant<Teams[]>('teamsList');
 
 @customElement('cricket-teams')
 export default class CricketTeams extends Polymer.Element {

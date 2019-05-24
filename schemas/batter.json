@@ -26,9 +26,10 @@
 			"default": ""
 		},
 		"batting": {
-			"type": "boolean",
+			"type": "string",
 			"description": "If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out",
-			"default": false
+			"enum": ["WAITING", "BATTING", "OUT"],
+			"default": "WAITING"
 		},
 		"facing": {
 			"type": "boolean",

@@ -15,11 +15,12 @@
 			"maximum": 10,
 			"default": 0
 		},
-		"over": {
-			"type": "number",
-			"description": "Current over with decimal, e.g. 15.2",
-			"default": 0,
-			"minimum": 0
+		"overs": {
+			"type": "array",
+			"items": {
+				"$ref": "./over.json"
+			},
+			"description": "Array of all overs, length is the overs past, the last index is the current over"
 		},
 		"bowlingTeam": {
 			"type": "string",
@@ -38,24 +39,7 @@
 			},
 			"description": "Three letter abreviations for playing teams. [Bowlers, Batters]"
 		},
-		"currentBowler": {
-			"$ref": "./bowler.json"
-		},
-		"battersFacing": {
-			"type": "array",
-			"items": {
-				"$ref": "./batter.json"
-			},
-			"minItems": 2,
-			"maxItems": 2
-		},
 		"bowlers": {
-			"type": "array",
-			"items": {
-				"$ref": "./bowler.json"
-			}
-		},
-		"playedBowlers": {
 			"type": "array",
 			"items": {
 				"$ref": "./bowler.json"
@@ -68,5 +52,5 @@
 			}
 		}
 	},
-	"required": ["runs", "wickets", "over", "battingTeam", "bowlingTeam", "TLAs", "currentBowler", "battersFacing", "bowlers", "batters", "playedBowlers"]
+	"required": ["runs", "wickets", "overs", "battingTeam", "bowlingTeam", "TLAs", "bowlers", "batters"]
 }

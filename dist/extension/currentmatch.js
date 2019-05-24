@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const currentInningsRep = nodecg.Replicant('currentInnings', { persistent: false });
+const overRep = nodecg.Replicant('over', { persistent: false });
+let badBallInOver = false;
 nodecg.listenFor('changeBowler', (newVal) => {
     // Check if the current bowler is not initialised meaning it is the first bowler
     if (currentInningsRep.value.currentBowler.name == "MISSING BOWLERS NAME") {
@@ -83,5 +85,78 @@ nodecg.listenFor('newWicket', (data) => {
     currentInningsRep.value.batters[batterOriginalIndex] = currentInningsRep.value.battersFacing[data[2]];
     // Set next batter as the batter facing
     currentInningsRep.value.battersFacing[data[2]] = nextBatter;
+});
+nodecg.listenFor('addRuns', (runs) => {
+    // Add runs to total score
+    currentInningsRep.value.runs = +runs;
+    // Add runs to over
+    overRep.value.over.push(runs);
+    // Get the batter currently facing
+    let batterFacingIndex = currentInningsRep.value.battersFacing.findIndex(x => x.facing == true);
+    // Add runs to batter
+    currentInningsRep.value.battersFacing[batterFacingIndex].runs[0] = +runs;
+    // Add stats to type of run scored
+    if (runs == 4) {
+        // Add one to four stat
+        currentInningsRep.value.battersFacing[batterFacingIndex].runs[1] = +1;
+    }
+    else if (runs == 6) {
+        // Add one to six stat
+        currentInningsRep.value.battersFacing[batterFacingIndex].runs[2] = +1;
+    }
+    // Add runs to bowler
+    currentInningsRep.value.currentBowler.runs = +runs;
+    // Switch current facing status
+    if ((runs % 2) == 1) {
+        currentInningsRep.value.battersFacing[0].facing = !currentInningsRep.value.battersFacing[0].facing;
+        currentInningsRep.value.battersFacing[1].facing = !currentInningsRep.value.battersFacing[1].facing;
+    }
+    // Add balls to players
+    currentInningsRep.value.battersFacing[batterFacingIndex].balls = +1;
+    _NextBall();
+});
+function _NextBall() {
+    // Add ball to over
+    if (currentInningsRep.value.overs.length != 5) {
+        // Still in over
+        currentInningsRep.value.currentBowler.overs = +0.1;
+    }
+    else {
+        // Next over
+        // Push current over to list of overs
+        currentInningsRep.value.overs.push(overRep.value);
+        // Check if maiden
+        if (overRep.value.over.every(x => x == 0) && badBallInOver == false) {
+            currentInningsRep.value.currentBowler.maidenOvers++;
+        }
+        // Start new over
+        overRep.value.over = [];
+        // Add over to bowler (add 0.5 to complete the whole number)
+        currentInningsRep.value.currentBowler.overs = +0.5;
+        // Switch batter status
+        currentInningsRep.value.battersFacing[0].facing = !currentInningsRep.value.battersFacing[0].facing;
+        currentInningsRep.value.battersFacing[1].facing = !currentInningsRep.value.battersFacing[1].facing;
+        // Reset local badball status
+        badBallInOver = false;
+    }
+}
+nodecg.listenFor('addBadBall', (ballType) => {
+    badBallInOver = true;
+    if (ballType == "wide") {
+        // Add wide to bowler
+        currentInningsRep.value.currentBowler.badBalls[0]++;
+        // Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
+        // Add single run to score
+        // TODO: Byes and Leg byes
+        currentInningsRep.value.runs++;
+    }
+    else {
+        // Must be no ball
+        // Add no ball to bowler
+        currentInningsRep.value.currentBowler.badBalls[1]++;
+        // Add single run to score
+        currentInningsRep.value.runs++;
+    }
+    _NextBall();
 });
 //# sourceMappingURL=currentmatch.js.map

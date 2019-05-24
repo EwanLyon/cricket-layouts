@@ -1,6 +1,6 @@
 'use strict';
 
-import {NodeCG} from '../../types/nodecg';
+import {NodeCG} from '../../../../../types/server';
 
 let context: NodeCG;
 

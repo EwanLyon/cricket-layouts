@@ -25,7 +25,7 @@ export interface Batter {
 	/**
 	 * If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out
 	 */
-	batting: boolean;
+	batting: 'WAITING' | 'BATTING' | 'OUT';
 	/**
 	 * If true the batter is facing the bowler, false if the batter is running
 	 */

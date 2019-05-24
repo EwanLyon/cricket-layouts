@@ -1,9 +1,13 @@
 'use-strict';
 
+// Node
 import fs = require('fs');
 import path = require('path');
 
+// NodeCG
 import * as nodecgApiContext from './util/nodecg-api-context';
+
+// Mine
 import {Teams} from '../types/schemas/teams';
 
 interface Asset {
@@ -18,21 +22,20 @@ interface Asset {
 
 const nodecg = nodecgApiContext.get();
 
-const teams = nodecg.Replicant<Teams[]>('teams');
+const teams = nodecg.Replicant<Teams[]>('teamsList');
 const teamAssets = nodecg.Replicant<Asset[]>('assets:teams');
 
 nodecg.listenFor('updateTeamFiles', () => {
-
-
-    teams.value = [];
+	nodecg.log.info('Updating team files');
+    let teamsArray: Teams[] = [];
 
 	try {
 		teamAssets.value.forEach((teamFile: Asset) => {
-			teams.value.push(JSON.parse(fs.readFileSync(path.join("Z:/Ewan/NodeCG/nodecg-master", teamFile.url), 'utf-8')));
+			nodecg.log.info('Adding ' + teamFile.url);
+			teamsArray.push(JSON.parse(fs.readFileSync(path.join("R:/Programming/NodeCG/nodecg", teamFile.url), 'utf-8')));
 		});
-		
+		teams.value = teamsArray;
 	} catch (error) {
-        nodecg.log.error(error);
+        nodecg.log.error("Failed loading team data: " + error);
 	}
-
 });
