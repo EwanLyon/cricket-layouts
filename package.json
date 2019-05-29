@@ -78,6 +78,13 @@
         "file": "bowler.html",
         "headerColor": "#525F78",
         "workspace": "Game"
+      },{
+        "name": "debug",
+        "title": "Debug",
+        "width": 2,
+        "file": "debug.html",
+        "headerColor": "#525F78",
+        "workspace": "Dev"
       }
     ],
     "graphics": [

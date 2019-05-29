@@ -1,0 +1,23 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="debug-panel">
+	<template>
+		<style is="custom-style">
+            paper-button{
+                margin: 10px 0;
+                width: 100%;
+                background-color: #474aff;
+            }
+		</style>
+		
+        <paper-button id="batter1Button" raised on-click="debugTeams">Teams</paper-button>
+        <paper-button id="batter1Button" raised on-click="debugBatters">Batters</paper-button>
+        <paper-button id="batter1Button" raised on-click="debugBowlers">Bowlers</paper-button>
+        <paper-button id="batter1Button" raised on-click="debugCurrentInnings">Current Innings</paper-button>
+        <paper-button id="batter1Button" raised on-click="debugMatchData">Match Data</paper-button>
+
+	</template>
+
+	<script src="debug.js" type="module"></script>
+</dom-module>

@@ -17,4 +17,6 @@ async function init() {
 	require('./teamdata');
 	require('./matchsetup');
 	require('./currentmatch');
+	
+	require('./debug');
 }
