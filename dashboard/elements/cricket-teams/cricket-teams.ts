@@ -18,12 +18,13 @@ export default class CricketTeams extends Polymer.Element {
 		nodecg.sendMessage('updateTeamFiles');
 	}
 
-	SwapTeams(){
+	swapTeams(){
 		// https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript
 		(this.$.typeaheadBowlers as any).selectedItem = [(this.$.typeaheadBatter as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem = (this.$.typeaheadBowlers as any).selectedItem][0]
 	}
 
 	ConfirmTeams(){
-		nodecg.sendMessage('newInnings', [(this.$.typeaheadBowlers as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem]);
+		console.log((this.$.typeaheadBowlers as any).selectedItem)
+		nodecg.sendMessage('newInnings', {bowlingTeam: (this.$.typeaheadBowlers as any).selectedItem, battingTeam: (this.$.typeaheadBatter as any).selectedItem});
 	}
 }

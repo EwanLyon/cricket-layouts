@@ -12,14 +12,13 @@ import {Bowler} from '../types/schemas/bowler';
 const matchRep = nodecg.Replicant<MatchInfo>('match');
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings', {persistent: false});
 
-import * as util from 'util';
+// import * as util from 'util';
 
 nodecg.listenFor('updateMatch', (data: MatchInfo) => {
     matchRep.value = data;
 });
 
 nodecg.listenFor('newInnings', (data: {bowlingTeam: Teams[0], battingTeam: Teams[0]}) => {
-	console.log(util.inspect(data.bowlingTeam))
 	const bowlingPlayers = createBowlersObjects(data.bowlingTeam);
 	const battingPlayers = createBatterObjects(data.battingTeam);
 

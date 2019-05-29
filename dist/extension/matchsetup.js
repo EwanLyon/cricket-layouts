@@ -5,12 +5,11 @@ const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const matchRep = nodecg.Replicant('match');
 const currentInningsRep = nodecg.Replicant('currentInnings', { persistent: false });
-const util = require("util");
+// import * as util from 'util';
 nodecg.listenFor('updateMatch', (data) => {
     matchRep.value = data;
 });
 nodecg.listenFor('newInnings', (data) => {
-    console.log(util.inspect(data.bowlingTeam));
     const bowlingPlayers = createBowlersObjects(data.bowlingTeam);
     const battingPlayers = createBatterObjects(data.battingTeam);
     bowlingPlayers[0].bowling = true;

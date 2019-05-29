@@ -20,7 +20,9 @@ function findCurrentBowlerIndex() {
 }
 
 nodecg.listenFor('changeBowler', (newVal: Bowler) => {
-	currentInningsRep.value.bowlers[findCurrentBowlerIndex()].bowling = false;
+	if (findCurrentBowlerIndex() > -1) {
+		currentInningsRep.value.bowlers[findCurrentBowlerIndex()].bowling = false;
+	}
 	const newBowlerIndex = currentInningsRep.value.bowlers.indexOf(newVal);
 	currentInningsRep.value.bowlers[newBowlerIndex].bowling = true;
 });
@@ -122,6 +124,11 @@ function swapBatters() {
 	const currentBatters = currentInningsRep.value.batters.filter(batter => {
 		return batter.batting == "BATTING";
 	});
+
+	if (currentBatters.length != 2) {
+		nodecg.log.error('There aren\'t two batters: ' + currentBatters.length);
+		process.exit(0);
+	}
 
 	currentBatters[0].facing = !currentBatters[0].facing;
 	currentBatters[1].facing = !currentBatters[1].facing;
