@@ -37,13 +37,14 @@ export default class CricketRuns extends Polymer.Element {
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
-			if (newVal.battersFacing[0].name == "MISSING BATTERS NAME") {
+			const battersBatting = this._getCurrentBatters(newVal);
+			if (battersBatting[0].name == "MISSING BATTERS NAME") {
 				return;
 			}
 			this.currentInnings = newVal;
 
-			this.batter1 = newVal.battersFacing[0];
-			this.batter2 = newVal.battersFacing[1];
+			this.batter1 = battersBatting[0];
+			this.batter2 = battersBatting[1];
 
 			if (this.batter1.facing) {
 				this.batter1.name += '*';
@@ -58,6 +59,12 @@ export default class CricketRuns extends Polymer.Element {
 			this.b2Singles = this.batter2.runs[0];
 			this.b2Fours = this.batter2.runs[1];
 			this.b2Sixes = this.batter2.runs[2];
+		});
+	}
+
+	_getCurrentBatters(newVal: CurrentInnings) {
+		return newVal.batters.filter(batter => {
+			batter.batting == "BATTING";
 		});
 	}
 }

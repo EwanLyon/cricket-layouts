@@ -13,9 +13,9 @@ nodecg.listenFor('updateTeamFiles', () => {
     nodecg.log.info('Updating team files');
     let teamsArray = [];
     try {
-        teamAssets.value.forEach((teamFile) => {
+        teamAssets.value.forEach(teamFile => {
             nodecg.log.info('Adding ' + teamFile.url);
-            teamsArray.push(JSON.parse(fs.readFileSync(path.join("R:/Programming/NodeCG/nodecg", teamFile.url), 'utf-8')));
+            teamsArray.push(JSON.parse(fs.readFileSync(path.join(process.cwd(), teamFile.url)).toString()));
         });
         teams.value = teamsArray;
     }

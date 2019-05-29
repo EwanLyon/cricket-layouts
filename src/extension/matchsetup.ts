@@ -12,36 +12,29 @@ import {Bowler} from '../types/schemas/bowler';
 const matchRep = nodecg.Replicant<MatchInfo>('match');
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings', {persistent: false});
 
-// const util = require('util');
+import * as util from 'util';
 
 nodecg.listenFor('updateMatch', (data: MatchInfo) => {
     matchRep.value = data;
 });
 
-nodecg.listenFor('newInnings', (data: [Teams[0], Teams[0]]) => {
-	// nodecg.log.info(util.inspect(currentInningsRep, false, null, true /* enable colors */));
-
-	let newInnings: CurrentInnings;
-
-	newInnings.wickets = 0;
-	newInnings.runs = 0;
-	newInnings.overs = [];
-	
-	const bowlingTeam = data[0];
-	const battingTeam = data[1];
-
-	newInnings.bowlingTeam = bowlingTeam.name;
-	newInnings.battingTeam = battingTeam.name;
-
-	newInnings.TLAs = [bowlingTeam.tla, battingTeam.tla];
-
-	const bowlingPlayers = createBowlersObjects(bowlingTeam);
-	const battingPlayers = createBatterObjects(battingTeam);
+nodecg.listenFor('newInnings', (data: {bowlingTeam: Teams[0], battingTeam: Teams[0]}) => {
+	console.log(util.inspect(data.bowlingTeam))
+	const bowlingPlayers = createBowlersObjects(data.bowlingTeam);
+	const battingPlayers = createBatterObjects(data.battingTeam);
 
 	bowlingPlayers[0].bowling = true;
 
-	newInnings.bowlers = bowlingPlayers;
-	newInnings.batters = battingPlayers;
+	let newInnings: CurrentInnings = {
+		wickets: 0,
+		runs: 0,
+		overs: [],
+		bowlingTeam: data.bowlingTeam.name,
+		battingTeam: data.battingTeam.name,
+		TLAs: [data.bowlingTeam.tla, data.battingTeam.tla],
+		bowlers: bowlingPlayers,
+		batters: battingPlayers
+	};
 
 	currentInningsRep.value = newInnings;
 	nodecg.log.info('New innings started! Batters: ' + newInnings.battingTeam + ' | Bowlers: ' + newInnings.bowlingTeam);

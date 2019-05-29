@@ -25,8 +25,18 @@ export default class CricketBowler extends Polymer.Element {
 
 		currentInningsRep.on('change', newVal =>{
 			(this.$.typeaheadBowler as any).items = newVal.bowlers;
-			this.curBowler = newVal.currentBowler;
+
+			this.curBowler = this._getCurrentBowler()!;
 		});
+	}
+
+	_getCurrentBowler() {
+		if (currentInningsRep.value) {
+			return currentInningsRep.value.bowlers[currentInningsRep.value.bowlers.findIndex(bowler => {
+					return bowler.bowling;
+			})];
+		}
+		return;
 	}
 
 	UpdateBowler() {

@@ -56,7 +56,6 @@
         "headerColor": "#525F78",
         "workspace": "Game"
       },
-      
       {
         "name": "wicket",
         "title": "Wicket",
@@ -72,7 +71,6 @@
         "fullbleed": true,
         "headerColor": "#525F78"
       },
-      
       {
         "name": "bowler",
         "title": "Bowler",
@@ -81,7 +79,6 @@
         "headerColor": "#525F78",
         "workspace": "Game"
       }
-      
     ],
     "graphics": [
       {

@@ -7,7 +7,6 @@ import {CurrentInnings} from '../types/schemas/currentInnings';
 import {Batter} from '../types/schemas/batter';
 import {Bowler} from '../types/schemas/bowler';
 import {Over} from '../types/schemas/over';
-import {Wickets} from '../types/schemas/wickets';
 
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings', {persistent: false});
 const overRep = nodecg.Replicant<Over>('over', {persistent: false});
@@ -27,7 +26,7 @@ nodecg.listenFor('changeBowler', (newVal: Bowler) => {
 });
 
 nodecg.listenFor('newWicket', (data:{dismissal: string, batterOut: Batter, batterIndex: number, fielder: Bowler}) => {
-	const currentBowler = currentInningsRep.value.bowlers[findCurrentBowlerIndex()];
+	const currentBowler = getCurrentBowler();
 
 	if (currentInningsRep.value.wickets == 10){
 		// All batters are out!
@@ -94,6 +93,7 @@ nodecg.listenFor('addRuns', (runs: number) => {
 
 	// Add runs to batter
 	currentBatterFacing.runs[0] =+ runs;
+	currentBatterFacing.balls++;
 
 	// Add stats to type of run scored
 	if (runs == 4) {
@@ -108,57 +108,73 @@ nodecg.listenFor('addRuns', (runs: number) => {
 	currentInningsRep.value.bowlers[findCurrentBowlerIndex()].runs =+ runs;
 
 	// Switch current facing status
-	if ((runs % 2) == 1) {
-		currentInningsRep.value.battersFacing[0].facing = !currentInningsRep.value.battersFacing[0].facing;
-		currentInningsRep.value.battersFacing[1].facing = !currentInningsRep.value.battersFacing[1].facing;
-	}
+	swapBatters();
 
 	// Add balls to players
-	currentInningsRep.value.battersFacing[batterFacingIndex].balls =+ 1;
+	currentBatterFacing.balls++;
+	
+	currentInningsRep.value.batters[currentBatterFacingIndex] = currentBatterFacing;
 
-	_NextBall();
+	_nextBall();
 });
 
 function swapBatters() {
-	const currentBatters = 
+	const currentBatters = currentInningsRep.value.batters.filter(batter => {
+		return batter.batting == "BATTING";
+	});
+
+	currentBatters[0].facing = !currentBatters[0].facing;
+	currentBatters[1].facing = !currentBatters[1].facing;
+
+	// Set the batter objects back
+	currentInningsRep.value.batters.map(batter => {
+		if (batter.name == currentBatters[0].name) {
+			batter = currentBatters[0];
+		} else if (batter.name == currentBatters[1].name) {
+			batter = currentBatters[1];
+		}
+	});
 }
 
-function _NextBall() {
+function _nextBall() {
+	const currentBowler = getCurrentBowler();
 	// Add ball to over
 	if (currentInningsRep.value.overs.length != 5) {
 		// Still in over
-		currentInningsRep.value.currentBowler.overs =+ 0.1;
+		currentBowler.overs =+ 0.1;
 	} else {
-		// Next over
+		// NEXT OVER
 		// Push current over to list of overs
 		currentInningsRep.value.overs.push(overRep.value);
 
 		// Check if maiden
 		if (overRep.value.over.every(x => x == 0) && badBallInOver == false) {
-			currentInningsRep.value.currentBowler.maidenOvers++;
+			currentBowler.maidenOvers++;
 		}
 
 		// Start new over
 		overRep.value.over = [];
 
 		// Add over to bowler (add 0.5 to complete the whole number)
-		currentInningsRep.value.currentBowler.overs =+ 0.5;
+		currentBowler.overs =+ 0.5;
 
 		// Switch batter status
-		currentInningsRep.value.battersFacing[0].facing = !currentInningsRep.value.battersFacing[0].facing;
-		currentInningsRep.value.battersFacing[1].facing = !currentInningsRep.value.battersFacing[1].facing;
+		swapBatters();
 
 		// Reset local badball status
 		badBallInOver = false;
 	}
+
+	currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
 }
 
 nodecg.listenFor('addBadBall', (ballType: string) => {
 	badBallInOver = true;
+	const currentBowler = getCurrentBowler();
 
 	if (ballType == "wide") {
 		// Add wide to bowler
-		currentInningsRep.value.currentBowler.badBalls[0]++;
+		currentBowler.badBalls[0]++;
 
 		// Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
 
@@ -168,11 +184,17 @@ nodecg.listenFor('addBadBall', (ballType: string) => {
 	} else {
 		// Must be no ball
 		// Add no ball to bowler
-		currentInningsRep.value.currentBowler.badBalls[1]++;
+		currentBowler.badBalls[1]++;
 
 		// Add single run to score
 		currentInningsRep.value.runs++;
 	}
 
-	_NextBall();
+	currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
+
+	_nextBall();
 });
+
+function getCurrentBowler(): Bowler {
+	return currentInningsRep.value.bowlers[findCurrentBowlerIndex()];
+}

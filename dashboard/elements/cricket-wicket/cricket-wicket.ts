@@ -39,8 +39,10 @@ export default class CricketWicket extends Polymer.Element {
         (this.$.dismissal as any).items = dismissalTitles;
 
         currentInningsRep.on('change', newVal => {
-            this.batter1 = newVal.battersFacing[0];
-            this.batter2 = newVal.battersFacing[1];
+            const battersBatting = this._getCurrentBatters(newVal);
+
+            this.batter1 = battersBatting[0];
+            this.batter2 = battersBatting[1];
 
             (this.$.fielders as any).items = newVal.bowlers;
         });
@@ -59,6 +61,12 @@ export default class CricketWicket extends Polymer.Element {
         this.$.batter1Button.toggleAttribute('disabled');
         this.canDismiss[0] = true;
     }
+
+    _getCurrentBatters(newVal: CurrentInnings) {
+		return newVal.batters.filter(batter => {
+			batter.batting == "BATTING";
+		});
+	}
 
     _checkIfFielderNeeded() {
         let selectedDismissal: string = (this.$.dismissal as any).selectedItem;

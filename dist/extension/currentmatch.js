@@ -6,33 +6,18 @@ const nodecg = nodecgApiContext.get();
 const currentInningsRep = nodecg.Replicant('currentInnings', { persistent: false });
 const overRep = nodecg.Replicant('over', { persistent: false });
 let badBallInOver = false;
+function findCurrentBowlerIndex() {
+    return currentInningsRep.value.bowlers.findIndex(bowler => {
+        return bowler.bowling;
+    });
+}
 nodecg.listenFor('changeBowler', (newVal) => {
-    // Check if the current bowler is not initialised meaning it is the first bowler
-    if (currentInningsRep.value.currentBowler.name == "MISSING BOWLERS NAME") {
-        currentInningsRep.value.playedBowlers = [];
-        currentInningsRep.value.currentBowler = newVal; // Set the new bowler as the current bowler
-    }
-    else {
-        // Put the current bowler into the played bowlers list
-        currentInningsRep.value.playedBowlers.push(currentInningsRep.value.currentBowler);
-        // Assign played bowlers variable
-        var playedBowlers = currentInningsRep.value.playedBowlers;
-        // Iterate through played bowlers using a normal for loop to access the iteration number (i)
-        for (let i = 0; i < playedBowlers.length; i++) {
-            // If the bowler is already in the played bowlers list, take that object and delete it from the list
-            if (playedBowlers[i].name == newVal.name) {
-                currentInningsRep.value.currentBowler = playedBowlers[i];
-                playedBowlers.splice(i, 1);
-            }
-            else {
-                // It must be a bowler who hasn't bowled before and thus can be added in raw
-                currentInningsRep.value.currentBowler = newVal;
-            }
-        }
-    }
+    currentInningsRep.value.bowlers[findCurrentBowlerIndex()].bowling = false;
+    const newBowlerIndex = currentInningsRep.value.bowlers.indexOf(newVal);
+    currentInningsRep.value.bowlers[newBowlerIndex].bowling = true;
 });
-// Data: [dismissalText, batterOut, batterIndex, fielderItem]
 nodecg.listenFor('newWicket', (data) => {
+    const currentBowler = getCurrentBowler();
     if (currentInningsRep.value.wickets == 10) {
         // All batters are out!
         return;
@@ -40,111 +25,121 @@ nodecg.listenFor('newWicket', (data) => {
     // Add one to wickets
     currentInningsRep.value.wickets++;
     // Add one to bowler
-    currentInningsRep.value.currentBowler.wickets++;
-    let dismissedBatter = currentInningsRep.value.battersFacing[data[2]];
+    currentBowler.wickets++;
     // Get dismissal message
     let dismissalText = "Error";
-    if (data[0] == "c: ") {
-        // Caught therefore needs both fielder and bowler
-        dismissalText = "c: " + data[3].name + " b: " + currentInningsRep.value.currentBowler.name;
-    }
-    else if (data[0] == "b: " || data[0] == "lbw: ") {
-        // Bowled only needs bowler
-        dismissalText = data[0] + currentInningsRep.value.currentBowler.name;
-    }
-    else if (data[3]) {
-        // Else add fielder to end of dismissal text given
-        dismissalText = data[0] + data[3].name;
-    }
-    else {
-        // Else extra data must not be needed
-        dismissalText = data[0];
+    switch (data.dismissal) {
+        case "c: ":
+            dismissalText = "c: " + data.fielder.name + " b: " + currentBowler.name;
+            break;
+        case "b: ":
+        case "lbw: ":
+            dismissalText = data.dismissal + currentBowler.name;
+            break;
+        default:
+            if (data.fielder) {
+                dismissalText = data.dismissal + data.fielder.name;
+            }
+            else {
+                dismissalText = data.dismissal;
+            }
+            break;
     }
     // Get next batter
-    let nextBatter = {};
+    let nextBatter;
     for (let batter of currentInningsRep.value.batters) {
-        if (batter.dismissal == '' && !batter.batting) {
+        if (batter.dismissal == '' && batter.batting == "WAITING") {
             // Batter hasn't been dismissed and isn't batting
             nextBatter = batter;
-            nextBatter.batting = true; // Set batter to be facing
-            nextBatter.facing = dismissedBatter.facing; // If batter was facing set this batter to be facing
+            nextBatter.batting = "BATTING"; // Set batter to be facing
+            nextBatter.facing = data.batterOut.facing; // If batter was facing set this batter to be facing
             break;
         }
     }
     ;
+    data.batterOut.batting = "OUT";
+    data.batterOut.dismissal = dismissalText;
     // Update dismissed batter
-    currentInningsRep.value.battersFacing[data[2]] = {
-        name: dismissedBatter.name,
-        runs: dismissedBatter.runs,
-        balls: dismissedBatter.balls,
-        dismissal: dismissalText,
-        batting: false,
-        facing: false
-    };
-    let batterOriginalIndex = currentInningsRep.value.batters.findIndex(x => x.name == dismissedBatter.name);
-    currentInningsRep.value.batters[batterOriginalIndex] = currentInningsRep.value.battersFacing[data[2]];
-    // Set next batter as the batter facing
-    currentInningsRep.value.battersFacing[data[2]] = nextBatter;
+    currentInningsRep.value.batters[data.batterIndex] = data.batterOut;
 });
 nodecg.listenFor('addRuns', (runs) => {
+    const currentBatterFacingIndex = currentInningsRep.value.batters.findIndex(batter => {
+        return batter.facing == true && batter.batting == "BATTING";
+    });
+    const currentBatterFacing = currentInningsRep.value.batters[currentBatterFacingIndex];
     // Add runs to total score
     currentInningsRep.value.runs = +runs;
     // Add runs to over
     overRep.value.over.push(runs);
-    // Get the batter currently facing
-    let batterFacingIndex = currentInningsRep.value.battersFacing.findIndex(x => x.facing == true);
     // Add runs to batter
-    currentInningsRep.value.battersFacing[batterFacingIndex].runs[0] = +runs;
+    currentBatterFacing.runs[0] = +runs;
+    currentBatterFacing.balls++;
     // Add stats to type of run scored
     if (runs == 4) {
         // Add one to four stat
-        currentInningsRep.value.battersFacing[batterFacingIndex].runs[1] = +1;
+        currentBatterFacing.runs[1] = +1;
     }
     else if (runs == 6) {
         // Add one to six stat
-        currentInningsRep.value.battersFacing[batterFacingIndex].runs[2] = +1;
+        currentBatterFacing.runs[2] = +1;
     }
     // Add runs to bowler
-    currentInningsRep.value.currentBowler.runs = +runs;
+    currentInningsRep.value.bowlers[findCurrentBowlerIndex()].runs = +runs;
     // Switch current facing status
-    if ((runs % 2) == 1) {
-        currentInningsRep.value.battersFacing[0].facing = !currentInningsRep.value.battersFacing[0].facing;
-        currentInningsRep.value.battersFacing[1].facing = !currentInningsRep.value.battersFacing[1].facing;
-    }
+    swapBatters();
     // Add balls to players
-    currentInningsRep.value.battersFacing[batterFacingIndex].balls = +1;
-    _NextBall();
+    currentBatterFacing.balls++;
+    currentInningsRep.value.batters[currentBatterFacingIndex] = currentBatterFacing;
+    _nextBall();
 });
-function _NextBall() {
+function swapBatters() {
+    const currentBatters = currentInningsRep.value.batters.filter(batter => {
+        return batter.batting == "BATTING";
+    });
+    currentBatters[0].facing = !currentBatters[0].facing;
+    currentBatters[1].facing = !currentBatters[1].facing;
+    // Set the batter objects back
+    currentInningsRep.value.batters.map(batter => {
+        if (batter.name == currentBatters[0].name) {
+            batter = currentBatters[0];
+        }
+        else if (batter.name == currentBatters[1].name) {
+            batter = currentBatters[1];
+        }
+    });
+}
+function _nextBall() {
+    const currentBowler = getCurrentBowler();
     // Add ball to over
     if (currentInningsRep.value.overs.length != 5) {
         // Still in over
-        currentInningsRep.value.currentBowler.overs = +0.1;
+        currentBowler.overs = +0.1;
     }
     else {
-        // Next over
+        // NEXT OVER
         // Push current over to list of overs
         currentInningsRep.value.overs.push(overRep.value);
         // Check if maiden
         if (overRep.value.over.every(x => x == 0) && badBallInOver == false) {
-            currentInningsRep.value.currentBowler.maidenOvers++;
+            currentBowler.maidenOvers++;
         }
         // Start new over
         overRep.value.over = [];
         // Add over to bowler (add 0.5 to complete the whole number)
-        currentInningsRep.value.currentBowler.overs = +0.5;
+        currentBowler.overs = +0.5;
         // Switch batter status
-        currentInningsRep.value.battersFacing[0].facing = !currentInningsRep.value.battersFacing[0].facing;
-        currentInningsRep.value.battersFacing[1].facing = !currentInningsRep.value.battersFacing[1].facing;
+        swapBatters();
         // Reset local badball status
         badBallInOver = false;
     }
+    currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
 }
 nodecg.listenFor('addBadBall', (ballType) => {
     badBallInOver = true;
+    const currentBowler = getCurrentBowler();
     if (ballType == "wide") {
         // Add wide to bowler
-        currentInningsRep.value.currentBowler.badBalls[0]++;
+        currentBowler.badBalls[0]++;
         // Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
         // Add single run to score
         // TODO: Byes and Leg byes
@@ -153,10 +148,14 @@ nodecg.listenFor('addBadBall', (ballType) => {
     else {
         // Must be no ball
         // Add no ball to bowler
-        currentInningsRep.value.currentBowler.badBalls[1]++;
+        currentBowler.badBalls[1]++;
         // Add single run to score
         currentInningsRep.value.runs++;
     }
-    _NextBall();
+    currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
+    _nextBall();
 });
+function getCurrentBowler() {
+    return currentInningsRep.value.bowlers[findCurrentBowlerIndex()];
+}
 //# sourceMappingURL=currentmatch.js.map
