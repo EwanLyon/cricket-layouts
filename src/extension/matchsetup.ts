@@ -86,6 +86,8 @@ nodecg.listenFor('updateBattingRoster', (updatedBatters: Batter[]) => {
 
 	batters[0].batting = "BATTING";
 	batters[0].facing = true;
+	batters[0].name += '*';
+
 	batters[1].batting = "BATTING";
 
     // Set first two batters as on pitch

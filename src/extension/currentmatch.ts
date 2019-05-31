@@ -110,7 +110,9 @@ nodecg.listenFor('addRuns', (runs: number) => {
 	currentInningsRep.value.bowlers[findCurrentBowlerIndex()].runs =+ runs;
 
 	// Switch current facing status
-	swapBatters();
+	if ((runs % 2) == 1) {
+		swapBatters();
+	}
 
 	// Add balls to players
 	currentBatterFacing.balls++;
@@ -130,8 +132,19 @@ function swapBatters() {
 		process.exit(0);
 	}
 
+	currentBatters.map(batter => {
+		if (batter.facing) {
+			batter.name = batter.name.slice(-1);
+		} else {
+			batter.name += '*';
+		}
+	});
+
 	currentBatters[0].facing = !currentBatters[0].facing;
 	currentBatters[1].facing = !currentBatters[1].facing;
+
+	// Add an asterisk to the batter facing
+	if (currentBatters[0].name.slice(-1) == '*')
 
 	// Set the batter objects back
 	currentInningsRep.value.batters.map(batter => {
@@ -173,6 +186,10 @@ function _nextBall() {
 	}
 
 	currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
+}
+
+function nextOver() {
+	
 }
 
 nodecg.listenFor('addBadBall', (ballType: string) => {

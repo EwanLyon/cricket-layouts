@@ -47,8 +47,6 @@ export default class CricketRuns extends Polymer.Element {
 			this.batter1 = battersBatting[0];
 			this.batter2 = battersBatting[1];
 
-			
-
 			this.b1Singles = this.batter1.runs[0];
 			this.b1Fours = this.batter1.runs[1];
 			this.b1Sixes = this.batter1.runs[2];
@@ -65,15 +63,4 @@ export default class CricketRuns extends Polymer.Element {
 		});
 	}
 
-	// _setPlayerBattingStatus() {
-	// 	if (this.batter1.facing) {
-	// 		this.batter1.name[this.batter1.name.length - 1] != "*" ?  this.batter1.name += '*' : 
-	// 		this.batter1.name += '*';
-	// 	} else {
-	// 		this.batter2.name += '*';
-	// 	}
-	// 	if (batter.name[batter.name.length - 1] != "*") {
-	// 		batter.name += 1;
-	// 	}
-	// }
 }

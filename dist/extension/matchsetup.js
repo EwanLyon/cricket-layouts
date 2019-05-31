@@ -64,6 +64,7 @@ nodecg.listenFor('updateBattingRoster', (updatedBatters) => {
     let batters = updatedBatters;
     batters[0].batting = "BATTING";
     batters[0].facing = true;
+    batters[0].name += '*';
     batters[1].batting = "BATTING";
     // Set first two batters as on pitch
     currentInningsRep.value.batters = batters;
