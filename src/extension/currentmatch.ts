@@ -3,7 +3,6 @@
 import * as nodecgApiContext from './util/nodecg-api-context';
 const nodecg = nodecgApiContext.get();
 import {CurrentInnings} from '../types/schemas/currentInnings';
-// import {Teams} from '../types/schemas/teams';
 import {Batter} from '../types/schemas/batter';
 import {Bowler} from '../types/schemas/bowler';
 import {Over} from '../types/schemas/over';
@@ -19,12 +18,24 @@ function findCurrentBowlerIndex() {
 	});
 }
 
+function findBowlerIndex(searchBowler: Bowler) {
+	let index = currentInningsRep.value.bowlers.map((bowler, i) => {
+		if (bowler.name == searchBowler.name) {
+			return i;
+		}
+		return undefined;
+	});
+	return index.filter(item => item != undefined)[0];
+}
+
 nodecg.listenFor('changeBowler', (newVal: Bowler) => {
 	if (findCurrentBowlerIndex() > -1) {
 		currentInningsRep.value.bowlers[findCurrentBowlerIndex()].bowling = false;
 	}
-	const newBowlerIndex = currentInningsRep.value.bowlers.indexOf(newVal);
-	currentInningsRep.value.bowlers[newBowlerIndex].bowling = true;
+	const newBowlerIndex = findBowlerIndex(newVal);
+	if (newBowlerIndex != undefined) {
+		currentInningsRep.value.bowlers[newBowlerIndex].bowling = true;
+	}
 });
 
 nodecg.listenFor('newWicket', (data:{dismissal: string, batterOut: Batter, batterIndex: number, fielder: Bowler}) => {
@@ -88,38 +99,35 @@ nodecg.listenFor('addRuns', (runs: number) => {
 	const currentBatterFacing = currentInningsRep.value.batters[currentBatterFacingIndex];
 
 	// Add runs to total score
-	currentInningsRep.value.runs =+ runs;
+	currentInningsRep.value.runs += runs;
 
 	// Add runs to over
 	overRep.value.over.push(runs);
 
 	// Add runs to batter
-	currentBatterFacing.runs[0] =+ runs;
+	currentBatterFacing.runs[0] += runs;
 	currentBatterFacing.balls++;
 
 	// Add stats to type of run scored
 	if (runs == 4) {
 		// Add one to four stat
-		currentBatterFacing.runs[1] =+ 1;
+		currentBatterFacing.runs[1] += 1;
 	} else if (runs == 6) {
 		// Add one to six stat
-		currentBatterFacing.runs[2] =+ 1;
+		currentBatterFacing.runs[2] += 1;
 	}
 
 	// Add runs to bowler
-	currentInningsRep.value.bowlers[findCurrentBowlerIndex()].runs =+ runs;
+	currentInningsRep.value.bowlers[findCurrentBowlerIndex()].runs += runs;
 
 	// Switch current facing status
 	if ((runs % 2) == 1) {
 		swapBatters();
 	}
-
-	// Add balls to players
-	currentBatterFacing.balls++;
 	
 	currentInningsRep.value.batters[currentBatterFacingIndex] = currentBatterFacing;
 
-	_nextBall();
+	nextBall();
 });
 
 function swapBatters() {
@@ -132,9 +140,10 @@ function swapBatters() {
 		process.exit(0);
 	}
 
+	// Switching asterisk
 	currentBatters.map(batter => {
 		if (batter.facing) {
-			batter.name = batter.name.slice(-1);
+			batter.name = batter.name.slice(0, -1);
 		} else {
 			batter.name += '*';
 		}
@@ -142,9 +151,6 @@ function swapBatters() {
 
 	currentBatters[0].facing = !currentBatters[0].facing;
 	currentBatters[1].facing = !currentBatters[1].facing;
-
-	// Add an asterisk to the batter facing
-	if (currentBatters[0].name.slice(-1) == '*')
 
 	// Set the batter objects back
 	currentInningsRep.value.batters.map(batter => {
@@ -156,40 +162,48 @@ function swapBatters() {
 	});
 }
 
-function _nextBall() {
+function nextBall() {
 	const currentBowler = getCurrentBowler();
 	// Add ball to over
-	if (currentInningsRep.value.overs.length != 5) {
+	if (overRep.value.over.length < 6) {
 		// Still in over
-		currentBowler.overs =+ 0.1;
+		currentBowler.overs += 0.1;
 	} else {
-		// NEXT OVER
-		// Push current over to list of overs
-		currentInningsRep.value.overs.push(overRep.value);
-
-		// Check if maiden
-		if (overRep.value.over.every(x => x == 0) && badBallInOver == false) {
-			currentBowler.maidenOvers++;
-		}
-
-		// Start new over
-		overRep.value.over = [];
-
-		// Add over to bowler (add 0.5 to complete the whole number)
-		currentBowler.overs =+ 0.5;
-
-		// Switch batter status
-		swapBatters();
-
-		// Reset local badball status
-		badBallInOver = false;
+		nextOver(currentBowler);		
 	}
-
-	currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
 }
 
-function nextOver() {
+nodecg.listenFor('nextOver', () => {
+	nextOver(getCurrentBowler());
+});
+
+function nextOver(curBowler: Bowler) {
+	// NEXT OVER
+	let currentOver = JSON.parse(JSON.stringify(overRep.value));	// Fixes NodeCG assert single owner error
+
+	// Start new over
+	overRep.value = {
+		over: []
+	};
 	
+	// Push current over to list of overs
+	currentInningsRep.value.overs.push(currentOver);
+
+	// Check if maiden
+	if (overRep.value.over.every(x => x == 0) && badBallInOver == false) {
+		curBowler.maidenOvers++;
+	}
+
+	// Add over to bowler (add 0.5 to complete the whole number)
+	curBowler.overs += 0.5;
+
+	// Switch batter status
+	swapBatters();
+
+	// Reset local badball status
+	badBallInOver = false;
+
+	currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = curBowler;
 }
 
 nodecg.listenFor('addBadBall', (ballType: string) => {
@@ -216,7 +230,7 @@ nodecg.listenFor('addBadBall', (ballType: string) => {
 
 	currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
 
-	_nextBall();
+	nextBall();
 });
 
 function getCurrentBowler(): Bowler {

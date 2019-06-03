@@ -8,6 +8,7 @@ const util_1 = require("util");
 const teamsRep = nodecg.Replicant('teamsList');
 const currentInningsRep = nodecg.Replicant('currentInnings');
 const matchRep = nodecg.Replicant('match');
+const overRep = nodecg.Replicant('over');
 nodecg.listenFor('debugTeams', () => {
     nodecg.log.info('Debugging Teams');
     nodecg.log.info(util_1.inspect(teamsRep.value, false, null, true));
@@ -28,5 +29,9 @@ nodecg.listenFor('debugCurrentInnings', () => {
 nodecg.listenFor('debugMatchData', () => {
     nodecg.log.info('Debugging Match Data');
     nodecg.log.info(util_1.inspect(matchRep.value, false, null, true));
+});
+nodecg.listenFor('debugOver', () => {
+    nodecg.log.info('Debugging Over');
+    nodecg.log.info(util_1.inspect(overRep.value, false, null, true));
 });
 //# sourceMappingURL=debug.js.map

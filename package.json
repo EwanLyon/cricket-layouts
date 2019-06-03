@@ -22,7 +22,7 @@
         "width": 3,
         "file": "teams.html",
         "headerColor": "#525F78",
-        "workspace": "!Setup"
+        "workspace": "Setup"
       },
       {
         "name": "match",
@@ -30,7 +30,7 @@
         "width": 3,
         "file": "match.html",
         "headerColor": "#525F78",
-        "workspace": "!Setup"
+        "workspace": "Setup"
       },
       {
         "name": "battingroster",
@@ -38,7 +38,7 @@
         "width": 2,
         "file": "battingroster.html",
         "headerColor": "#525F78",
-        "workspace": "!Setup"
+        "workspace": "Setup"
       },
       {
         "name": "runs",

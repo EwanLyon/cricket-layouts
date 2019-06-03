@@ -39,7 +39,6 @@ export default class CricketWicket extends Polymer.Element {
         (this.$.dismissal as any).items = dismissalTitles;
 
         currentInningsRep.on('change', newVal => {
-            console.log('Wickets');
             const battersBatting = this._getCurrentBatters(newVal);
 
             this.batter1 = battersBatting[0];

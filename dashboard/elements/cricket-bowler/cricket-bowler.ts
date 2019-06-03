@@ -8,7 +8,7 @@ const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 
 @customElement('cricket-bowler')
 export default class CricketBowler extends Polymer.Element {
-	@property({type: Object, observer: CricketBowler.prototype._updateBadBalls})
+	@property({type: Object, observer: CricketBowler.prototype.updateBadBalls})
 	curBowler: Bowler;
 
 	@property({type: String})
@@ -20,30 +20,31 @@ export default class CricketBowler extends Polymer.Element {
 	@property({type: Number})
 	cbNoBalls: number;
 
-    ready() {
+  ready() {
 		super.ready();
 
 		currentInningsRep.on('change', newVal =>{
 			(this.$.typeaheadBowler as any).items = newVal.bowlers;
 
-			this.curBowler = this._getCurrentBowler()!;
+			this.curBowler = this.getCurrentBowler()!;
 		});
 	}
 
-	_getCurrentBowler() {
+	getCurrentBowler() {
 		if (currentInningsRep.value) {
 			return currentInningsRep.value.bowlers[currentInningsRep.value.bowlers.findIndex(bowler => {
-					return bowler.bowling;
+				return bowler.bowling;
 			})];
 		}
 		return;
 	}
 
-	UpdateBowler() {
+	updateBowler() {
+		console.log((this.$.typeaheadBowler as any).selectedItem);
 		nodecg.sendMessage('changeBowler', (this.$.typeaheadBowler as any).selectedItem);
 	}
 
-	_updateBadBalls(){
+	updateBadBalls(){
 		this.cbName = this.curBowler.name;
 		this.cbWides = this.curBowler.badBalls[0];
 		this.cbNoBalls = this.curBowler.badBalls[1];

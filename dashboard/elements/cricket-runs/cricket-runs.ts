@@ -33,34 +33,32 @@ export default class CricketRuns extends Polymer.Element {
 	@property({type:Number})
 	b2Sixes: number;
 
-    ready() {
+  ready() {
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
-			console.log('Runs');
-			const battersBatting = this._getCurrentBatters(newVal);
-			if (battersBatting[0].name == "MISSING BATTERS NAME") {
-				return;
+			const battersBatting = this.getCurrentBatters(newVal);
+			console.log(battersBatting);
+			if (battersBatting != []) {
+				this.currentInnings = newVal;
+
+				this.batter1 = battersBatting[0];
+				this.batter2 = battersBatting[1];
+
+				this.b1Singles = this.batter1.runs[0];
+				this.b1Fours = this.batter1.runs[1];
+				this.b1Sixes = this.batter1.runs[2];
+
+				this.b2Singles = this.batter2.runs[0];
+				this.b2Fours = this.batter2.runs[1];
+				this.b2Sixes = this.batter2.runs[2];
 			}
-			this.currentInnings = newVal;
-
-			this.batter1 = battersBatting[0];
-			this.batter2 = battersBatting[1];
-
-			this.b1Singles = this.batter1.runs[0];
-			this.b1Fours = this.batter1.runs[1];
-			this.b1Sixes = this.batter1.runs[2];
-
-			this.b2Singles = this.batter2.runs[0];
-			this.b2Fours = this.batter2.runs[1];
-			this.b2Sixes = this.batter2.runs[2];
 		});
 	}
 
-	_getCurrentBatters(newVal: CurrentInnings) {
+	getCurrentBatters(newVal: CurrentInnings) {
 		return newVal.batters.filter(batter => {
 			return batter.batting == "BATTING";
 		});
 	}
-
 }

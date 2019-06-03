@@ -24,5 +24,9 @@ export default class DebugPanel extends Polymer.Element {
 	
 	debugMatchData(){
 		nodecg.sendMessage('debugMatchData');
+	}
+
+	debugOver(){
+		nodecg.sendMessage('debugOver');
 	}	
 }

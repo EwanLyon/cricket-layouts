@@ -20,19 +20,21 @@ export default class CricketOver extends Polymer.Element {
         
         overRep.on('change', newVal => {
             for (let i = 0; i < newVal.over.length; i++) {
+                console.log(i);
+                console.log(overDivs[i + 1]);
                 overDivs[i].innerHTML = newVal.over[i];
 
                 // Update current ball indicator
-                overDivs[i].classList.remove('currentBall');
-                if (i == newVal.over.length - 1) {
-                    overDivs[i].classList.add('currentBall');
+                overDivs[i].id = "";
+                if (i == newVal.over.length - 1 && i < 6) {
+                    overDivs[i + 1].id = "currentBall";
                 }
             }
         });
 
         currentInningsRep.on('change', newVal => {
             let totalOvers: number = newVal.overs.length;
-            totalOvers =+ 10 / ((overRep.value as Over).over.length + 1);
+            totalOvers =+ 10 / (overRep.value!.over.length + 1);
 
             this.overs = totalOvers;
         });
@@ -44,6 +46,10 @@ export default class CricketOver extends Polymer.Element {
 
     badBall(ballType: string){
         nodecg.sendMessage('addBadBall', ballType);
+    }
+
+    nextOver() {
+        nodecg.sendMessage('nextOver');
     }
 
     wide(){

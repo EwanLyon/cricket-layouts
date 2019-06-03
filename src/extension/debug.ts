@@ -6,10 +6,12 @@ import {inspect} from 'util';
 import { Teams } from '../types/schemas/teams';
 import { CurrentInnings } from '../types/schemas/currentInnings';
 import { MatchInfo } from '../types/schemas/matchInfo';
+import { Over } from '../types/schemas/over';
 
 const teamsRep = nodecg.Replicant<Teams>('teamsList');
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 const matchRep = nodecg.Replicant<MatchInfo>('match');
+const overRep = nodecg.Replicant<Over>('over');
 
 nodecg.listenFor('debugTeams', () => {
 	nodecg.log.info('Debugging Teams');
@@ -35,4 +37,9 @@ nodecg.listenFor('debugCurrentInnings', () => {
 nodecg.listenFor('debugMatchData', () => {
 	nodecg.log.info('Debugging Match Data');
 	nodecg.log.info(inspect(matchRep.value, false, null, true));
+});
+
+nodecg.listenFor('debugOver', () => {
+	nodecg.log.info('Debugging Over');
+	nodecg.log.info(inspect(overRep.value, false, null, true));
 });
