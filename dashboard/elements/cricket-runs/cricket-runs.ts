@@ -38,7 +38,6 @@ export default class CricketRuns extends Polymer.Element {
 
 		currentInningsRep.on('change', newVal => {
 			const battersBatting = this.getCurrentBatters(newVal);
-			console.log(battersBatting);
 			if (battersBatting != []) {
 				this.currentInnings = newVal;
 

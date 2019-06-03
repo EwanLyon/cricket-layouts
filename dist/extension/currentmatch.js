@@ -6,6 +6,7 @@ const nodecg = nodecgApiContext.get();
 const currentInningsRep = nodecg.Replicant('currentInnings', { persistent: false });
 const overRep = nodecg.Replicant('over', { persistent: false });
 let badBallInOver = false;
+let ballsLeft = 6;
 function findCurrentBowlerIndex() {
     return currentInningsRep.value.bowlers.findIndex(bowler => {
         return bowler.bowling;
@@ -70,8 +71,11 @@ nodecg.listenFor('newWicket', (data) => {
         }
     }
     ;
+    // Update dismissed batter
     data.batterOut.batting = "OUT";
     data.batterOut.dismissal = dismissalText;
+    // Update over
+    overRep.value.over.push("W");
     // Update dismissed batter
     currentInningsRep.value.batters[data.batterIndex] = data.batterOut;
 });
@@ -137,19 +141,21 @@ function swapBatters() {
 function nextBall() {
     const currentBowler = getCurrentBowler();
     // Add ball to over
-    if (overRep.value.over.length < 6) {
+    if (ballsLeft > 1) {
         // Still in over
         currentBowler.overs += 0.1;
     }
     else {
         nextOver(currentBowler);
     }
+    ballsLeft--;
 }
 nodecg.listenFor('nextOver', () => {
     nextOver(getCurrentBowler());
 });
 function nextOver(curBowler) {
     // NEXT OVER
+    ballsLeft = 6;
     let currentOver = JSON.parse(JSON.stringify(overRep.value)); // Fixes NodeCG assert single owner error
     // Start new over
     overRep.value = {
@@ -158,7 +164,7 @@ function nextOver(curBowler) {
     // Push current over to list of overs
     currentInningsRep.value.overs.push(currentOver);
     // Check if maiden
-    if (overRep.value.over.every(x => x == 0) && badBallInOver == false) {
+    if (overRep.value.over.every(x => x == 0 || x == "W") && badBallInOver == false) {
         curBowler.maidenOvers++;
     }
     // Add over to bowler (add 0.5 to complete the whole number)
@@ -172,20 +178,26 @@ function nextOver(curBowler) {
 nodecg.listenFor('addBadBall', (ballType) => {
     badBallInOver = true;
     const currentBowler = getCurrentBowler();
-    if (ballType == "wide") {
-        // Add wide to bowler
-        currentBowler.badBalls[0]++;
-        // Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
-        // Add single run to score
-        // TODO: Byes and Leg byes
-        currentInningsRep.value.runs++;
-    }
-    else {
-        // Must be no ball
-        // Add no ball to bowler
-        currentBowler.badBalls[1]++;
-        // Add single run to score
-        currentInningsRep.value.runs++;
+    switch (ballType) {
+        case "wide":
+            currentBowler.badBalls[0]++; // Add wide to bowler
+            currentBowler.runs++; // Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
+            currentInningsRep.value.runs++; // Add single run to score
+            overRep.value.over.push("Wide");
+            ballsLeft++;
+            break;
+        case "noball":
+            currentBowler.badBalls[1]++; // Add no ball to bowler
+            currentInningsRep.value.runs++; // Add single run to score
+            overRep.value.over.push("NB");
+            ballsLeft++;
+            break;
+        case "bye":
+            break;
+        case "legbye":
+            break;
+        default:
+            break;
     }
     currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
     nextBall();

@@ -19,6 +19,7 @@
 
 			.table {
 				width: 100%;
+				display: flex;
 			}
 
 			.tableCell {
@@ -30,7 +31,7 @@
 				font-size: 25px;
 				margin: 0 1px;
 				height: 38px;
-    			width: 38.33px;
+				flex-grow: 1;
 			}
 
 			#currentBall {
@@ -78,18 +79,23 @@
 		<div id="seperator"></div>
 
 		<div id="scoreButtons" class="horizontal">
-			<paper-button raised on-tap="addZero">0</paper-button>
-			<paper-button raised on-tap="addOne">1</paper-button>
-			<paper-button raised on-tap="addTwo">2</paper-button>
-			<paper-button raised on-tap="addThree">3</paper-button>
-			<paper-button raised on-tap="addFour">4</paper-button>
-			<paper-button raised on-tap="addFive">5</paper-button>
-			<paper-button raised on-tap="addSix">6</paper-button>
+			<paper-button raised on-click="addZero">0</paper-button>
+			<paper-button raised on-click="addOne">1</paper-button>
+			<paper-button raised on-click="addTwo">2</paper-button>
+			<paper-button raised on-click="addThree">3</paper-button>
+			<paper-button raised on-click="addFour">4</paper-button>
+			<paper-button raised on-click="addFive">5</paper-button>
+			<paper-button raised on-click="addSix">6</paper-button>
 		</div>
 
 		<div id="ballButtons" class="horizontal">
-			<paper-button raised on-tap="wide">Wide</paper-button>
-			<paper-button raised on-tap="noBall">No ball</paper-button>
+			<paper-button raised on-click="wide">Wide</paper-button>
+			<paper-button raised on-click="noBall">No ball</paper-button>
+		</div>
+
+		<div id="ballButtons" class="horizontal">
+			<paper-button raised on-click="bye">Bye</paper-button>
+			<paper-button raised on-click="legBye">Leg Bye</paper-button>
 		</div>
 
 		<paper-button raised on-tap="nextOver">Next Over</paper-button>

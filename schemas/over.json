@@ -6,8 +6,10 @@
 		"over": {
 			"type": "array",
 			"description": "The balls in the past over, any as strings may be included, e.g. [0, 4, Wide, NB, 3, W]",
-            "default": [],
-            "maxItems": 6
+			"default": [],
+			"items": {
+				"type": ["number", "string"]
+			}
 		}
 	},
 	"required": ["over"]

@@ -19,14 +19,31 @@ export default class CricketOver extends Polymer.Element {
         overDivs = this.$.overTable.children;
         
         overRep.on('change', newVal => {
-            for (let i = 0; i < newVal.over.length; i++) {
-                console.log(i);
-                console.log(overDivs[i + 1]);
-                overDivs[i].innerHTML = newVal.over[i];
+            // If over is longer than 6 balls
+            if (newVal.over.length > 6) {
+                // Create new cell
+                const tableDiv = this.$.overTable;
+                let newCell = document.createElement('div');
+                newCell.classList.add('tableCell');
+                tableDiv.appendChild(newCell);
+            } else {
+                // Reset over length
+                while (overDivs.length > 6) {
+                    overDivs[overDivs.length - 1].remove();
+                }
+            }
+
+            console.log(newVal);
+            for (let i = 0; i < newVal.over.length || i < 6; i++) {
+                if (newVal.over[i] != undefined) {
+                    overDivs[i].innerHTML = String(newVal.over[i]);
+                } else {
+                    overDivs[i].innerHTML = '';
+                }
 
                 // Update current ball indicator
                 overDivs[i].id = "";
-                if (i == newVal.over.length - 1 && i < 6) {
+                if (i == newVal.over.length - 1) {
                     overDivs[i + 1].id = "currentBall";
                 }
             }
@@ -34,7 +51,7 @@ export default class CricketOver extends Polymer.Element {
 
         currentInningsRep.on('change', newVal => {
             let totalOvers: number = newVal.overs.length;
-            totalOvers =+ 10 / (overRep.value!.over.length + 1);
+            totalOvers += (overRep.value!.over.length + 1) / 10;
 
             this.overs = totalOvers;
         });
@@ -44,20 +61,27 @@ export default class CricketOver extends Polymer.Element {
         nodecg.sendMessage('addRuns', runs);
     }
 
-    badBall(ballType: string){
+    badBall(ballType: "wide" | "noball" | "bye" | "legBye"){
         nodecg.sendMessage('addBadBall', ballType);
     }
 
     nextOver() {
         nodecg.sendMessage('nextOver');
     }
-
     wide(){
         this.badBall("wide");
     }
 
     noBall(){
         this.badBall("noball");
+    }
+
+    bye(){
+        this.badBall("bye");
+    }
+
+    legBye(){
+        this.badBall("legBye");
     }
 
     addZero(){

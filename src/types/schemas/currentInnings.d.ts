@@ -21,7 +21,7 @@ export interface CurrentInnings {
 		/**
 		 * The balls in the past over, any as strings may be included, e.g. [0, 4, Wide, NB, 3, W]
 		 */
-		over: any[];
+		over: (number | string)[];
 	}[];
 	/**
 	 * The team that is bowling this innings
