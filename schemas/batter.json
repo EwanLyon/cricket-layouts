@@ -9,11 +9,22 @@
 			"default": "MISSING BATTERS NAME"
 		},
 		"runs": {
-			"type": "array",
-			"description": "Runs in each category made by player, 1st index is total runs, 2nd is 4's, 3rd is 6's",
-			"minItems": 3,
-			"maxItems": 3,
-			"default": [0, 0, 0]
+			"type": "number",
+			"description": "Total run made",
+			"default": 0,
+			"minimum": 0
+		},
+		"fours": {
+			"type": "number",
+			"description": "Number of fours made",
+			"default": 0,
+			"minimum": 0
+		},
+		"sixes": {
+			"type": "number",
+			"description": "Number of sixes made",
+			"default": 0,
+			"minimum": 0
 		},
 		"balls": {
 			"type": "integer",
@@ -37,5 +48,5 @@
 			"default": false
 		}
 	},
-	"required": ["name", "runs", "balls", "dismissal", "batting", "facing"]
+	"required": ["name", "runs", "fours", "sixes", "balls", "dismissal", "batting", "facing"]
 }

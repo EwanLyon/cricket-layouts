@@ -3,12 +3,11 @@ const {customElement, property} = Polymer.decorators;
 import {Over} from 'src/types/schemas/over';
 const overRep = nodecg.Replicant<Over>('over');
 import {CurrentInnings} from 'src/types/schemas/currentInnings';
-const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 
 let overDivs: HTMLCollection;
 
 @customElement('cricket-over')
-export default class CricketOver extends Polymer.Element {
+export default class CricketOver extends Polymer.MutableData(Polymer.Element) {
 
     @property({type: Number})
 	overs: number;
@@ -47,13 +46,13 @@ export default class CricketOver extends Polymer.Element {
                     overDivs[i + 1].id = "currentBall";
                 }
             }
-        });
 
-        currentInningsRep.on('change', newVal => {
-            let totalOvers: number = newVal.overs.length;
-            totalOvers += (overRep.value!.over.length + 1) / 10;
+            nodecg.readReplicant<CurrentInnings>('currentInnings', value => {
+                let totalOvers: number = value.overs.length;
+                totalOvers += (newVal.over.length)/ 10;
 
-            this.overs = totalOvers;
+                this.overs = totalOvers;
+            });
         });
 	}
 

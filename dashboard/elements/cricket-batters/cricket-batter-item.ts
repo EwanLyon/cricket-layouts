@@ -34,9 +34,9 @@ export default class CricketBatterItem extends Polymer.Element {
 			// Unfortunately since I need to show batters who haven't batted yet as "-" so the variables need to be strings
 			this.balls = String(newVal.balls);
 
-			this.totalRuns = String(newVal.runs[0]);
-			this.fours = String(newVal.runs[1]);
-			this.sixes = String(newVal.runs[2]);
+			this.totalRuns = String(newVal.runs);
+			this.fours = String(newVal.fours);
+			this.sixes = String(newVal.sixes);
 		} else {
 			this.totalRuns = '-';
 			this.balls = '-';

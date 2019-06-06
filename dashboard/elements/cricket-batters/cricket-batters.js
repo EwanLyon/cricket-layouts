@@ -5,7 +5,7 @@ let CricketBatters = class CricketBatters extends Polymer.MutableData(Polymer.El
     ready() {
         super.ready();
         currentInningsRep.on('change', newVal => {
-            this.currentBatters = newVal.batters;
+            this.currentBatters = newVal.batsmen;
             this.notifyPath('currentBatters');
         });
     }

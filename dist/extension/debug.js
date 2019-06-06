@@ -15,7 +15,7 @@ nodecg.listenFor('debugTeams', () => {
 });
 nodecg.listenFor('debugBatters', () => {
     nodecg.log.info('Debugging Batters');
-    nodecg.log.info(util_1.inspect(currentInningsRep.value.batters, false, null, true));
+    nodecg.log.info(util_1.inspect(currentInningsRep.value.batsmen, false, null, true));
 });
 nodecg.listenFor('debugBowlers', () => {
     nodecg.log.info('Debugging Bowlers');
@@ -23,7 +23,7 @@ nodecg.listenFor('debugBowlers', () => {
 });
 nodecg.listenFor('debugCurrentInnings', () => {
     nodecg.log.info('Debugging Current Innings');
-    let _a = currentInningsRep.value, { batters, battingTeam, bowlers, bowlingTeam } = _a, matchData = tslib_1.__rest(_a, ["batters", "battingTeam", "bowlers", "bowlingTeam"]);
+    let _a = currentInningsRep.value, { batsmen, battingTeam, bowlers, bowlingTeam } = _a, matchData = tslib_1.__rest(_a, ["batsmen", "battingTeam", "bowlers", "bowlingTeam"]);
     nodecg.log.info(util_1.inspect(matchData, false, null, true));
 });
 nodecg.listenFor('debugMatchData', () => {

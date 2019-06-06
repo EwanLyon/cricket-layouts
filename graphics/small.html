@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+		body {
+			color: white;
+			margin: 0;
+			width: 260px;
+			text-align: center;
+		}
+
+		#scoreBox {
+			background: rgb(150, 98, 218);
+			font-size: 50px;
+		}
+
+		#score {
+			font-weight: bold;
+		}
+
+		#main {
+			background: rgba(154, 103, 218, 0.5);
+		}
+
+		#overBox {
+			font-size: 30px;
+		}
+
+		#overText {
+			font-family: 'Roboto Light';
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="scoreBox">
+			<span id="team">IND</span>
+			<span id="score">1-150</span>
+		</div>
+		<div id="overBox">
+			<span id="overText">OVER</span>
+			<span id="overs">20.4</span>
+		</div>
+	</div>
+
+	<script>
+		'use strict';
+
+		const currentInningsRep = nodecg.Replicant('currentInnings');
+		const overRep = nodecg.Replicant('over');
+
+		currentInningsRep.on('change', newVal => {
+			document.getElementById('team').innerHTML = newVal.TLAs[1];
+			document.getElementById('score').innerHTML = formatScore(newVal);
+		});
+
+		overRep.on('change', newVal => {
+			document.getElementById('overs').innerHTML = formatOvers(currentInningsRep.value, newVal);
+		});
+
+		function formatOvers(currentInnings, currentOver) {
+			let totalOvers = currentInnings.overs.length;
+            totalOvers += (currentOver.over.length + 1) / 10;
+            return totalOvers;
+		}
+
+		function formatScore(currentInnings) {
+			return currentInnings.wickets + "-" + currentInnings.runs
+		}
+	</script>
+</body>
+</html>

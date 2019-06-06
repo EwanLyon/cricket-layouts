@@ -21,7 +21,7 @@ nodecg.listenFor('newInnings', (data) => {
         battingTeam: data.battingTeam.name,
         TLAs: [data.bowlingTeam.tla, data.battingTeam.tla],
         bowlers: bowlingPlayers,
-        batters: battingPlayers
+        batsmen: battingPlayers
     };
     currentInningsRep.value = newInnings;
     nodecg.log.info('New innings started! Batters: ' + newInnings.battingTeam + ' | Bowlers: ' + newInnings.bowlingTeam);
@@ -49,7 +49,9 @@ function createBatterObjects(battingTeam) {
     battingTeam.players.forEach(player => {
         var batterObj = {
             name: player.name,
-            runs: [0, 0, 0],
+            runs: 0,
+            fours: 0,
+            sixes: 0,
             balls: 0,
             dismissal: "",
             batting: "WAITING",
@@ -67,6 +69,6 @@ nodecg.listenFor('updateBattingRoster', (updatedBatters) => {
     batters[0].name += '*';
     batters[1].batting = "BATTING";
     // Set first two batters as on pitch
-    currentInningsRep.value.batters = batters;
+    currentInningsRep.value.batsmen = batters;
 });
 //# sourceMappingURL=matchsetup.js.map

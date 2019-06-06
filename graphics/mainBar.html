@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-	<style>
-		
-	</style>
-</head>
-<body>
-
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500&display=swap" rel="stylesheet" />
+		<link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html" />
+		<link rel="import" href="../bower_components/polymer/polymer-element.html"/>
+		<script>
+			{
+				let links = ['mainBar/mainbarPolymer.html'];
+				for (const link of links) {
+					const linkElem = document.createElement('link');
+					linkElem.rel = 'import';
+					linkElem.href = link;
+					document.head.appendChild(linkElem);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<main-bar></main-bar>
+	</body>
 </html>

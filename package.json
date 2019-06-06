@@ -78,7 +78,8 @@
         "file": "bowler.html",
         "headerColor": "#525F78",
         "workspace": "Game"
-      },{
+      },
+      {
         "name": "debug",
         "title": "Debug",
         "width": 2,
@@ -90,8 +91,18 @@
     "graphics": [
       {
         "file": "mainBar.html",
+        "width": 1400,
+        "height": 80
+      },
+      {
+        "file": "small.html",
+        "width": 260,
+        "height": 105
+      },
+      {
+        "file": "fui.html",
         "width": 1920,
-        "height": 1080
+        "height": 100
       }
     ],
     "assetCategories": [
@@ -106,14 +117,11 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "typescript": "^3.2.1"
-  },
-  "dependencies": {
-    "ajv": "^6.6.1",
-    "json-schema-to-typescript": "^6.1.0",
-    "trash-cli": "^1.4.0",
+    "typescript": "^3.5.1",
+    "trash-cli": "^3.0.0",
     "tslib": "^1.9.3"
   },
+  "dependencies": {},
   "scripts": {
     "start": "node ../.. --bundlesEnabled=cricket-layouts",
     "build": "npm run build:extension && npm run build:browser",

@@ -45,12 +45,12 @@
 				"$ref": "./bowler.json"
 			}
 		},
-		"batters": {
+		"batsmen": {
 			"type": "array",
 			"items": {
 				"$ref": "./batter.json"
 			}
 		}
 	},
-	"required": ["runs", "wickets", "overs", "battingTeam", "bowlingTeam", "TLAs", "bowlers", "batters"]
+	"required": ["runs", "wickets", "overs", "battingTeam", "bowlingTeam", "TLAs", "bowlers", "batsmen"]
 }

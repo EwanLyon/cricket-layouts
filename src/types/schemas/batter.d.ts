@@ -11,9 +11,17 @@ export interface Batter {
 	 */
 	name: string;
 	/**
-	 * Runs in each category made by player, 1st index is total runs, 2nd is 4's, 3rd is 6's
+	 * Total run made
 	 */
-	runs: any[];
+	runs: number;
+	/**
+	 * Number of fours made
+	 */
+	fours: number;
+	/**
+	 * Number of sixes made
+	 */
+	sixes: number;
 	/**
 	 * Number of balls the batter has faced
 	 */

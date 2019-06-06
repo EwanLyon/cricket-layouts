@@ -14,7 +14,7 @@ export default class CricketBatters extends Polymer.MutableData(Polymer.Element)
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
-			this.currentBatters = newVal.batters;
+			this.currentBatters = newVal.batsmen;
 			this.notifyPath('currentBatters');
 		});
 	}

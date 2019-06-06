@@ -7,7 +7,7 @@ const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 let typeaheadBatters: Element[] = [];
 
 @customElement('cricket-batting-roster')
-export default class CricketBattingRoster extends Polymer.Element {
+export default class CricketBattingRoster extends Polymer.MutableData(Polymer.Element) {
 
 	ready(){
         super.ready();
@@ -21,8 +21,8 @@ export default class CricketBattingRoster extends Polymer.Element {
 
             // Set inputs to contain batters and set the selected value as the same in the list
             for (let i = 0; i < typeaheadBatters.length; i++) {
-                (typeaheadBatters[i] as any).items = newVal.batters;
-                (typeaheadBatters[i] as any).selectedItem = newVal.batters[i];
+                (typeaheadBatters[i] as any).items = newVal.batsmen;
+                (typeaheadBatters[i] as any).selectedItem = newVal.batsmen[i];
             }
         });
     }

@@ -5,7 +5,6 @@ const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const currentInningsRep = nodecg.Replicant('currentInnings', { persistent: false });
 const overRep = nodecg.Replicant('over', { persistent: false });
-let badBallInOver = false;
 let ballsLeft = 6;
 function findCurrentBowlerIndex() {
     return currentInningsRep.value.bowlers.findIndex(bowler => {
@@ -32,6 +31,7 @@ nodecg.listenFor('changeBowler', (newVal) => {
 });
 nodecg.listenFor('newWicket', (data) => {
     const currentBowler = getCurrentBowler();
+    let batterOutLocal = data.batterOut;
     if (currentInningsRep.value.wickets == 10) {
         // All batters are out!
         return;
@@ -59,46 +59,49 @@ nodecg.listenFor('newWicket', (data) => {
             }
             break;
     }
+    // Update dismissed batter
+    batterOutLocal.batting = "OUT";
+    batterOutLocal.dismissal = dismissalText;
+    // Update over
+    overRep.value.over.push("W");
+    // Update dismissed batter
+    currentInningsRep.value.batsmen[data.batterIndex] = batterOutLocal;
     // Get next batter
     let nextBatter;
-    for (let batter of currentInningsRep.value.batters) {
+    for (let batter of currentInningsRep.value.batsmen) {
         if (batter.dismissal == '' && batter.batting == "WAITING") {
             // Batter hasn't been dismissed and isn't batting
             nextBatter = batter;
             nextBatter.batting = "BATTING"; // Set batter to be facing
-            nextBatter.facing = data.batterOut.facing; // If batter was facing set this batter to be facing
+            nextBatter.facing = batterOutLocal.facing; // If batter was facing set this batter to be facing
             break;
         }
     }
     ;
-    // Update dismissed batter
-    data.batterOut.batting = "OUT";
-    data.batterOut.dismissal = dismissalText;
-    // Update over
-    overRep.value.over.push("W");
-    // Update dismissed batter
-    currentInningsRep.value.batters[data.batterIndex] = data.batterOut;
 });
 nodecg.listenFor('addRuns', (runs) => {
-    const currentBatterFacingIndex = currentInningsRep.value.batters.findIndex(batter => {
+    if (ballsLeft == 0) {
+        nextOver(currentInningsRep.value.bowlers[findCurrentBowlerIndex()]);
+    }
+    const currentBatterFacingIndex = currentInningsRep.value.batsmen.findIndex(batter => {
         return batter.facing == true && batter.batting == "BATTING";
     });
-    const currentBatterFacing = currentInningsRep.value.batters[currentBatterFacingIndex];
+    const currentBatterFacing = currentInningsRep.value.batsmen[currentBatterFacingIndex];
     // Add runs to total score
     currentInningsRep.value.runs += runs;
     // Add runs to over
     overRep.value.over.push(runs);
     // Add runs to batter
-    currentBatterFacing.runs[0] += runs;
+    currentBatterFacing.runs += runs;
     currentBatterFacing.balls++;
     // Add stats to type of run scored
     if (runs == 4) {
         // Add one to four stat
-        currentBatterFacing.runs[1] += 1;
+        currentBatterFacing.fours += 1;
     }
     else if (runs == 6) {
         // Add one to six stat
-        currentBatterFacing.runs[2] += 1;
+        currentBatterFacing.sixes += 1;
     }
     // Add runs to bowler
     currentInningsRep.value.bowlers[findCurrentBowlerIndex()].runs += runs;
@@ -106,11 +109,11 @@ nodecg.listenFor('addRuns', (runs) => {
     if ((runs % 2) == 1) {
         swapBatters();
     }
-    currentInningsRep.value.batters[currentBatterFacingIndex] = currentBatterFacing;
+    currentInningsRep.value.batsmen[currentBatterFacingIndex] = currentBatterFacing;
     nextBall();
 });
 function swapBatters() {
-    const currentBatters = currentInningsRep.value.batters.filter(batter => {
+    const currentBatters = currentInningsRep.value.batsmen.filter(batter => {
         return batter.batting == "BATTING";
     });
     if (currentBatters.length != 2) {
@@ -129,7 +132,7 @@ function swapBatters() {
     currentBatters[0].facing = !currentBatters[0].facing;
     currentBatters[1].facing = !currentBatters[1].facing;
     // Set the batter objects back
-    currentInningsRep.value.batters.map(batter => {
+    currentInningsRep.value.batsmen.map(batter => {
         if (batter.name == currentBatters[0].name) {
             batter = currentBatters[0];
         }
@@ -141,13 +144,7 @@ function swapBatters() {
 function nextBall() {
     const currentBowler = getCurrentBowler();
     // Add ball to over
-    if (ballsLeft > 1) {
-        // Still in over
-        currentBowler.overs += 0.1;
-    }
-    else {
-        nextOver(currentBowler);
-    }
+    currentBowler.overs += 0.1;
     ballsLeft--;
 }
 nodecg.listenFor('nextOver', () => {
@@ -157,26 +154,23 @@ function nextOver(curBowler) {
     // NEXT OVER
     ballsLeft = 6;
     let currentOver = JSON.parse(JSON.stringify(overRep.value)); // Fixes NodeCG assert single owner error
+    // Check if maiden
+    if (overRep.value.over.every(x => x == 0 || x == "W")) {
+        curBowler.maidenOvers++;
+    }
     // Start new over
     overRep.value = {
         over: []
     };
     // Push current over to list of overs
     currentInningsRep.value.overs.push(currentOver);
-    // Check if maiden
-    if (overRep.value.over.every(x => x == 0 || x == "W") && badBallInOver == false) {
-        curBowler.maidenOvers++;
-    }
-    // Add over to bowler (add 0.5 to complete the whole number)
-    curBowler.overs += 0.5;
+    // Add over to bowler
+    curBowler.overs = Math.ceil(curBowler.overs);
     // Switch batter status
     swapBatters();
-    // Reset local badball status
-    badBallInOver = false;
     currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = curBowler;
 }
 nodecg.listenFor('addBadBall', (ballType) => {
-    badBallInOver = true;
     const currentBowler = getCurrentBowler();
     switch (ballType) {
         case "wide":

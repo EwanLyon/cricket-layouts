@@ -63,7 +63,7 @@ export default class CricketWicket extends Polymer.Element {
 	}
 
 	_getCurrentBatters(newVal: CurrentInnings) {
-		return newVal.batters.filter(batter => {
+		return newVal.batsmen.filter(batter => {
 			return batter.batting == 'BATTING';
 		});
 	}

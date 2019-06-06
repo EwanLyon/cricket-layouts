@@ -1,0 +1,181 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500&display=swap" rel="stylesheet">
+<link rel="import" href="../../bower_components/sc-fitted-text/sc-fitted-text.html">
+
+<dom-module id="main-bar">
+	<template>
+		<style>
+			* {
+				font-family: 'Roboto';
+				color: white;
+				margin: 0;
+				height: 80px;
+				position: absolute;
+			}
+
+			#scoreBox {
+				left: 0px;
+				top: 0px;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+				background: #0085EF;
+				font-size: 55px;
+				width: 303px;
+				height: 80px;
+				z-index: 1;
+			}
+
+			#team {
+				height: 80px;
+				left: 15px;
+				line-height: 80px;
+				font-size: 55px;
+			}
+
+			#score {
+				font-weight: 500;
+				width: 164px;
+				height: 80px;
+				left: 124px;
+				font-size: 55px;
+				line-height: 80px;
+				text-align: right;
+			}
+
+			.batter {
+				background: #003FD0;
+				width: 342px;
+				top: 0px;
+				height: 80px;
+			}
+
+			#b1 {
+				left: 303px;
+			}
+
+			#b2 {
+				left: 648px;
+			}
+
+			.name {
+				left: 21px;
+				font-weight: 300;
+				font-size: 30px;
+				line-height: 80px;
+			}
+
+			.batterScore {
+				left: 199px;
+				width: 76px;
+				font-size: 45px;
+				line-height: 76px;
+				text-align: right;
+			}
+
+			.balls {
+				left: 275px;
+				font-weight: 300;
+				font-size: 20px;
+				width: 54px;
+				text-align: right;
+				line-height: 76px;
+			}
+
+			#batterDivider {
+				background: #476BEB;
+				box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+				width: 3px;
+				height: 80px;
+				z-index: 1;		
+				left: 645px;
+				top: 0px;
+			}
+
+			#overBox {
+				background: #0085EF;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+				width: 69px;
+				z-index: 1;
+				height: 80px;
+				left: 990px;
+				top: 0px;
+			}
+
+			#over {
+				font-style: italic;
+				font-size: 30px;
+				width: 69px;
+				height: 25px;
+				top: 21px;
+				text-align: center;
+			}
+
+			#bowler {
+				background: #003C7D;
+				width: 341px;
+				height: 80px;
+				left: 1059px;
+				top: 0px;
+			}
+
+			#bowlerTeam {
+				font-size: 28px;
+				left: 10px;
+				line-height: 80px;
+				width: 111px;
+			}
+
+			#bowlerName {
+				font-weight: 300;
+				font-size: 28px;
+				left: 70px;
+				line-height: 80px;
+				text-align: left;
+			}
+
+			#bowlerScore {
+				font-size: 45px;
+				left: 190px;
+				line-height: 78px;
+				text-align: right;
+			}
+
+			#bowlerOver {
+				font-weight: 300;
+				font-size: 30px;
+				width: 59px;
+				left: 275px;
+				line-height: 80px;
+				text-align: right;
+			}
+		</style>
+
+		<div id="scoreBox">
+			<span id="team">[[batterTLA]]</span>
+			<span id="score">[[score]]</span>
+		</div>
+
+		<div id="b1" class="batter">
+			<sc-fitted-text class="name" max-width="190" text="[[batter1Name]]"></sc-fitted-text>
+			<span class="batterScore">[[batter1.runs]]</span>
+			<span class="balls ">([[batter1.balls]])</span>
+		</div>
+
+		<div id="batterDivider"></div>
+
+		<div id="b2" class="batter">
+			<sc-fitted-text class="name" max-width="190" text="[[batter2Name]]"></sc-fitted-text>
+			<span class="batterScore">[[batter2.runs]]</span>
+			<span class="balls ">([[batter2.balls]])</span>
+		</div>
+
+		<div id="overBox"><span id="over">[[totalOvers]]</span></div>
+
+		<div id="bowler">
+			<span id="bowlerTeam">[[bowlerTLA]]</span>
+			<sc-fitted-text id="bowlerName" max-width="115" text="[[bowlerName]]"></sc-fitted-text>
+			<span id="bowlerScore">[[bowlerScore]]</span>
+			<span id="bowlerOver">[[bowlerOver]]</span>
+		</div>
+	</template>
+
+	<script src="mainbarPolymer.js" type="module"></script>
+</dom-module>
