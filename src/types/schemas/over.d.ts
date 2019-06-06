@@ -10,4 +10,12 @@ export interface Over {
 	 * The balls in the past over, any as strings may be included, e.g. [0, 4, Wide, NB, 3, W]
 	 */
 	over: (number | string)[];
+	/**
+	 * Number of balls left in the over
+	 */
+	ballsLeft: number;
+	/**
+	 * Name of bowler
+	 */
+	bowler: string;
 }

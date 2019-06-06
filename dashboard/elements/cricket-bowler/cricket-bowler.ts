@@ -1,30 +1,30 @@
-import {CurrentInnings} from 'src/types/schemas/currentInnings';
-import {Bowler} from 'src/types/schemas/bowler';
+import { CurrentInnings } from 'src/types/schemas/currentInnings';
+import { Bowler } from 'src/types/schemas/bowler';
 
-const {customElement, property} = Polymer.decorators;
+const { customElement, property } = Polymer.decorators;
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 
 @customElement('cricket-bowler')
 export default class CricketBowler extends Polymer.MutableData(Polymer.Element) {
-	@property({type: Object, observer: CricketBowler.prototype.updateBadBalls})
+	@property({ type: Object, observer: CricketBowler.prototype.updateBadBalls })
 	curBowler: Bowler;
 
-	@property({type: String})
+	@property({ type: String })
 	cbName: string = "No Bowler";
 
-	@property({type: Number})
+	@property({ type: Number })
 	cbWides: number;
 
-	@property({type: Number})
+	@property({ type: Number })
 	cbNoBalls: number;
 
-	@property({type: String})
+	@property({ type: String })
 	cbOvers: string;
 
-  ready() {
+	ready() {
 		super.ready();
 
-		currentInningsRep.on('change', newVal =>{
+		currentInningsRep.on('change', newVal => {
 			(this.$.typeaheadBowler as any).items = newVal.bowlers;
 
 			this.curBowler = this.getCurrentBowler()!;
@@ -46,10 +46,10 @@ export default class CricketBowler extends Polymer.MutableData(Polymer.Element) 
 		}
 	}
 
-	updateBadBalls(){
+	updateBadBalls() {
 		this.cbName = this.curBowler.name;
 		this.cbWides = this.curBowler.badBalls[0];
 		this.cbNoBalls = this.curBowler.badBalls[1];
-		this.cbOvers = this.curBowler.overs.toFixed(1);
+		this.cbOvers = this.curBowler.overs;
 	}
 }

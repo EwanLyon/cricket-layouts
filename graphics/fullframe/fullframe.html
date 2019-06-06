@@ -1,0 +1,104 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/mixins/mutable-data.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="batter-item.html">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500&display=swap" rel="stylesheet">
+
+<dom-module id="full-frame">
+	<template>
+		<style>
+			* {
+				color: white;
+				font-family: 'Roboto';
+			}
+
+			#title {
+				width: 774px;
+				height: 71px;
+				background-color: #003FD0;
+				line-height: 71px;
+			}
+
+			#team{
+				font-size: 36px;
+				margin-left: 23px;
+			}
+
+			#versus {
+				font-size: 20px;
+				font-weight: 300;
+			}
+
+			#score {
+				font-weight: 500;
+				font-size: 35px;
+				text-align: right;
+				float: right;
+				margin-right: 30px;
+			}
+
+			.margin {
+				height: 2px;
+			}
+
+			#bottom {
+				width: 774px;
+				height: 44px;
+				background-color: #003C7D;
+				font-size: 25px;
+				line-height: 44px;
+			}
+
+			#event {
+				margin-left: 23px;
+				font-size: 30px;
+				font-weight: 300;
+			}
+
+			#overName,
+			#extrasName {
+				font-weight: 300;
+			}
+
+			#rightInfo {
+				float: right;
+				margin-right: 30px;
+			}
+
+			#rightInfo * {
+				margin-left: 15px;
+			}
+
+			#extrasName {
+				margin-left: 30px;
+			}
+
+		</style>
+
+		<div id="title">
+			<span id="team">[[currentInnings.battingTeam]]</span>
+			<span id="versus">v [[currentInnings.bowlingTeam]]</span>
+			<span id="score">[[score]]</span>
+		</div>
+		<div class="margin"></div>
+
+		<div id="batterListParent">
+			<template id="BattersList" is="dom-repeat" items="[[batsmen]]" as="batter" mutable-data>
+				<batter-item id="batterItem" batter="[[batter]]"></batter-item>
+				<div class="margin"></div>
+			</template>
+		</div>
+
+		<div id="bottom">
+			<span id="event">[[matchInfo.event]]</span>
+			<div id="rightInfo">
+				<span id="overName">Overs</span>
+				<span id="overs">[[totalOvers]]</span>
+				<span id="extrasName">Extras</span>
+				<span id="extras">[[currentInnings.extras]]</span>
+			</div>
+		</div>
+	</template>
+
+	<script src="fullframe.js" type="module"></script>
+</dom-module>

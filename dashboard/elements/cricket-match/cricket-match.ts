@@ -5,6 +5,7 @@ export default class CricketMatch extends Polymer.Element {
 
 	updateMatch() {
 		nodecg.sendMessage('updateMatch', {
+			event: (this.$.EventInput as IronInputElement).value,
 			venue: (this.$.VenueInput as IronInputElement).value,
 			startDate: (this.$.DateInput as IronInputElement).value,
 			umpires: [(this.$.Ump1Input as IronInputElement).value,

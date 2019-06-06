@@ -10,8 +10,6 @@ import {Over} from '../types/schemas/over';
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings', {persistent: false});
 const overRep = nodecg.Replicant<Over>('over', {persistent: false});
 
-let ballsLeft = 6;
-
 function findCurrentBowlerIndex() {
 	return currentInningsRep.value.bowlers.findIndex(bowler => {
 		return bowler.bowling;
@@ -21,6 +19,16 @@ function findCurrentBowlerIndex() {
 function findBowlerIndex(searchBowler: Bowler) {
 	let index = currentInningsRep.value.bowlers.map((bowler, i) => {
 		if (bowler.name == searchBowler.name) {
+			return i;
+		}
+		return undefined;
+	});
+	return index.filter(item => item != undefined)[0];
+}
+
+function findBatterIndex(searchBatter: Batter) {
+	let index = currentInningsRep.value.batsmen.map((batter, i) => {
+		if (batter.name == searchBatter.name) {
 			return i;
 		}
 		return undefined;
@@ -38,7 +46,7 @@ nodecg.listenFor('changeBowler', (newVal: Bowler) => {
 	}
 });
 
-nodecg.listenFor('newWicket', (data:{dismissal: string, batterOut: Batter, batterIndex: number, fielder: Bowler}) => {
+nodecg.listenFor('newWicket', (data:{dismissal: string, batterOut: Batter, fielder: Bowler}) => {
 	const currentBowler = getCurrentBowler();
 	let batterOutLocal = data.batterOut;
 
@@ -74,14 +82,22 @@ nodecg.listenFor('newWicket', (data:{dismissal: string, batterOut: Batter, batte
 	}
 
 	// Update dismissed batter
+	const batterOutIndex = findBatterIndex(batterOutLocal);
 	batterOutLocal.batting = "OUT";
 	batterOutLocal.dismissal = dismissalText;
+	if (batterOutLocal.facing) {
+		batterOutLocal.name = batterOutLocal.name.slice(0, -1);	// Remove asterisk
+	}
 
 	// Update over
 	overRep.value.over.push("W");
 
 	// Update dismissed batter
-	currentInningsRep.value.batsmen[data.batterIndex] = batterOutLocal;
+	if (batterOutIndex != undefined) {
+		currentInningsRep.value.batsmen[batterOutIndex] = batterOutLocal;
+	} else {
+		nodecg.log.error('Batter out does not exist');
+	}
 
 	// Get next batter
 	let nextBatter: Batter;
@@ -92,13 +108,17 @@ nodecg.listenFor('newWicket', (data:{dismissal: string, batterOut: Batter, batte
 			nextBatter = batter;
 			nextBatter.batting = "BATTING";	// Set batter to be facing
 			nextBatter.facing = batterOutLocal.facing;	// If batter was facing set this batter to be facing
+			if (nextBatter.facing) {
+				nextBatter.name += '*';
+			}
 			break;
 		}
 	};
 });
 
 nodecg.listenFor('addRuns', (runs: number) => {
-	if (ballsLeft == 0) {
+	let ballsLeftLocal = overRep.value.ballsLeft;
+	if (ballsLeftLocal == 0) {
 		nextOver(currentInningsRep.value.bowlers[findCurrentBowlerIndex()]);
 	}
 
@@ -174,8 +194,13 @@ function swapBatters() {
 function nextBall() {
 	const currentBowler = getCurrentBowler();
 	// Add ball to over
-	currentBowler.overs += 0.1;
-	ballsLeft--;
+	let buildingOverArray = currentBowler.overs.split('.');
+	// Can only be undefined on new over
+	if (buildingOverArray[1] == undefined) {
+		buildingOverArray.push('0');
+	}
+	currentBowler.overs = buildingOverArray[0] + '.' + (parseInt(buildingOverArray[1]) + 1).toString();
+	overRep.value.ballsLeft--;
 }
 
 nodecg.listenFor('nextOver', () => {
@@ -184,7 +209,7 @@ nodecg.listenFor('nextOver', () => {
 
 function nextOver(curBowler: Bowler) {
 	// NEXT OVER
-	ballsLeft = 6;
+	overRep.value.bowler = curBowler.name;
 	let currentOver = JSON.parse(JSON.stringify(overRep.value));	// Fixes NodeCG assert single owner error
 	
 	// Check if maiden
@@ -194,14 +219,16 @@ function nextOver(curBowler: Bowler) {
 
 	// Start new over
 	overRep.value = {
-		over: []
+		over: [],
+		ballsLeft: 6,
+		bowler: 'NOTSUBMITTED'
 	};
 	
 	// Push current over to list of overs
 	currentInningsRep.value.overs.push(currentOver);
 
 	// Add over to bowler
-	curBowler.overs = Math.ceil(curBowler.overs);
+	curBowler.overs = Math.ceil(parseFloat(curBowler.overs)).toString();
 
 	// Switch batter status
 	swapBatters();
@@ -217,15 +244,17 @@ nodecg.listenFor('addBadBall', (ballType: "wide" | "noball" | "bye" | "legbye") 
 			currentBowler.badBalls[0]++;	// Add wide to bowler
 			currentBowler.runs++;	// Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
 			currentInningsRep.value.runs++;	// Add single run to score
+			currentInningsRep.value.extras++;	// Add extra
 			overRep.value.over.push("Wide");
-			ballsLeft++;
+			overRep.value.ballsLeft++;
 			break;
 
 		case "noball":
 			currentBowler.badBalls[1]++;	// Add no ball to bowler
 			currentInningsRep.value.runs++;	// Add single run to score
+			currentInningsRep.value.extras++;	// Add extra
 			overRep.value.over.push("NB");
-			ballsLeft++;
+			overRep.value.ballsLeft++;
 			break;
 
 		case "bye":

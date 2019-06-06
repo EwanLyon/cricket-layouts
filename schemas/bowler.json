@@ -9,9 +9,9 @@
 			"default": "MISSING BOWLERS NAME"
 		},
 		"overs": {
-			"type": "number",
+			"type": "string",
 			"description": "Number of overs bowled with decimal, e.g. 15.2",
-			"default": 0
+			"default": "0"
 		},
 		"maidenOvers": {
 			"type": "integer",
@@ -37,7 +37,7 @@
 		},
 		"bowling": {
 			"type": "boolean",
-			"description": "True if the bowler is currently bowling, false if they are fielding",
+			"description": "True if the bowler is currently bowling, false if they are not",
 			"default": false
 		}
 	},

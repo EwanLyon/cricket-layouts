@@ -6,11 +6,14 @@
 <dom-module id="cricket-batters">
 	<template>
 		<style>
-			#seperator{
+			hr{
 				height: 1px;
 				background-color: #526076;
-				width: 100%;
-				margin: 10px 0;
+				color: #526076;
+				width: 80%;
+				margin: 10px auto;
+				border: none;
+				text-align: center;
 			}
 
 			#battingKey {
@@ -45,7 +48,7 @@
 
 		<template id="BattersList" is="dom-repeat" items="[[currentBatters]]" as="batter">
 			<cricket-batter-item batter="[[batter]]"></cricket-batter-item>
-			<div id="seperator"></div>
+			<hr/>
 		</template>
 
 	</template>

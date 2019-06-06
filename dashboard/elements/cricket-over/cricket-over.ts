@@ -9,8 +9,8 @@ let overDivs: HTMLCollection;
 @customElement('cricket-over')
 export default class CricketOver extends Polymer.MutableData(Polymer.Element) {
 
-    @property({type: Number})
-	overs: number;
+    @property({type: String})
+	overs: string;
 
     ready() {
         super.ready();
@@ -43,15 +43,14 @@ export default class CricketOver extends Polymer.MutableData(Polymer.Element) {
                 // Update current ball indicator
                 overDivs[i].id = "";
                 if (i == newVal.over.length - 1) {
-                    overDivs[i + 1].id = "currentBall";
+                    if (overDivs[i + 1] != undefined) {
+                        overDivs[i + 1].id = "currentBall";
+                    }
                 }
             }
 
-            nodecg.readReplicant<CurrentInnings>('currentInnings', value => {
-                let totalOvers: number = value.overs.length;
-                totalOvers += (newVal.over.length)/ 10;
-
-                this.overs = totalOvers;
+            nodecg.readReplicant<CurrentInnings>('currentInnings', currentInningsValue => {
+                this.overs = currentInningsValue.overs.length + '.' + newVal.over.length;
             });
         });
 	}

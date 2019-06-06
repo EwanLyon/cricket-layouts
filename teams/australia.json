@@ -3,13 +3,8 @@
     "tla": "AUS",
     "players": [
         {
-            "name": "Tim Paine",
-            "role": "wicketkeeper"
-        },
-        {
-            "name": "Pat Cummins",
-            "role": "bowler",
-            "bowlingStyle": "Right Arm Fast"
+            "name": "Usman Khawaja",
+            "role": "batter"
         },
         {
             "name": "Aaron Finch",
@@ -20,35 +15,36 @@
             "role": "wicketkeeper"
         },
         {
-            "name": "Josh Hazlewood",
+            "name": "Glenn Maxwell",
+            "role": "batter"
+        },
+        {
+            "name": "Marcus Stoinis",
+            "role": "batter",
+            "bowlingStyle": "Right Arm Medium"
+        },
+        {
+            "name": "Ashton Turner",
+            "role": "batter"
+        },
+        {
+            "name": "Alex Carey",
+            "role": "wicketkeeper"
+        },
+        {
+            "name": "Jhye Richardson",
             "role": "bowler",
-            "bowlingStyle": "Right Arm Fast-Med"
+            "bowlingStyle": "Right Arm Fast"
         },
         {
-            "name": "Travis Head",
-            "role": "batter"
-        },
-        {
-            "name": "Usman Khawaja",
-            "role": "batter"
+            "name": "Pat Cummins",
+            "role": "bowler",
+            "bowlingStyle": "Right Arm Fast"
         },
         {
             "name": "Nathan Lyon",
             "role": "bowler",
             "bowlingStyle": "Right Arm Off-Spin"
-        },
-        {
-            "name": "Shaun Marsh",
-            "role": "batter"
-        },
-        {
-            "name": "Mitchell Starc",
-            "role": "bowler",
-            "bowlingStyle": "Left Arm Fast"
-        },
-        {
-            "name": "Marcus Harris",
-            "role": "allrounder"
         }
     ]
 }

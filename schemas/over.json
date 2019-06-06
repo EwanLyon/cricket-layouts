@@ -10,7 +10,17 @@
 			"items": {
 				"type": ["number", "string"]
 			}
+		},
+		"ballsLeft": {
+			"type": "number",
+			"description": "Number of balls left in the over",
+			"default": 6
+		},
+		"bowler": {
+			"type": "string",
+			"description": "Name of bowler",
+			"default": "UNKNOWN"
 		}
 	},
-	"required": ["over"]
+	"required": ["over", "ballsLeft", "bowler"]
 }

@@ -1,5 +1,5 @@
-import * as tslib_1 from "tslib";
 var CricketBatterItem_1;
+import * as tslib_1 from "tslib";
 const { customElement, property } = Polymer.decorators;
 let CricketBatterItem = CricketBatterItem_1 = class CricketBatterItem extends Polymer.Element {
     _updateBatter(newVal) {

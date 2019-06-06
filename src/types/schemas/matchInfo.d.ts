@@ -7,6 +7,10 @@
 
 export interface MatchInfo {
 	/**
+	 * The event/division name
+	 */
+	event?: string;
+	/**
 	 * Location of game as {Stadium/Ground Name, City}
 	 */
 	venue: string;

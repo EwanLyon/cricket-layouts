@@ -1,6 +1,6 @@
 {
   "name": "cricket-layouts",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Cricket bundle",
   "homepage": "https://github.com/EwanLyon/cricket-layouts",
   "author": {
@@ -86,6 +86,14 @@
         "file": "debug.html",
         "headerColor": "#525F78",
         "workspace": "Dev"
+      },
+      {
+        "name": "proddisplay",
+        "title": "Graphics Controller",
+        "width": 2,
+        "file": "proddisplay.html",
+        "headerColor": "#525F78",
+        "workspace": "Producer"
       }
     ],
     "graphics": [
@@ -103,6 +111,11 @@
         "file": "fui.html",
         "width": 1920,
         "height": 100
+      },
+      {
+        "file": "fullframe.html",
+        "width": 774,
+        "height": 865
       }
     ],
     "assetCategories": [
@@ -121,7 +134,10 @@
     "trash-cli": "^3.0.0",
     "tslib": "^1.9.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/animejs": "^2.0.2",
+    "animejs": "^3.0.1"
+  },
   "scripts": {
     "start": "node ../.. --bundlesEnabled=cricket-layouts",
     "build": "npm run build:extension && npm run build:browser",

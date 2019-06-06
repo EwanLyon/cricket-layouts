@@ -11,6 +11,10 @@ export interface CurrentInnings {
 	 */
 	runs: number;
 	/**
+	 * Current extra runs
+	 */
+	extras: number;
+	/**
 	 * Current wickets
 	 */
 	wickets: number;
@@ -22,6 +26,14 @@ export interface CurrentInnings {
 		 * The balls in the past over, any as strings may be included, e.g. [0, 4, Wide, NB, 3, W]
 		 */
 		over: (number | string)[];
+		/**
+		 * Number of balls left in the over
+		 */
+		ballsLeft: number;
+		/**
+		 * Name of bowler
+		 */
+		bowler: string;
 	}[];
 	/**
 	 * The team that is bowling this innings
@@ -43,7 +55,7 @@ export interface CurrentInnings {
 		/**
 		 * Number of overs bowled with decimal, e.g. 15.2
 		 */
-		overs: number;
+		overs: string;
 		/**
 		 * Number of overs where the batsman has not made a run
 		 */
@@ -61,7 +73,7 @@ export interface CurrentInnings {
 		 */
 		badBalls: any[];
 		/**
-		 * True if the bowler is currently bowling, false if they are fielding
+		 * True if the bowler is currently bowling, false if they are not
 		 */
 		bowling: boolean;
 	}[];
@@ -91,7 +103,7 @@ export interface CurrentInnings {
 		 */
 		dismissal: string;
 		/**
-		 * If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out
+		 * State of batter
 		 */
 		batting: 'WAITING' | 'BATTING' | 'OUT';
 		/**

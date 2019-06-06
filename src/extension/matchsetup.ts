@@ -27,6 +27,7 @@ nodecg.listenFor('newInnings', (data: {bowlingTeam: Teams[0], battingTeam: Teams
 	let newInnings: CurrentInnings = {
 		wickets: 0,
 		runs: 0,
+		extras: 0,
 		overs: [],
 		bowlingTeam: data.bowlingTeam.name,
 		battingTeam: data.battingTeam.name,
@@ -46,7 +47,7 @@ function createBowlersObjects(bowlingTeam: Teams[0]) {
 	bowlingTeam.players.forEach(player => {
 		let bowlingObj: Bowler = {
 			name: player.name,
-			overs: 0,
+			overs: '0',
 			maidenOvers: 0,
 			runs: 0,
 			wickets: 0,
@@ -61,11 +62,14 @@ function createBowlersObjects(bowlingTeam: Teams[0]) {
 }
 
 function createBatterObjects(battingTeam: Teams[0]) {
-	var buildingBatters: Batter[] = [];
+	let buildingBatters: Batter[] = [];
 
+	const filteredBattingTeam = battingTeam.players.filter(batter => {
+		return batter != null
+	});
     // Reset each player to default
-	battingTeam.players.forEach(player => {
-		var batterObj: Batter = {
+	filteredBattingTeam.forEach(player => {
+		let batterObj: Batter = {
 			name: player.name,
 			runs: 0,
 			fours: 0,
@@ -84,7 +88,9 @@ function createBatterObjects(battingTeam: Teams[0]) {
 
 nodecg.listenFor('updateBattingRoster', (updatedBatters: Batter[]) => {
 	// Push each batter into the batting roster	
-	let batters = updatedBatters;
+	let batters = updatedBatters.filter(batter => {
+		return batter != null
+	});
 
 	batters[0].batting = "BATTING";
 	batters[0].facing = true;

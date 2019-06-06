@@ -22,8 +22,8 @@ export default class CricketBowlerItem extends Polymer.Element {
     @property({type: Number})
     wickets: number;
 
-    @property({type: Number})
-    overs: number;
+    @property({type: String})
+    overs: string;
 
     @property({type: Number})
     wides: number;

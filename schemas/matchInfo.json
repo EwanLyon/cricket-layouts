@@ -4,6 +4,11 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
+        "event": {
+            "type": "string",
+            "description": "The event/division name",
+            "default": "UNKNOWN"
+        },
         "venue": {
             "type": "string",
             "description": "Location of game as {Stadium/Ground Name, City}",

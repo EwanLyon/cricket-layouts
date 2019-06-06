@@ -7,15 +7,15 @@ import {Batter} from 'src/types/schemas/batter';
 
 @customElement('cricket-batters')
 export default class CricketBatters extends Polymer.MutableData(Polymer.Element) {
-	@property({type: Object})
+	@property({type: Array})
 	currentBatters: Batter[];
 
-    ready() {
+	ready() {
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
+			this.currentBatters = [];
 			this.currentBatters = newVal.batsmen;
-			this.notifyPath('currentBatters');
 		});
 	}
 }

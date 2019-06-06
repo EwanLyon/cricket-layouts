@@ -38,7 +38,7 @@
 		},
 		"batting": {
 			"type": "string",
-			"description": "If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out",
+			"description": "State of batter",
 			"enum": ["WAITING", "BATTING", "OUT"],
 			"default": "WAITING"
 		},

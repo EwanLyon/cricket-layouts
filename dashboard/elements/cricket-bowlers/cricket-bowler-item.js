@@ -1,5 +1,5 @@
-import * as tslib_1 from "tslib";
 var CricketBowlerItem_1;
+import * as tslib_1 from "tslib";
 const { customElement, property } = Polymer.decorators;
 let CricketBowlerItem = CricketBowlerItem_1 = class CricketBowlerItem extends Polymer.Element {
     _updateBowler(newVal) {
@@ -36,7 +36,7 @@ tslib_1.__decorate([
     property({ type: Number })
 ], CricketBowlerItem.prototype, "wickets", void 0);
 tslib_1.__decorate([
-    property({ type: Number })
+    property({ type: String })
 ], CricketBowlerItem.prototype, "overs", void 0);
 tslib_1.__decorate([
     property({ type: Number })

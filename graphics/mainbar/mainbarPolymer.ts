@@ -1,13 +1,16 @@
 import { CurrentInnings } from 'src/types/schemas/currentInnings';
 import { Over } from 'src/types/schemas/over';
 import { Batter } from 'src/types/schemas/batter';
+import anime from 'animejs';
 
 const { customElement, property } = Polymer.decorators;
 
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 
+let currentBatsmen: Batter[];
+
 @customElement('main-bar')
-export default class MainBar extends Polymer.Element {
+export default class MainBar extends Polymer.MutableData(Polymer.Element) {
 	@property({ type: Object })
 	currentInningsProp: CurrentInnings;
 
@@ -54,15 +57,15 @@ export default class MainBar extends Polymer.Element {
 
 			this.score = this.formatScore(newVal);
 
-			const currentBatters = this.getCurrentBatters(newVal);
-			this.batter1 = currentBatters[0];
-			this.batter2 = currentBatters[1];
-			this.batter1Name = this.formatName(currentBatters[0].name);
-			this.batter2Name = this.formatName(currentBatters[1].name);
+			currentBatsmen = this.getCurrentBatsmen(newVal);
+			this.batter1 = currentBatsmen[0];
+			this.batter2 = currentBatsmen[1];
+			this.batter1Name = this.formatName(currentBatsmen[0].name);
+			this.batter2Name = this.formatName(currentBatsmen[1].name);
 
 			const currentBowler = this.getCurrentBowler(newVal);
 			this.bowlerScore = currentBowler.wickets.toString() + "-" + currentBowler.runs.toString();
-			this.bowlerOver = currentBowler.overs.toFixed(1);
+			this.bowlerOver = currentBowler.overs;
 			this.bowlerName = this.formatName(currentBowler.name);
 
 			nodecg.readReplicant<Over>('over', overValue => {
@@ -71,6 +74,26 @@ export default class MainBar extends Polymer.Element {
 				} else {
 					this.totalOvers = this.formatOvers(newVal, overValue).toString();
 				}
+			});
+		});
+
+		nodecg.listenFor('showFullFrame', () => {
+			console.log('Showing');
+			anime({
+				targets: this.$.parent,
+				translateY: 200,
+				duration: 1000,
+				easing: 'easeInElastic(1, 1)'
+			});
+		});
+
+		nodecg.listenFor('hideFullFrame', () => {
+			console.log('Hiding');
+			anime({
+				targets: this.$.parent,
+				translateY: 0,
+				duration: 1500,
+				delay: 1000
 			});
 		});
 	}
@@ -82,7 +105,11 @@ export default class MainBar extends Polymer.Element {
 
 	formatOvers(currentInnings: CurrentInnings, currentOver: Over) {
 		let totalOvers = currentInnings.overs.length;
-		totalOvers += (currentOver.over.length) / 10;
+		let ballsInOver = currentOver.ballsLeft;
+		if (ballsInOver == 0) {
+			ballsInOver = 10;
+		}
+		totalOvers += ballsInOver / 10;
 		return totalOvers;
 	}
 
@@ -90,10 +117,21 @@ export default class MainBar extends Polymer.Element {
 		return currentInnings.wickets + "-" + currentInnings.runs
 	}
 
-	getCurrentBatters(currentInnings: CurrentInnings) {
-		return currentInnings.batsmen.filter(batter => {
+	getCurrentBatsmen(currentInnings: CurrentInnings) {
+		let batsmenArray = currentInnings.batsmen.filter(batter => {
 			return batter.batting == "BATTING";
 		});
+		
+		if (currentBatsmen == undefined) {
+			return batsmenArray;
+		}
+		// Don't switch the batsmen places when one goes out
+		if (currentBatsmen[1].name == batsmenArray[0].name) {
+			let tempBatter = batsmenArray[0];
+			batsmenArray[0] = batsmenArray[1];
+			batsmenArray[1] = tempBatter;
+		}
+		return batsmenArray;
 	}
 
 	getCurrentBowler(currentInnings: CurrentInnings) {

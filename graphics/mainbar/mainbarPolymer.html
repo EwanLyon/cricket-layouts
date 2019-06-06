@@ -12,6 +12,10 @@
 				position: absolute;
 			}
 
+			#parent {
+				top: 50px;
+			}
+
 			#scoreBox {
 				left: 0px;
 				top: 0px;
@@ -45,6 +49,7 @@
 				width: 342px;
 				top: 0px;
 				height: 80px;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
 			}
 
 			#b1 {
@@ -114,6 +119,7 @@
 				height: 80px;
 				left: 1059px;
 				top: 0px;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
 			}
 
 			#bowlerTeam {
@@ -132,48 +138,51 @@
 			}
 
 			#bowlerScore {
-				font-size: 45px;
-				left: 190px;
+				font-size: 35px;
+				left: 196px;
 				line-height: 78px;
 				text-align: right;
+				width: 70px;
 			}
 
 			#bowlerOver {
 				font-weight: 300;
-				font-size: 30px;
+				font-size: 24px;
 				width: 59px;
-				left: 275px;
+				left: 260px;
 				line-height: 80px;
 				text-align: right;
 			}
 		</style>
 
-		<div id="scoreBox">
-			<span id="team">[[batterTLA]]</span>
-			<span id="score">[[score]]</span>
-		</div>
+		<div id="parent">
+			<div id="scoreBox">
+				<span id="team">[[batterTLA]]</span>
+				<span id="score">[[score]]</span>
+			</div>
 
-		<div id="b1" class="batter">
-			<sc-fitted-text class="name" max-width="190" text="[[batter1Name]]"></sc-fitted-text>
-			<span class="batterScore">[[batter1.runs]]</span>
-			<span class="balls ">([[batter1.balls]])</span>
-		</div>
+			<div id="b1" class="batter">
+				<sc-fitted-text class="name" max-width="190" text="[[batter1Name]]"></sc-fitted-text>
+				<span class="batterScore">[[batter1.runs]]</span>
+				<span class="balls ">([[batter1.balls]])</span>
+			</div>
 
-		<div id="batterDivider"></div>
+			<div id="batterDivider"></div>
 
-		<div id="b2" class="batter">
-			<sc-fitted-text class="name" max-width="190" text="[[batter2Name]]"></sc-fitted-text>
-			<span class="batterScore">[[batter2.runs]]</span>
-			<span class="balls ">([[batter2.balls]])</span>
-		</div>
+			<div id="b2" class="batter">
+				<sc-fitted-text class="name" max-width="190" text="[[batter2Name]]"></sc-fitted-text>
+				<span class="batterScore">[[batter2.runs]]</span>
+				<span class="balls ">([[batter2.balls]])</span>
+			</div>
 
-		<div id="overBox"><span id="over">[[totalOvers]]</span></div>
+			<div id="overBox"><span id="over">[[totalOvers]]</span></div>
 
-		<div id="bowler">
-			<span id="bowlerTeam">[[bowlerTLA]]</span>
-			<sc-fitted-text id="bowlerName" max-width="115" text="[[bowlerName]]"></sc-fitted-text>
-			<span id="bowlerScore">[[bowlerScore]]</span>
-			<span id="bowlerOver">[[bowlerOver]]</span>
+			<div id="bowler">
+				<span id="bowlerTeam">[[bowlerTLA]]</span>
+				<sc-fitted-text id="bowlerName" max-width="115" text="[[bowlerName]]"></sc-fitted-text>
+				<span id="bowlerScore">[[bowlerScore]]</span>
+				<span id="bowlerOver">[[bowlerOver]]</span>
+			</div>
 		</div>
 	</template>
 

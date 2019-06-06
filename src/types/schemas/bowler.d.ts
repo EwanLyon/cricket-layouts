@@ -13,7 +13,7 @@ export interface Bowler {
 	/**
 	 * Number of overs bowled with decimal, e.g. 15.2
 	 */
-	overs: number;
+	overs: string;
 	/**
 	 * Number of overs where the batsman has not made a run
 	 */
@@ -31,7 +31,7 @@ export interface Bowler {
 	 */
 	badBalls: any[];
 	/**
-	 * True if the bowler is currently bowling, false if they are fielding
+	 * True if the bowler is currently bowling, false if they are not
 	 */
 	bowling: boolean;
 }

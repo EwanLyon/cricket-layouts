@@ -31,7 +31,7 @@ export interface Batter {
 	 */
 	dismissal: string;
 	/**
-	 * If true the batter is currently on the pitch, false if the batter has yet to bat or has gone out
+	 * State of batter
 	 */
 	batting: 'WAITING' | 'BATTING' | 'OUT';
 	/**

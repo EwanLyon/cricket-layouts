@@ -1,0 +1,62 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/sc-fitted-text/sc-fitted-text.html">
+
+<dom-module id="batter-item">
+	<template>
+		<style>
+			#batterItemBody {
+				background-color: #0085EF;
+				width: 774px;
+				height: 66px;
+				font-family: 'Roboto';
+				line-height: 66px;
+			}
+
+			.batting {
+				background-color: rgb(0, 94, 170) !important;
+			}
+
+			#name {
+				position: absolute;
+				font-size: 32px;
+				margin-left: 23px;
+				margin-right: 0;
+			}
+
+			#rightInfo {
+				float: right;
+				margin-right: 30px;
+				display: flex;
+			}
+
+			#runs{
+				font-size: 30px;
+			}
+
+			#balls {
+				font-weight: 300;
+				font-size: 30px;
+				margin-left: 25px;
+				margin-top: 0.5px;
+			}
+
+			#dismissal {
+				margin-right: 50px;
+				font-size: 20px;
+				width: 230px;
+			}
+		</style>
+
+		<div id="batterItemBody">
+			<sc-fitted-text id="name" text="[[name]]" max-width="300"></sc-fitted-text>
+			<div id="rightInfo">
+				<sc-fitted-text id="dismissal" text="[[dismissal]]" max-width="230"></sc-fitted-text>
+				<span id="runs">[[totalRuns]]</span>
+				<span id="balls">[[balls]]</span>
+			</div>
+		</div>
+
+	</template>
+
+	<script src="batter-item.js" type="module"></script>
+</dom-module>

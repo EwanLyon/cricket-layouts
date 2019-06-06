@@ -6,24 +6,23 @@ import { Bowler } from 'src/types/schemas/bowler';
 const currentInningsRep = nodecg.Replicant<CurrentInnings>('currentInnings');
 
 const dismissalTypes: object = {
-	Caught: 'c: ', // Both
+	'Caught': 'c: ', // Both
 	'Run out': 'run out: ', // Only fielder needed
-	Bowled: 'b: ', // No fielder
-	LBW: 'lbw: ', // No fielder
-	Retired: 'retired',
-	Stumped: 'stumped',
+	'Bowled': 'b: ', // No fielder
+	'LBW': 'lbw: ', // No fielder
+	'Retired': 'retired',
+	'Stumped': 'stumped',
 	'Hit wicket': 'hit wicket',
 	'Hit ball twice': 'hit ball twice',
-	Obstructing: 'obstructing field',
+	'Obstructing': 'obstructing field',
 	'Timed out': 'timed out'
 };
 
 let dismissalTitles: string[] = Object.keys(dismissalTypes);
 let batterOut: Batter;
-let batterIndex: number;
 
 @customElement('cricket-wicket')
-export default class CricketWicket extends Polymer.Element {
+export default class CricketWicket extends Polymer.MutableData(Polymer.Element) {
 	@property({ type: String })
 	batter1: Batter;
 
@@ -50,14 +49,12 @@ export default class CricketWicket extends Polymer.Element {
 
 	batter1Selected() {
 		batterOut = this.batter1;
-		batterIndex = 0;
 		this.$.batter2Button.toggleAttribute('disabled');
 		this.canDismiss[0] = true;
 	}
 
 	batter2Selected() {
 		batterOut = this.batter2;
-		batterIndex = 1;
 		this.$.batter1Button.toggleAttribute('disabled');
 		this.canDismiss[0] = true;
 	}
@@ -91,7 +88,6 @@ export default class CricketWicket extends Polymer.Element {
 		nodecg.sendMessage('newWicket', {
 			dismissal: dismissalText,
 			batterOut: batterOut,
-			batterIndex: batterIndex,
 			fielder: fielderItem
 		});
 

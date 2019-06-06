@@ -3,15 +3,11 @@
 	"tla": "IND",
 	"players": [
 		{
-			"name": "Hanuma Vihari",
+			"name": "Rohit Sharma",
 			"role": "batter"
 		},
 		{
-			"name": "Mayank Agarwal",
-			"role": "bowler"
-		},
-		{
-			"name": "Chesteshwar Pujara",
+			"name": "Shikhar Dhawan",
 			"role": "batter"
 		},
 		{
@@ -19,15 +15,15 @@
 			"role": "batter"
 		},
 		{
-			"name": "Ajinkya Rahane",
-			"role": "batter"
-		},
-		{
-			"name": "Rohit Sharma",
-			"role": "batter"
-		},
-		{
 			"name": "Rishabh Pant",
+			"role": "wicketkeeper"
+		},
+		{
+			"name": "Vijay Shankar",
+			"role": "batter"
+		},
+		{
+			"name": "Kedar Jadhav",
 			"role": "wicketkeeper"
 		},
 		{
@@ -35,11 +31,15 @@
 			"role": "bowler"
 		},
 		{
+			"name": "Bhuvneshwar Kumar",
+			"role": "bowler"
+		},
+		{
 			"name": "Mohammed Shami",
 			"role": "bowler"
 		},
 		{
-			"name": "Ishant Sharma",
+			"name": "Kuldeep Yadav",
 			"role": "bowler"
 		},
 		{

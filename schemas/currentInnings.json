@@ -8,6 +8,11 @@
 			"description": "Current runs scored",
 			"default": 0
 		},
+		"extras": {
+			"type": "integer",
+			"description": "Current extra runs",
+			"default": 0
+		},
 		"wickets": {
 			"type": "integer",
 			"description": "Current wickets",
@@ -52,5 +57,5 @@
 			}
 		}
 	},
-	"required": ["runs", "wickets", "overs", "battingTeam", "bowlingTeam", "TLAs", "bowlers", "batsmen"]
+	"required": ["runs", "extras", "wickets", "overs", "battingTeam", "bowlingTeam", "TLAs", "bowlers", "batsmen"]
 }
