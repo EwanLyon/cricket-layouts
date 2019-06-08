@@ -4,6 +4,10 @@ import { Over } from 'src/types/schemas/over';
 export function formatOvers(currentInnings: CurrentInnings, currentOver: Over) {
 	let totalOvers = currentInnings.overs.length;
 	let ballsInOver = currentOver.over.length;
+	if (currentOver.ballsLeft == 0) {
+		totalOvers++;
+		ballsInOver = 0;
+	}
 	return `${totalOvers}.${ballsInOver}`;
 }
 
