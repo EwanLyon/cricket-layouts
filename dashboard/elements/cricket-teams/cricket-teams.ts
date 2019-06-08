@@ -23,7 +23,7 @@ export default class CricketTeams extends Polymer.Element {
 		(this.$.typeaheadBowlers as any).selectedItem = [(this.$.typeaheadBatter as any).selectedItem, (this.$.typeaheadBatter as any).selectedItem = (this.$.typeaheadBowlers as any).selectedItem][0]
 	}
 
-	ConfirmTeams(){
+	confirmTeams(){
 		nodecg.sendMessage('newInnings', {bowlingTeam: (this.$.typeaheadBowlers as any).selectedItem, battingTeam: (this.$.typeaheadBatter as any).selectedItem});
 	}
 }

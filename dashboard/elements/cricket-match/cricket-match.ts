@@ -1,7 +1,37 @@
-const {customElement} = Polymer.decorators;
+import { MatchInfo } from 'src/types/schemas/matchInfo';
+
+const {customElement, property} = Polymer.decorators;
+const matchRep = nodecg.Replicant<MatchInfo>('match');
 
 @customElement('cricket-match')
 export default class CricketMatch extends Polymer.Element {
+
+	@property({type: Object})
+	matchInfo: MatchInfo
+
+	@property({type: String})
+	umpire1: string
+	
+	@property({type: String})
+	umpire2: string
+	
+	@property({type: String})
+	thirdUmpire: string
+	
+	@property({type: String})
+	referee: string
+
+	ready() {
+		super.ready();
+
+		matchRep.on('change', newVal => {
+			this.matchInfo = newVal;
+			this.umpire1 = newVal.umpires[0];
+			this.umpire2 = newVal.umpires[0];
+			this.thirdUmpire = newVal.umpires[0];
+			this.referee = newVal.umpires[0];
+		});
+	}
 
 	updateMatch() {
 		nodecg.sendMessage('updateMatch', {

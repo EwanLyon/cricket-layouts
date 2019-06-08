@@ -27,7 +27,7 @@ export default class CricketBattingRoster extends Polymer.MutableData(Polymer.El
         });
     }
 
-    UpdateBattingRoster(){
+    updateBattingRoster(){
         // Make all inputs into an array to iterate over
         typeaheadBatters = Array.from(this.$.rosterInputs.children);
 

@@ -1,3 +1,4 @@
+import {getCurrentBowler} from '../../../shared/scripts/getters';
 import { CurrentInnings } from 'src/types/schemas/currentInnings';
 import { Bowler } from 'src/types/schemas/bowler';
 
@@ -27,17 +28,8 @@ export default class CricketBowler extends Polymer.MutableData(Polymer.Element) 
 		currentInningsRep.on('change', newVal => {
 			(this.$.typeaheadBowler as any).items = newVal.bowlers;
 
-			this.curBowler = this.getCurrentBowler()!;
+			this.curBowler = getCurrentBowler(newVal);
 		});
-	}
-
-	getCurrentBowler() {
-		if (currentInningsRep.value) {
-			return currentInningsRep.value.bowlers[currentInningsRep.value.bowlers.findIndex(bowler => {
-				return bowler.bowling;
-			})];
-		}
-		return;
 	}
 
 	updateBowler() {

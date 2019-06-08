@@ -5,9 +5,13 @@
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500&display=swap" rel="stylesheet" />
 		<link rel="import" href="../bower_components/polymer-decorators/polymer-decorators.html" />
 		<link rel="import" href="../bower_components/polymer/polymer-element.html"/>
+		<link rel="import" href="../bower_components/polymer/lib/mixins/mutable-data.html">
 		<script>
 			{
-				let links = ['fullframe/fullframe.html'];
+				let links = [
+					'mainBar/mainbar.html',
+					'fullframe/fullframe.html'
+				];
 				for (const link of links) {
 					const linkElem = document.createElement('link');
 					linkElem.rel = 'import';
@@ -16,8 +20,22 @@
 				}
 			}
 		</script>
+		<style>
+			main-bar {
+				position: absolute;
+				top: 920px;
+				left: 260px;
+			}
+
+			full-frame {
+				position: absolute;
+				top: 107px;
+				left: 573px;
+			}
+		</style>
 	</head>
 	<body>
+		<main-bar></main-bar>
 		<full-frame></full-frame>
 	</body>
 </html>

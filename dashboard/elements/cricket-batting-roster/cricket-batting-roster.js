@@ -17,7 +17,7 @@ let CricketBattingRoster = class CricketBattingRoster extends Polymer.MutableDat
             }
         });
     }
-    UpdateBattingRoster() {
+    updateBattingRoster() {
         // Make all inputs into an array to iterate over
         typeaheadBatters = Array.from(this.$.rosterInputs.children);
         let batterObjects = [];

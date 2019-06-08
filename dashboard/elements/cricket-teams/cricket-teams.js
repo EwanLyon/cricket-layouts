@@ -16,7 +16,7 @@ let CricketTeams = class CricketTeams extends Polymer.Element {
         // https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript
         this.$.typeaheadBowlers.selectedItem = [this.$.typeaheadBatter.selectedItem, this.$.typeaheadBatter.selectedItem = this.$.typeaheadBowlers.selectedItem][0];
     }
-    ConfirmTeams() {
+    confirmTeams() {
         nodecg.sendMessage('newInnings', { bowlingTeam: this.$.typeaheadBowlers.selectedItem, battingTeam: this.$.typeaheadBatter.selectedItem });
     }
 };

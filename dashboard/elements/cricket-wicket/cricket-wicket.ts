@@ -1,5 +1,6 @@
 const { customElement, property } = Polymer.decorators;
 
+import {getCurrentBatsmen} from '../../../shared/scripts/getters';
 import { CurrentInnings } from 'src/types/schemas/currentInnings';
 import { Batter } from 'src/types/schemas/batter';
 import { Bowler } from 'src/types/schemas/bowler';
@@ -38,7 +39,7 @@ export default class CricketWicket extends Polymer.MutableData(Polymer.Element) 
 		(this.$.dismissal as any).items = dismissalTitles;
 
 		currentInningsRep.on('change', newVal => {
-			const battersBatting = this._getCurrentBatters(newVal);
+			const battersBatting = getCurrentBatsmen(newVal, [this.batter1, this.batter2]);
 
 			this.batter1 = battersBatting[0];
 			this.batter2 = battersBatting[1];
@@ -59,13 +60,7 @@ export default class CricketWicket extends Polymer.MutableData(Polymer.Element) 
 		this.canDismiss[0] = true;
 	}
 
-	_getCurrentBatters(newVal: CurrentInnings) {
-		return newVal.batsmen.filter(batter => {
-			return batter.batting == 'BATTING';
-		});
-	}
-
-	_checkIfFielderNeeded() {
+	checkIfFielderNeeded() {
 		let selectedDismissal: string = (this.$.dismissal as any).selectedItem;
 		this.canDismiss[1] = true;
 

@@ -1,9 +1,9 @@
+import * as cricketFormat from '../../shared/scripts/formatters';
 import { CurrentInnings } from 'src/types/schemas/currentInnings';
 import { Over } from 'src/types/schemas/over';
 import { Batter } from 'src/types/schemas/batter';
 import { MatchInfo } from 'src/types/schemas/matchInfo';
-import {} from 'animejs'
-import anime from 'animejs';
+import {TweenLite} from 'gsap'
 
 const { customElement, property } = Polymer.decorators;
 
@@ -36,16 +36,12 @@ export default class FullFrame extends Polymer.MutableData(Polymer.Element) {
 		super.ready();
 
 		// Start hidden
-		anime({
-			targets: [this.$.title, this.$.batterListParent, this.$.bottom],
-			opacity: 0,
-			duration: 0
-		});
+		TweenLite.to([this.$.title, this.$.batterListParent, this.$.bottom], 0, {opacity: 0});
 
 		currentInningsRep.on('change', newVal => {
 			this.currentInnings = newVal;
 
-			this.score = this.formatScore(newVal);
+			this.score = cricketFormat.formatScore(newVal);
 			this.batsmen = [];
 			this.batsmen = newVal.batsmen;
 
@@ -53,7 +49,7 @@ export default class FullFrame extends Polymer.MutableData(Polymer.Element) {
 				if (overValue == undefined) {
 					this.totalOvers = "0";
 				} else {
-					this.totalOvers = this.formatOvers(newVal, overValue).toString();
+					this.totalOvers = cricketFormat.formatOvers(newVal, overValue);
 				}
 			});
 		});
@@ -63,35 +59,13 @@ export default class FullFrame extends Polymer.MutableData(Polymer.Element) {
 		})
 
 		nodecg.listenFor('showFullFrame', () => {
-			console.log('Showing');
-			anime({
-				targets: [this.$.title, this.$.batterListParent, this.$.bottom],
-				opacity: 1,
-				duration: 2000,
-				delay: 1000
-			});
+			console.log('Showing Full Frame');
+			TweenLite.to([this.$.title, this.$.batterListParent, this.$.bottom], 1, {opacity: 1});
 		});
 
 		nodecg.listenFor('hideFullFrame', () => {
-			console.log('Hiding');
-			anime({
-				targets: [this.$.title, this.$.batterListParent, this.$.bottom],
-				opacity: 0,
-				duration: 2000
-			});
+			console.log('Hiding Full Frame');
+			TweenLite.to([this.$.title, this.$.batterListParent, this.$.bottom], 1, {opacity: 0});
 		});
-	}
-
-	formatName(batterName: string) {
-		let splitName = batterName.split(" ");
-		return splitName[splitName.length - 1].toUpperCase();
-	}
-
-	formatOvers(currentInnings: CurrentInnings, currentOver: Over) {
-		return currentInnings.overs.length.toString() + '.' + currentOver.ballsLeft.toString();
-	}
-
-	formatScore(currentInnings: CurrentInnings) {
-		return currentInnings.wickets + "-" + currentInnings.runs
 	}
 }

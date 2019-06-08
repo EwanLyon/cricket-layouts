@@ -13,4 +13,12 @@ export default class ProdGraphics extends Polymer.Element {
 	hideFullFrame(){
 		nodecg.sendMessage('hideFullFrame');
 	}
+
+	showScorebug(){
+		nodecg.sendMessage('showScorebug');
+	}
+
+	hideScorebug(){
+		nodecg.sendMessage('hideScorebug');
+	}
 }

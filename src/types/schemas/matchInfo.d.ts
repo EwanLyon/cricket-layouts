@@ -9,7 +9,7 @@ export interface MatchInfo {
 	/**
 	 * The event/division name
 	 */
-	event?: string;
+	event: string;
 	/**
 	 * Location of game as {Stadium/Ground Name, City}
 	 */

@@ -1,5 +1,6 @@
 const {customElement, property} = Polymer.decorators;
 
+import {formatName} from '../../shared/scripts/formatters';
 import {Batter} from 'src/types/schemas/batter';
 
 @customElement('batter-item')
@@ -23,7 +24,7 @@ export default class BatterItem extends Polymer.MutableData(Polymer.Element) {
 	batting: string;
 	
 	_updateBatter(newVal: Batter){
-		this.name = this.formatName(newVal.name);
+		this.name = formatName(newVal.name);
 		this.dismissal = newVal.dismissal;
 
 		if (newVal.batting == "BATTING") {
@@ -41,11 +42,6 @@ export default class BatterItem extends Polymer.MutableData(Polymer.Element) {
 			this.balls = '-';
 		}
 		
-	}
-
-	formatName(batterName: string) {
-		let splitName = batterName.split(" ");
-		return splitName[splitName.length - 1].toUpperCase();
 	}
 	
 }

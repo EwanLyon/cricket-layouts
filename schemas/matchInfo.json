@@ -48,5 +48,5 @@
             "default": "UNKNOWN"
         }
     },
-    "required": ["venue", "toss", "startDate", "umpires", "pitchState", "surfaceState", "weather"]
+    "required": ["event", "venue", "toss", "startDate", "umpires", "pitchState", "surfaceState", "weather"]
 }

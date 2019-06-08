@@ -1,8 +1,9 @@
 const {customElement, property} = Polymer.decorators;
 
+import {formatOvers} from '../../../shared/scripts/formatters';
 import {Over} from 'src/types/schemas/over';
-const overRep = nodecg.Replicant<Over>('over');
 import {CurrentInnings} from 'src/types/schemas/currentInnings';
+const overRep = nodecg.Replicant<Over>('over');
 
 let overDivs: HTMLCollection;
 
@@ -32,7 +33,6 @@ export default class CricketOver extends Polymer.MutableData(Polymer.Element) {
                 }
             }
 
-            console.log(newVal);
             for (let i = 0; i < newVal.over.length || i < 6; i++) {
                 if (newVal.over[i] != undefined) {
                     overDivs[i].innerHTML = String(newVal.over[i]);
@@ -50,7 +50,7 @@ export default class CricketOver extends Polymer.MutableData(Polymer.Element) {
             }
 
             nodecg.readReplicant<CurrentInnings>('currentInnings', currentInningsValue => {
-                this.overs = currentInningsValue.overs.length + '.' + newVal.over.length;
+                this.overs = formatOvers(currentInningsValue, newVal);
             });
         });
 	}

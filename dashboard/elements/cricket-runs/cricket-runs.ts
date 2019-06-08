@@ -1,3 +1,4 @@
+import {getCurrentBatsmen} from '../../../shared/scripts/getters';
 import {CurrentInnings} from 'src/types/schemas/currentInnings';
 import {Batter} from 'src/types/schemas/batter';
 
@@ -19,19 +20,13 @@ export default class CricketRuns extends Polymer.MutableData(Polymer.Element) {
 		super.ready();
 
 		currentInningsRep.on('change', newVal => {
-			const battersBatting = this.getCurrentBatters(newVal);
-			if (battersBatting != []) {
+			const batsmenBatting = getCurrentBatsmen(newVal, [this.batter1, this.batter2]);
+			if (batsmenBatting != []) {
 				this.currentInnings = newVal;
 
-				this.batter1 = battersBatting[0];
-				this.batter2 = battersBatting[1];
+				this.batter1 = batsmenBatting[0];
+				this.batter2 = batsmenBatting[1];
 			}
-		});
-	}
-
-	getCurrentBatters(newVal: CurrentInnings) {
-		return newVal.batsmen.filter(batter => {
-			return batter.batting == "BATTING";
 		});
 	}
 }
