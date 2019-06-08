@@ -24,19 +24,26 @@ let batterOut: Batter;
 
 @customElement('cricket-wicket')
 export default class CricketWicket extends Polymer.MutableData(Polymer.Element) {
-	@property({ type: String })
+	@property({ type: Object })
 	batter1: Batter;
 
-	@property({ type: String })
+	@property({ type: Object })
 	batter2: Batter;
 
-	@property({ type: Array, observer: CricketWicket.prototype.allowDismissal })
-	canDismiss: boolean[] = [false, false]; // [Batter selected, Dismissal selected, fielder selected]
+	@property({ type: Boolean, observer: 'allowDismissal' })
+	batterSelected: boolean = false;
+	
+	@property({ type: Boolean, observer: 'allowDismissal'  })
+	dismissalSelected: boolean = false;
+
+	@property({ type: Boolean, observer: 'allowDismissal'  })
+	fielderSelected: boolean = false;
 
 	ready() {
 		super.ready();
 
 		(this.$.dismissal as any).items = dismissalTitles;
+		this.$.fielders.toggleAttribute('disabled', true);
 
 		currentInningsRep.on('change', newVal => {
 			const battersBatting = getCurrentBatsmen(newVal, [this.batter1, this.batter2]);
@@ -51,26 +58,35 @@ export default class CricketWicket extends Polymer.MutableData(Polymer.Element) 
 	batter1Selected() {
 		batterOut = this.batter1;
 		this.$.batter2Button.toggleAttribute('disabled');
-		this.canDismiss[0] = true;
+		this.batterSelected = true;
 	}
 
 	batter2Selected() {
 		batterOut = this.batter2;
 		this.$.batter1Button.toggleAttribute('disabled');
-		this.canDismiss[0] = true;
+		this.batterSelected = true;
 	}
 
-	checkIfFielderNeeded() {
-		let selectedDismissal: string = (this.$.dismissal as any).selectedItem;
-		this.canDismiss[1] = true;
+	checkIfFielderNeeded(newVal: any) {
+		let selectedDismissal: string = newVal.detail.value;
+		this.dismissalSelected = true;
 
-		if (dismissalTitles.indexOf(selectedDismissal) > 1) {
+		let dismissalIndex = dismissalTitles.indexOf(selectedDismissal)
+		if (dismissalIndex <= 1 && dismissalIndex != -1) {
+			this.fielderSelected = false;
 			// Fielder is needed
-			this.$.fielders.toggleAttribute('disabled', true);
+			this.$.fielders.toggleAttribute('disabled', false);
 		} else {
 			// Fielder isnt needed
-			this.$.fielders.toggleAttribute('disabled', false);
-			(this.$.fielders as any).selectedItem = undefined;
+			this.fielderSelected = true;
+			this.$.fielders.toggleAttribute('disabled', true);
+		}
+		(this.$.fielders as any).selectedItem = undefined;
+	}
+
+	setFielder(newVal: any) {
+		if (newVal.detail.value != undefined) {
+			this.fielderSelected = true;
 		}
 	}
 
@@ -88,11 +104,26 @@ export default class CricketWicket extends Polymer.MutableData(Polymer.Element) 
 
 		this.$.batter1Button.toggleAttribute('disabled', false);
 		this.$.batter2Button.toggleAttribute('disabled', false);
+		this.$.fielders.toggleAttribute('disabled', false);
+		this.$.dismissButton.toggleAttribute('disabled', false);
+		this.batterSelected = false;
+		this.dismissalSelected = false;
+		this.fielderSelected = false
 	}
 
 	allowDismissal() {
-		if (this.canDismiss[0] == true && this.canDismiss[1] == true) {
-			// this.$.dismissButton.toggleAttribute('disabled', true);
-		}
+		// const ableToDismiss = [
+		// 	this.batterSelected = false,
+		// 	this.dismissalSelected = false,
+		// 	this.fielderSelected = false
+		// ].every(value => { return value == true })
+		// console.log('Dismissal checked', [
+		// 	this.batterSelected = false,
+		// 	this.dismissalSelected = false,
+		// 	this.fielderSelected = false
+		// ]);
+		// if (ableToDismiss) {
+		// 	this.$.dismissButton.toggleAttribute('disabled', false);
+		// }
 	}
 }

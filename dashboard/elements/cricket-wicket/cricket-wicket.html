@@ -22,8 +22,8 @@
 		
         <paper-button id="batter1Button" raised on-tap="batter1Selected"><sc-fitted-text text="[[batter1.name]]" max-width="180"></sc-fitted-text></paper-button>
         <paper-button id="batter2Button" raised on-tap="batter2Selected"><sc-fitted-text text="[[batter2.name]]" max-width="180"></sc-fitted-text></paper-button>
-        <nodecg-typeahead-input id="dismissal" label="Dismissal" on-value-changed="_checkIfFielderNeeded"></nodecg-typeahead-input>
-        <nodecg-typeahead-input disabled id="fielders" label="Fielder" item-label-path="name"></nodecg-typeahead-input>
+        <nodecg-typeahead-input id="dismissal" label="Dismissal" on-value-changed="checkIfFielderNeeded"></nodecg-typeahead-input>
+        <nodecg-typeahead-input disabled id="fielders" label="Fielder" item-label-path="name" on-value-changed="setFielder"></nodecg-typeahead-input>
         <paper-button id="dismissButton" raised on-tap="sendWicket">Dismissed</paper-button>
 
 	</template>
