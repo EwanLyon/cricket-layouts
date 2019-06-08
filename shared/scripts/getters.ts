@@ -1,7 +1,7 @@
 import { CurrentInnings } from '../../src/types/schemas/currentInnings';
 import { Batter } from '../../src/types/schemas/batter';
 
-export function getCurrentBatsmen(currentInnings: CurrentInnings, oldValue: Batter[]) {
+export function getCurrentBatsmen(currentInnings: CurrentInnings, oldValue: Batter[] | undefined) {
 	let batsmenArray = currentInnings.batsmen.filter(batter => {
 		return batter.batting == "BATTING";
 	});
@@ -25,8 +25,16 @@ export function getCurrentBowler(currentInnings: CurrentInnings) {
 	})];
 }
 
-export function getPlayedBowlers(innings: CurrentInnings) {
-	return innings.bowlers.filter(bowler => {
+export function getPlayedBowlers(currentInnings: CurrentInnings) {
+	return currentInnings.bowlers.filter(bowler => {
 		return bowler.overs != '0';
 	})
+}
+
+export function getCurrentFacing(currentInnings: CurrentInnings) {
+	const batsmen = getCurrentBatsmen(currentInnings, undefined);
+	if (batsmen[0].facing) {
+		return batsmen[0];
+	}
+	return batsmen[1];
 }

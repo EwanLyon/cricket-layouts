@@ -19,7 +19,7 @@ function findBowlerIndex(searchBowler) {
     });
     return index.filter(item => item != undefined)[0];
 }
-function findBatterIndex(searchBatter) {
+function findBatterIndexByName(searchBatter) {
     let index = currentInningsRep.value.batsmen.map((batter, i) => {
         if (batter.name == searchBatter.name) {
             return i;
@@ -68,7 +68,7 @@ nodecg.listenFor('newWicket', (data) => {
             break;
     }
     // Update dismissed batter
-    const batterOutIndex = findBatterIndex(batterOutLocal);
+    const batterOutIndex = findBatterIndexByName(batterOutLocal);
     batterOutLocal.batting = "OUT";
     batterOutLocal.dismissal = dismissalText;
     if (batterOutLocal.facing) {
@@ -98,6 +98,7 @@ nodecg.listenFor('newWicket', (data) => {
         }
     }
     ;
+    nextBall();
 });
 nodecg.listenFor('addRuns', (runs) => {
     let ballsLeftLocal = overRep.value.ballsLeft;
@@ -200,12 +201,14 @@ function nextOver(curBowler) {
 }
 nodecg.listenFor('addBadBall', (ballType) => {
     const currentBowler = getCurrentBowler();
+    const currentBatter = currentInningsRep.value.batsmen.filter(batter => { return batter.facing == true; })[0];
     switch (ballType) {
         case "wide":
             currentBowler.badBalls[0]++; // Add wide to bowler
             currentBowler.runs++; // Add run against bowler: http://atca.sa.cricket.com.au/files/38/files/General%20Scoring%20Tips.pdf
             currentInningsRep.value.runs++; // Add single run to score
             currentInningsRep.value.extras++; // Add extra
+            currentBatter.balls++; // Add ball to batter
             overRep.value.over.push("Wide");
             overRep.value.ballsLeft++;
             break;
@@ -213,6 +216,7 @@ nodecg.listenFor('addBadBall', (ballType) => {
             currentBowler.badBalls[1]++; // Add no ball to bowler
             currentInningsRep.value.runs++; // Add single run to score
             currentInningsRep.value.extras++; // Add extra
+            currentBatter.balls++; // Add ball to batter
             overRep.value.over.push("NB");
             overRep.value.ballsLeft++;
             break;
@@ -224,6 +228,10 @@ nodecg.listenFor('addBadBall', (ballType) => {
             break;
     }
     currentInningsRep.value.bowlers[findCurrentBowlerIndex()] = currentBowler;
+    const batterIndex = findBatterIndexByName(currentBatter);
+    if (batterIndex) {
+        currentInningsRep.value.batsmen[batterIndex] = currentBatter;
+    }
     nextBall();
 });
 function getCurrentBowler() {
