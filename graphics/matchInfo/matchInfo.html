@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="atoms/location/atom-location.html">
+<link rel="import" href="atoms/toss/atom-toss.html">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500&display=swap" rel="stylesheet">
+
+<dom-module id="match-info">
+	<template>
+		<style>
+			atom-location {
+				position: absolute;
+				top: 704px;
+				left: 160px;
+				--title-width: 0px;
+				--location-width: 0px;
+				--text-padding: 0px;
+			}
+
+			atom-toss {
+				position: absolute;	
+				left: 672px;
+				top: 940px;
+				--toss-height: 0px;
+			}
+		</style>
+
+		<atom-location id="location" location="[[info.venue]]"></atom-location>
+		<atom-toss id="toss" toss="[[info.toss]]"></atom-toss>
+	</template>
+
+	<script src="matchInfo.js" type="module"></script>
+</dom-module>

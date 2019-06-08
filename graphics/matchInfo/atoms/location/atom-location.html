@@ -1,0 +1,48 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/sc-fitted-text/sc-fitted-text.html">
+
+<dom-module id="atom-location">
+	<template>
+		<style>
+			* {
+				color: white;
+				overflow: hidden;
+				font-family: 'Roboto';
+			}
+
+			#title {
+				background-color: #0085EF;
+				height: 46px;
+				width: var(--title-width, 218px);
+				padding-right: var(--text-padding, 15px);
+				line-height: 46px;
+				font-size: 29px;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+			}
+
+			#title span {
+				float: right;
+			}
+
+			#location {
+				background-color: #003FD0;
+				height: 76px;
+				width: var(--location-width, 414px);
+				padding-right: var(--text-padding, 15px);
+				line-height: 46px;
+				font-size: 46px;
+				display: flex;
+				flex-direction: row-reverse;
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+			}
+
+			sc-fitted-text {
+				margin: auto 0;
+			}
+		</style>
+
+		<div id="title"><span>Location</span></div>
+		<div id="location"><sc-fitted-text align="right" max-width="398" text="[[location]]"></sc-fitted-text></div>
+	</template>
+	<script src="atom-location.js" type="module"></script>
+</dom-module>

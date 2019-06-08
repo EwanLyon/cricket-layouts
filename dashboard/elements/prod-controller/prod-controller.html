@@ -9,12 +9,25 @@
                 width: 100%;
                 background-color: #916c07;
             }
+
+            .show {
+                background-color: #4CAF50;
+                color: black;
+            }
+
+            .hide {
+                background-color: #F44336;
+            }
 		</style>
 		
-        <paper-button raised on-click="showFullFrame">Show Fullframe</paper-button>
-        <paper-button raised on-click="hideFullFrame">Hide Fullframe</paper-button>
-        <paper-button raised on-click="showScorebug">Show Score bug</paper-button>
-        <paper-button raised on-click="hideScorebug">Hide Score bug</paper-button>
+        <paper-button class="show" raised on-click="showFullFrame">Show Fullframe</paper-button>
+        <paper-button class="hide" raised on-click="hideFullFrame">Hide Fullframe</paper-button>
+        <paper-button class="show" raised on-click="showScorebug">Show Score bug</paper-button>
+        <paper-button class="hide" raised on-click="hideScorebug">Hide Score bug</paper-button>
+        <paper-button class="show" raised on-click="showLocation">Show Location</paper-button>
+        <paper-button class="hide" raised on-click="hideLocation">Hide Location</paper-button>
+        <paper-button class="show" raised on-click="showToss">Show Toss</paper-button>
+        <paper-button class="hide" raised on-click="hideToss">Hide Toss</paper-button>
 
 	</template>
 

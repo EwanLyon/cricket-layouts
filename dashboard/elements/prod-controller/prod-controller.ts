@@ -21,4 +21,20 @@ export default class ProdGraphics extends Polymer.Element {
 	hideScorebug(){
 		nodecg.sendMessage('hideScorebug');
 	}
+
+	showLocation(){
+		nodecg.sendMessage('showLocation');
+	}
+
+	hideLocation(){
+		nodecg.sendMessage('hideLocation');
+	}
+
+	showToss(){
+		nodecg.sendMessage('showToss');
+	}
+
+	hideToss(){
+		nodecg.sendMessage('hideToss');
+	}
 }
