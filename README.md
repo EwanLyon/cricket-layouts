@@ -4,13 +4,16 @@ Layouts used for cricket matches. These are not used in any production and were 
 
 ## Images
 **Graphics**
-Currently the graphics have not been worked on
+
+![Standard](https://raw.githubusercontent.com/EwanLyon/cricket-layouts/master/img/graphics/standard.jpg)
+![Small](https://raw.githubusercontent.com/EwanLyon/cricket-layouts/master/img/graphics/small.jpg)
 
 **Dashboard**
 
-![Game](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/game.jpg)
-![Setup](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/setup.jpg)
-![Players](https://raw.githubusercontent.com/Clubwho/cricket-layouts/master/img/dashboard/players.jpg)
+![Game](https://raw.githubusercontent.com/EwanLyon/cricket-layouts/master/img/dashboard/game.jpg)
+![Setup](https://raw.githubusercontent.com/EwanLyon/cricket-layouts/master/img/dashboard/setup.jpg)
+![Players](https://raw.githubusercontent.com/EwanLyon/cricket-layouts/master/img/dashboard/players.jpg)
+![Producer](https://raw.githubusercontent.com/EwanLyon/cricket-layouts/master/img/dashboard/producer.jpg)
 
 ## Requirements
 - [Node.js 8 or greater (8 recommended, newer versions not tested)](https://nodejs.org/)

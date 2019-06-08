@@ -90,7 +90,7 @@
       {
         "name": "proddisplay",
         "title": "Graphics Controller",
-        "width": 2,
+        "width": 3,
         "file": "proddisplay.html",
         "headerColor": "#525F78",
         "workspace": "Producer"

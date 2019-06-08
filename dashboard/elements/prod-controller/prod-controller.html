@@ -4,10 +4,12 @@
 <dom-module id="prod-graphics">
 	<template>
 		<style is="custom-style">
-            paper-button{
-                margin: 10px 0;
-                width: 100%;
-                background-color: #916c07;
+            .controlStandard {
+                display: flex;
+            }
+            .controlStandard paper-button {
+                margin: 5px 0;
+                flex-grow: 1;
             }
 
             .show {
@@ -19,16 +21,23 @@
                 background-color: #F44336;
             }
 		</style>
-		
-        <paper-button class="show" raised on-click="showFullFrame">Show Fullframe</paper-button>
-        <paper-button class="hide" raised on-click="hideFullFrame">Hide Fullframe</paper-button>
-        <paper-button class="show" raised on-click="showScorebug">Show Score bug</paper-button>
-        <paper-button class="hide" raised on-click="hideScorebug">Hide Score bug</paper-button>
-        <paper-button class="show" raised on-click="showLocation">Show Location</paper-button>
-        <paper-button class="hide" raised on-click="hideLocation">Hide Location</paper-button>
-        <paper-button class="show" raised on-click="showToss">Show Toss</paper-button>
-        <paper-button class="hide" raised on-click="hideToss">Hide Toss</paper-button>
-
+        
+        <div class="controlStandard">
+            <paper-button class="show" raised on-click="showFullFrame">Show Fullframe</paper-button>
+            <paper-button class="hide" raised on-click="hideFullFrame">Hide Fullframe</paper-button>
+        </div>
+        <div class="controlStandard">
+            <paper-button class="show" raised on-click="showScorebug">Show Score bug</paper-button>
+            <paper-button class="hide" raised on-click="hideScorebug">Hide Score bug</paper-button>
+        </div>
+        <div class="controlStandard">
+            <paper-button class="show" raised on-click="showLocation">Show Location</paper-button>
+            <paper-button class="hide" raised on-click="hideLocation">Hide Location</paper-button>
+        </div>
+        <div class="controlStandard">
+            <paper-button class="show" raised on-click="showToss">Show Toss</paper-button>
+            <paper-button class="hide" raised on-click="hideToss">Hide Toss</paper-button>
+        </div>
 	</template>
 
 	<script src="prod-controller.js" type="module"></script>
