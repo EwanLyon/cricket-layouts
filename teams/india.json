@@ -3,11 +3,11 @@
 	"tla": "IND",
 	"players": [
 		{
-			"name": "Rohit Sharma",
+			"name": "Shikhar Dhawan",
 			"role": "batter"
 		},
 		{
-			"name": "Shikhar Dhawan",
+			"name": "Rohit Sharma",
 			"role": "batter"
 		},
 		{
@@ -15,31 +15,31 @@
 			"role": "batter"
 		},
 		{
-			"name": "Rishabh Pant",
-			"role": "wicketkeeper"
+			"name": "Lokesh Rahul",
+			"role": "batter"
 		},
 		{
-			"name": "Vijay Shankar",
+			"name": "MS Dhoni",
 			"role": "batter"
+		},
+		{
+			"name": "Hardik Pandya",
+			"role": "bowler"
 		},
 		{
 			"name": "Kedar Jadhav",
 			"role": "wicketkeeper"
 		},
 		{
-			"name": "Ravindra Jadeja",
-			"role": "bowler"
-		},
-		{
 			"name": "Bhuvneshwar Kumar",
 			"role": "bowler"
 		},
 		{
-			"name": "Mohammed Shami",
+			"name": "Kuldeep Yadav",
 			"role": "bowler"
 		},
 		{
-			"name": "Kuldeep Yadav",
+			"name": "Yuzvendra Chahal",
 			"role": "bowler"
 		},
 		{

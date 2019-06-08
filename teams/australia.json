@@ -1,18 +1,22 @@
 {
-    "name": "Australia",
-    "tla": "AUS",
-    "players": [
+	"name": "Australia",
+	"tla": "AUS",
+	"players": [
+		{
+			"name": "David Warner",
+			"role": "batter"
+		},
+		{
+			"name": "Aaron Finch",
+			"role": "batter"
+		},
+		{
+			"name": "Usman Khawaja",
+			"role": "batter"
+		},
         {
-            "name": "Usman Khawaja",
+            "name": "Steven Smith",
             "role": "batter"
-        },
-        {
-            "name": "Aaron Finch",
-            "role": "batter"
-        },
-        {
-            "name": "Peter Handscomb",
-            "role": "wicketkeeper"
         },
         {
             "name": "Glenn Maxwell",
@@ -24,27 +28,28 @@
             "bowlingStyle": "Right Arm Medium"
         },
         {
-            "name": "Ashton Turner",
-            "role": "batter"
-        },
-        {
             "name": "Alex Carey",
             "role": "wicketkeeper"
         },
-        {
-            "name": "Jhye Richardson",
+		{
+			"name": "Nathan Coulter-Nile",
             "role": "bowler",
             "bowlingStyle": "Right Arm Fast"
-        },
-        {
-            "name": "Pat Cummins",
+		},
+		{
+			"name": "Pat Cummins",
+			"role": "bowler",
+			"bowlingStyle": "Right Arm Fast"
+		},
+		{
+			"name": "Mitchell Starc",
             "role": "bowler",
-            "bowlingStyle": "Right Arm Fast"
-        },
-        {
-            "name": "Nathan Lyon",
+            "bowlingStyle": "Left Arm fast"
+		},
+		{
+			"name": "Adam Zampa",
             "role": "bowler",
-            "bowlingStyle": "Right Arm Off-Spin"
-        }
-    ]
+            "bowlingStyle": "Legbreak googly"
+		}
+	]
 }
