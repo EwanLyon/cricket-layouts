@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+**These layouts are not going to be updated as it uses deprecated frameworks and respositories (polymer/bower). I wish to make a more generic sports bundle which can then have specific sport modules attached to it. https://github.com/EwanLyon/nodecg-sportscontrol**
+
 # cricket-layouts
 
 Layouts used for cricket matches. These are not used in any production and were made for fun. Some of the [gdx18-layouts](https://github.com/gamesdonequick/gdqx18-layouts) (e.g. tsconfig files) may be seen as it currently is the only large TypeScript bundle so I'm using to assist my learning.
